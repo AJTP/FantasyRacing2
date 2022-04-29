@@ -1,11 +1,11 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Rendering.PostProcessing;
 using Cinemachine;
 
-public class KartController : MonoBehaviour
+/*public class KartController : MonoBehaviour
 {
     private PostProcessVolume postVolume;
     private PostProcessProfile postProfile;
@@ -277,3 +277,4 @@ public class KartController : MonoBehaviour
     //    Gizmos.DrawLine(transform.position + transform.up, transform.position - (transform.up * 2));
     //}
 }
+*/
