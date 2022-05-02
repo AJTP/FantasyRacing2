@@ -1084,6 +1084,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: roadStraight (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 617842857ba5f4b1782cc78e4b44797a, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 617842857ba5f4b1782cc78e4b44797a, type: 3}
 --- !u!1001 &86728087
@@ -1570,6 +1574,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4a269d2708e5540cfa8eddb3ac21fa2b, type: 3}
       propertyPath: m_Name
       value: roadBump
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4a269d2708e5540cfa8eddb3ac21fa2b, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a269d2708e5540cfa8eddb3ac21fa2b, type: 3}
@@ -2467,6 +2475,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: afbef892bc830bf47b53f5ce1f23df7f, type: 3}
       propertyPath: m_Name
       value: roadCornerLarger
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: afbef892bc830bf47b53f5ce1f23df7f, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afbef892bc830bf47b53f5ce1f23df7f, type: 3}
@@ -4856,6 +4868,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: roadStraight (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 617842857ba5f4b1782cc78e4b44797a, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 617842857ba5f4b1782cc78e4b44797a, type: 3}
 --- !u!1001 &367617157
@@ -6295,6 +6311,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 436909202656506642, guid: a89f017510efe824492edb681438ceff, type: 3}
+      propertyPath: aceleracion
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 436909202656506642, guid: a89f017510efe824492edb681438ceff, type: 3}
+      propertyPath: puntoRayoSuelo
+      value: 
+      objectReference: {fileID: 905107991}
     - target: {fileID: 1500077964323196476, guid: a89f017510efe824492edb681438ceff, type: 3}
       propertyPath: fuerzaMotor
       value: 10
@@ -6310,6 +6334,18 @@ PrefabInstance:
     - target: {fileID: 5928939279491704542, guid: a89f017510efe824492edb681438ceff, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6353027245994381686, guid: a89f017510efe824492edb681438ceff, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 106.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6353027245994381686, guid: a89f017510efe824492edb681438ceff, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6353027245994381686, guid: a89f017510efe824492edb681438ceff, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 41.8
       objectReference: {fileID: 0}
     - target: {fileID: 8823930467762025084, guid: a89f017510efe824492edb681438ceff, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10621,6 +10657,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ramp
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2b8c06e5559f83f4d8588e3193d0c3a1, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b8c06e5559f83f4d8588e3193d0c3a1, type: 3}
 --- !u!1 &739537150 stripped
@@ -12761,6 +12801,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ff3682efbaba0b24bb2920a3955773c7, type: 3}
   m_PrefabInstance: {fileID: 901936127}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &905107991 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8681743591098303237, guid: a89f017510efe824492edb681438ceff, type: 3}
+  m_PrefabInstance: {fileID: 471390915}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &906963774
 GameObject:
   m_ObjectHideFlags: 0
@@ -13137,6 +13182,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: afbef892bc830bf47b53f5ce1f23df7f, type: 3}
       propertyPath: m_Name
       value: roadCornerLarger (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: afbef892bc830bf47b53f5ce1f23df7f, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afbef892bc830bf47b53f5ce1f23df7f, type: 3}
@@ -14085,6 +14134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: roadStraight (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 617842857ba5f4b1782cc78e4b44797a, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 617842857ba5f4b1782cc78e4b44797a, type: 3}
 --- !u!1001 &1036262288
@@ -14807,6 +14860,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: afbef892bc830bf47b53f5ce1f23df7f, type: 3}
       propertyPath: m_Name
       value: roadCornerLarger (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: afbef892bc830bf47b53f5ce1f23df7f, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afbef892bc830bf47b53f5ce1f23df7f, type: 3}
@@ -15763,6 +15820,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 617842857ba5f4b1782cc78e4b44797a, type: 3}
       propertyPath: m_Name
       value: roadStraight (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 617842857ba5f4b1782cc78e4b44797a, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 617842857ba5f4b1782cc78e4b44797a, type: 3}
@@ -16771,6 +16832,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f4c351e2b763340fb808263a8b5e29c2, type: 3}
       propertyPath: m_Name
       value: roadStraightLongBump
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f4c351e2b763340fb808263a8b5e29c2, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4c351e2b763340fb808263a8b5e29c2, type: 3}
@@ -19569,6 +19634,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 617842857ba5f4b1782cc78e4b44797a, type: 3}
       propertyPath: m_Name
       value: roadStraight (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 617842857ba5f4b1782cc78e4b44797a, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 617842857ba5f4b1782cc78e4b44797a, type: 3}
@@ -22822,6 +22891,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: roadStart
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 154df2051892748de985b03910929287, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 154df2051892748de985b03910929287, type: 3}
 --- !u!1001 &1719230758
@@ -23261,6 +23334,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: roadCornerLarger (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: afbef892bc830bf47b53f5ce1f23df7f, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afbef892bc830bf47b53f5ce1f23df7f, type: 3}
 --- !u!1001 &1738489317
@@ -23551,6 +23628,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 258c98176dc105a42be30ede873a3cce, type: 3}
       propertyPath: m_Name
       value: Suelo
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 258c98176dc105a42be30ede873a3cce, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 258c98176dc105a42be30ede873a3cce, type: 3}
       propertyPath: m_IsActive
