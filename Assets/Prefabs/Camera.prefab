@@ -97,5 +97,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objetivo: {fileID: 0}
+  puntoCamara: {fileID: 0}
   velocidadSuavizada: 0.125
-  offset: {x: 10, y: 4, z: 0}
