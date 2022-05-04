@@ -17209,6 +17209,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4832210405950345916, guid: 7574b0d5dfecddf40ba6999a0549e409, type: 3}
+      propertyPath: imagenes.Array.data[0]
+      value: 
+      objectReference: {fileID: 739791444}
+    - target: {fileID: 4832210405950345916, guid: 7574b0d5dfecddf40ba6999a0549e409, type: 3}
+      propertyPath: imagenes.Array.data[1]
+      value: 
+      objectReference: {fileID: 2005712161}
+    - target: {fileID: 4832210405950345916, guid: 7574b0d5dfecddf40ba6999a0549e409, type: 3}
+      propertyPath: imagenes.Array.data[2]
+      value: 
+      objectReference: {fileID: 1871656494}
+    - target: {fileID: 4832210405950345916, guid: 7574b0d5dfecddf40ba6999a0549e409, type: 3}
+      propertyPath: imagenes.Array.data[3]
+      value: 
+      objectReference: {fileID: 279165688}
     - target: {fileID: 5353619409612602473, guid: 7574b0d5dfecddf40ba6999a0549e409, type: 3}
       propertyPath: m_Name
       value: JugadorPolicia
