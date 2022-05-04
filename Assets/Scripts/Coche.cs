@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovimientoJugador : MonoBehaviour
+public class Coche : MonoBehaviour
 {
     public Rigidbody esfera;
     public float aceleracion=8f, marchaAtras=4f, velocidadMaxima=50f, fuerzaGiro=180f,gravedad=10f,dragEnSuelo = 3f;
+    
     public LayerMask suelo;
     public float longitudRayoSuelo = 0.5f;
     public Transform puntoRayoSuelo;
@@ -16,6 +17,15 @@ public class MovimientoJugador : MonoBehaviour
     private float multiplicador = 1000f;
     private float velocidadInput, giroInput;
     private bool tocandoSuelo;
+    #region INFORMACIÓN JUGADOR
+    private int idJugador;
+    private string nombreJugador;
+    #endregion
+    #region STATS COCHE
+    //COOLDOWN
+    public float cd1,cd2,cd3,cd4;
+    public int vida,vidaMaxima;
+    #endregion
     private void Start()
     {
         esfera.transform.parent = null;
@@ -77,6 +87,18 @@ public class MovimientoJugador : MonoBehaviour
             esfera.drag = 0.1f;
             esfera.AddForce(Vector3.up * -gravedad * 100f);
         }
+
+    }
+
+    public void RecibirBoost(float cantidad){
+
+    }
+
+    public void RecibirStun(float tiempo){
+
+    }
+
+    public void SoltarPrefab(){
 
     }
 }
