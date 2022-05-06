@@ -8,7 +8,7 @@ public class Coche : MonoBehaviour
     public Rigidbody esfera;
     public float aceleracion = 8f, marchaAtras = 4f, velocidadMaxima = 50f, fuerzaGiro = 180f, gravedad = 10f, dragEnSuelo = 3f;
 
-    public LayerMask suelo;
+    public LayerMask suelo,carretera;
     public float longitudRayoSuelo = 0.5f;
     public Transform puntoRayoSuelo;
     public Transform ruedaIzquierda, ruedaDerecha;
@@ -28,9 +28,11 @@ public class Coche : MonoBehaviour
     protected bool[] isCD = new bool[4];
     protected float[] coolDowns = new float[4];
     protected float[] timerCD= new float[4];
-    public Image[] imagenes = new Image[4];
-
     public int vida,vidaMaxima;
+    #endregion
+    #region UI
+    public Image[] imagenes = new Image[4];
+    public GameObject[] camaras = new GameObject[2];
     #endregion
     public void RecogerInputMovimientoBasico() {
         velocidadInput = 0f;
@@ -59,7 +61,16 @@ public class Coche : MonoBehaviour
         ruedaIzquierda.localRotation = Quaternion.Euler(ruedaIzquierda.localRotation.eulerAngles.x, (giroInput * maximaRotacionRuedas) - 180, ruedaIzquierda.localRotation.eulerAngles.z);
         ruedaDerecha.localRotation = Quaternion.Euler(ruedaDerecha.localRotation.eulerAngles.x, giroInput * maximaRotacionRuedas, ruedaDerecha.localRotation.eulerAngles.z);
 
-        transform.position = esfera.position;
+        transform.position = esfera.position - new Vector3(0,0.275f,0);
+
+        if (Input.GetKey(KeyCode.R))
+        {
+            camaras[0].SetActive(false);
+            camaras[1].SetActive(true);
+        }else{
+            camaras[1].SetActive(false);
+            camaras[0].SetActive(true);
+        }
     }
 
     public void AplicarVelocidad() {
@@ -67,11 +78,17 @@ public class Coche : MonoBehaviour
         RaycastHit hit;
 
         //COMPROBACION TOCANDO SUELO
-        if (Physics.Raycast(puntoRayoSuelo.position, -transform.up, out hit, longitudRayoSuelo, suelo))
+        if (Physics.Raycast(puntoRayoSuelo.position, -transform.up, out hit, longitudRayoSuelo, carretera))
         {
             tocandoSuelo = true;
 
             transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+        }else if(Physics.Raycast(puntoRayoSuelo.position, -transform.up, out hit, longitudRayoSuelo, suelo)){
+            
+            tocandoSuelo = true;
+            transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+            velocidadInput /=2;
+            
         }
 
         if (tocandoSuelo)
@@ -92,7 +109,7 @@ public class Coche : MonoBehaviour
 
     public void RecibirBoost(float cantidad){
         //NO FUNCIONA
-        //esfera.AddForce(transform.forward * cantidad);
+        esfera.AddForce(transform.forward * cantidad);
     }
 
     public void RecibirStun(float tiempo){
