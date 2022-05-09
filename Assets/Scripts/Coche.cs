@@ -8,31 +8,27 @@ public class Coche : MonoBehaviour
     public Rigidbody esfera;
     public float aceleracion = 8f, marchaAtras = 4f, velocidadMaxima = 50f, fuerzaGiro = 180f, gravedad = 10f, dragEnSuelo = 3f;
 
-    public LayerMask suelo,carretera;
+    public LayerMask suelo, carretera;
     public float longitudRayoSuelo = 0.5f;
     public Transform puntoRayoSuelo;
     public Transform ruedaIzquierda, ruedaDerecha;
     public float maximaRotacionRuedas = 25f;
-
+    public Transform puntoPrefabs;
 
     private float multiplicador = 1000f;
     private float velocidadInput, giroInput;
     private bool tocandoSuelo;
-    #region INFORMACIÓN JUGADOR
-    public int posicion;
-    private int idJugador;
-    private string nombreJugador;
-    #endregion
     #region STATS COCHE
     //COOLDOWNS
     protected bool[] isCD = new bool[4];
     protected float[] coolDowns = new float[4];
-    protected float[] timerCD= new float[4];
-    public int vida,vidaMaxima;
+    protected float[] timerCD = new float[4];
+    public int vida, vidaMaxima;
     #endregion
     #region UI
     public Image[] imagenes = new Image[4];
     public GameObject[] camaras = new GameObject[2];
+    public GameObject camarillas;
     #endregion
     public void RecogerInputMovimientoBasico() {
         velocidadInput = 0f;
@@ -61,13 +57,13 @@ public class Coche : MonoBehaviour
         ruedaIzquierda.localRotation = Quaternion.Euler(ruedaIzquierda.localRotation.eulerAngles.x, (giroInput * maximaRotacionRuedas) - 180, ruedaIzquierda.localRotation.eulerAngles.z);
         ruedaDerecha.localRotation = Quaternion.Euler(ruedaDerecha.localRotation.eulerAngles.x, giroInput * maximaRotacionRuedas, ruedaDerecha.localRotation.eulerAngles.z);
 
-        transform.position = esfera.position - new Vector3(0,0.275f,0);
+        transform.position = esfera.position - new Vector3(0, 0.275f, 0);
 
         if (Input.GetKey(KeyCode.R))
         {
             camaras[0].SetActive(false);
             camaras[1].SetActive(true);
-        }else{
+        } else {
             camaras[1].SetActive(false);
             camaras[0].SetActive(true);
         }
@@ -83,12 +79,12 @@ public class Coche : MonoBehaviour
             tocandoSuelo = true;
 
             transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
-        }else if(Physics.Raycast(puntoRayoSuelo.position, -transform.up, out hit, longitudRayoSuelo, suelo)){
-            
+        } else if (Physics.Raycast(puntoRayoSuelo.position, -transform.up, out hit, longitudRayoSuelo, suelo)) {
+
             tocandoSuelo = true;
             transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
-            velocidadInput /=2;
-            
+            velocidadInput /= 2;
+
         }
 
         if (tocandoSuelo)
@@ -99,7 +95,7 @@ public class Coche : MonoBehaviour
                 //SUMAR VELOCIDAD
                 esfera.AddForce(transform.forward * velocidadInput);
             }
-        }else{
+        } else {
             //ESTA EN EL AIRE
             esfera.drag = 0.1f;
             esfera.AddForce(Vector3.up * -gravedad * 100f);
@@ -107,16 +103,25 @@ public class Coche : MonoBehaviour
     }
 
 
-    public void RecibirBoost(float cantidad){
+    public void RecibirBoost(float cantidad) {
         //NO FUNCIONA
         esfera.AddForce(transform.forward * cantidad);
     }
 
-    public void RecibirStun(float tiempo){
+    public void RecibirStun(float tiempo) {
+
+    }
+
+    public void SoltarPrefab(GameObject prefab) {
+        Instantiate(prefab,puntoPrefabs.position,Quaternion.identity);
+    }
+
+    public void RecuperarVida() { 
+    }
+    public void PerderVida()
+    {
         
     }
 
-    public void SoltarPrefab(){
 
-    }
 }

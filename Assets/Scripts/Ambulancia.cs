@@ -5,10 +5,15 @@ using UnityEngine;
 
 public class Ambulancia : Coche
 {
+    private bool boosted = false;
+    private float cantidadBoost = 0;
     private GameObject canvas;
-
+    #region PREFABS
+    public GameObject charcoSangre;
+    #endregion
     void Start()
     {
+        camarillas.transform.parent = null;
         esfera.transform.parent = null;
         //CARGAR COOLDOWNS DESDE ALGUN SITIO
         coolDowns[0] = 4;
@@ -41,6 +46,11 @@ public class Ambulancia : Coche
     private void FixedUpdate()
     {
         AplicarVelocidad();
+        if (boosted == true) {
+            Debug.Log("entra");
+            esfera.AddForce(transform.forward * cantidadBoost);
+            //boosted = false;
+        }
     }
 
     private int RecogerInputHabilidades()
@@ -107,14 +117,15 @@ public class Ambulancia : Coche
         print("HABILIDA 0 LANZADA");
         //Activar Sirenas durante la duración de la habilidad
         //Recibir Boost de velocidad
-        RecibirBoost(20000f);
+        boosted = true;
+        cantidadBoost = 20000f;
     }
 
     private void Habilidad1(){
         // Deja en el suelo un charco de sangre que resbala
         print("HABILIDA 1 LANZADA");
         //Soltar prefab
-        SoltarPrefab();
+        SoltarPrefab(charcoSangre);
     }
 
     private void Habilidad2(){

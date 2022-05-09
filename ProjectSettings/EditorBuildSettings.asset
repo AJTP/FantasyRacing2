@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Karting.unity
+    path: Assets/Scenes/Menus/PantallaInicio.unity
+    guid: db3ae722e7fcbc4479897664d2b6c97f
+  - enabled: 1
+    path: Assets/Scenes/Menus/MenuPrincipal.unity
+    guid: a05c7e53aaead7842843c161b0671f23
+  - enabled: 1
+    path: Assets/Scenes/Menus/NuevoUsuario.unity
+    guid: 0a3d0068d7e54164faafea9c41d8ce23
+  - enabled: 1
+    path: Assets/Scenes/Circuitos/Karting.unity
     guid: 4885e54836235864c9d66f983137bdc8
   m_configObjects: {}
