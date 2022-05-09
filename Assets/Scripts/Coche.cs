@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class Coche : MonoBehaviour
 {
+    protected PhotonView view;
     public Rigidbody esfera;
     public float aceleracion = 8f, marchaAtras = 4f, velocidadMaxima = 50f, fuerzaGiro = 180f, gravedad = 10f, dragEnSuelo = 3f;
 

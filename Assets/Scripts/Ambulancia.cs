@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Ambulancia : Coche
 {
@@ -13,6 +14,7 @@ public class Ambulancia : Coche
     #endregion
     void Start()
     {
+        view = GetComponent<PhotonView>();
         camarillas.transform.parent = null;
         esfera.transform.parent = null;
         //CARGAR COOLDOWNS DESDE ALGUN SITIO
@@ -29,18 +31,21 @@ public class Ambulancia : Coche
 
     void Update()
     {
-        RecogerInputMovimientoBasico();
-        int habilidad = RecogerInputHabilidades();
-        if (habilidad != 5) {
-            LanzarHabilidad(habilidad);
-        }
-        for (int i = 0; i < isCD.Length; i++)
-        {
-            if (isCD[i] == true)
+        if (view.IsMine) {
+            RecogerInputMovimientoBasico();
+            int habilidad = RecogerInputHabilidades();
+            if (habilidad != 5)
             {
-                ReducirCoolDown(i);
+                LanzarHabilidad(habilidad);
             }
-        }
+            for (int i = 0; i < isCD.Length; i++)
+            {
+                if (isCD[i] == true)
+                {
+                    ReducirCoolDown(i);
+                }
+            }
+        }        
     }
 
     private void FixedUpdate()
