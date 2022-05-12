@@ -29,9 +29,11 @@ public class Coche : MonoBehaviour
     #endregion
     #region UI
     public Image[] imagenes = new Image[4];
-    public GameObject[] camaras = new GameObject[2];
+    //public GameObject[] camaras = new GameObject[2];
     public GameObject camarillas;
     #endregion
+
+    
     public void RecogerInputMovimientoBasico() {
         velocidadInput = 0f;
         //RECOGIDA ACELERACION
@@ -63,11 +65,11 @@ public class Coche : MonoBehaviour
 
         if (Input.GetKey(KeyCode.R))
         {
-            camaras[0].SetActive(false);
-            camaras[1].SetActive(true);
+            camarillas.transform.GetChild(0).gameObject.SetActive(false);
+            camarillas.transform.GetChild(2).gameObject.SetActive(true);
         } else {
-            camaras[1].SetActive(false);
-            camaras[0].SetActive(true);
+            camarillas.transform.GetChild(2).gameObject.SetActive(false);
+            camarillas.transform.GetChild(0).gameObject.SetActive(true);
         }
     }
 

@@ -12,6 +12,11 @@ public class Ambulancia : Coche
     #region PREFABS
     public GameObject charcoSangre;
     #endregion
+    private void Awake()
+    {
+        TrackCheckpoints tracker = GameObject.Find("Tracking").GetComponent<TrackCheckpoints>();
+        tracker.AddCocheTransform(esfera.transform);
+    }
     void Start()
     {
         view = GetComponent<PhotonView>();
