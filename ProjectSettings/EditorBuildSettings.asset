@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/InicioSesion(1).unity
     guid: eaa98ef83b257094cb59cb48b6f39bf3
   - enabled: 1
+    path: Assets/Scenes/Menus/NuevoUsuario(0).unity
+    guid: 0a3d0068d7e54164faafea9c41d8ce23
+  - enabled: 1
     path: Assets/Scenes/Menus/Loading(2).unity
     guid: 990b73267863e804797f7b2cf6bb411f
   - enabled: 1
