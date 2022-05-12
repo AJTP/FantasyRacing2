@@ -7,7 +7,7 @@ public class Jugador
     private int _posicion;
     private int _idJugador;
     private string _nombreJugador;
-    private string _usuario, _password;
+    private string _usuario, _password,_email;
     private int _vuelta;
     private int _puntosControl;
 
@@ -18,6 +18,7 @@ public class Jugador
     public int puntosControl { get => _puntosControl; set => _puntosControl = value; }
     public string usuario { get => _usuario; set => _usuario = value; }
     public string password { get => _password; set => _password = value; }
+    public string email { get => _email; set => _email = value; }
 
     public Jugador(string usuario, string password)
     {

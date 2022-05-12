@@ -19,24 +19,21 @@ public class ControlMenus : MonoBehaviour
     }
 
     public void Login() {
-        if (player.usuario != null && player.password != null)
+        if (_email != null && _password != null)
         {
             player = new Jugador(usuario, password); //ESTO HAY QUE SUSTITUIRLO POR CARGAR DATOS DE LA BASE DE DATOS
-            Debug.Log(player.usuario + player.password);
+            Debug.Log(player.email + player.password);
             //SI EL USUARIO SE CARGA CORRECTAMENTE ABRIR MENU
-            SceneManager.LoadScene("MenuPrincipal");
+            SceneManager.LoadScene("Loading(2)");
             //SINO FEEDBACK DATOS INCORRECTOS
         }
-        else { 
+        else {
+            Debug.Log("NO ENTRA");
             //FEEDBACK RELLENAR CAMPOS
         }
     }
 
     public void Registrar() { 
         SceneManager.LoadScene("NuevoUsuario");
-    }
-
-    public void Jugar() {
-        SceneManager.LoadScene("Karting");
     }
 }
