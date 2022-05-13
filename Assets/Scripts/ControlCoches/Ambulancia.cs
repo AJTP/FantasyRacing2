@@ -124,7 +124,7 @@ public class Ambulancia : Coche
         }
     }
 
-    private void Habilidad0(){
+    public void Habilidad0(){
         //USA LAS SIRENAS Y AUMENTA SU VELOCIDAD
         print("HABILIDA 0 LANZADA");
         //Activar Sirenas durante la duración de la habilidad
@@ -133,14 +133,14 @@ public class Ambulancia : Coche
         cantidadBoost = 20000f;
     }
 
-    private void Habilidad1(){
+    public void Habilidad1(){
         // Deja en el suelo un charco de sangre que resbala
         print("HABILIDA 1 LANZADA");
         //Soltar prefab
         SoltarPrefab(charcoSangre);
     }
 
-    private void Habilidad2(){
+    public void Habilidad2(){
         //REGENERA SU VIDA UN 30%
         print("HABILIDA 2 LANZADA");
         // Sumar un % de vida
@@ -150,7 +150,7 @@ public class Ambulancia : Coche
         //Animacion suma vida
     }
 
-    private void Habilidad3(){
+    public void Habilidad3(){
         //ELECTROCUTA AL RETO DE JUGADORES Y LOS DEJA INMOVILIZADOS
         print("HABILIDA 3 LANZADA");
         //Animación electricidad

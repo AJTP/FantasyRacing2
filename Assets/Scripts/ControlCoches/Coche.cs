@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using Photon.Pun;
 using System;
 
-public class Coche : MonoBehaviour
+public class Coche : MonoBehaviour,Habilidades
 {
     protected PhotonView view;
     public Rigidbody esfera;
@@ -138,5 +138,23 @@ public class Coche : MonoBehaviour
         
     }
 
+    public void Habilidad0()
+    {
+        
+    }
 
+    public void Habilidad1()
+    {
+        
+    }
+
+    public void Habilidad2()
+    {
+       
+    }
+
+    public void Habilidad3()
+    {
+        
+    }
 }
