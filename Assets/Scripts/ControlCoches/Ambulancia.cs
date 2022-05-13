@@ -8,9 +8,9 @@ public class Ambulancia : Coche
 {
     private bool boosted = false;
     private float cantidadBoost = 0;
-    private GameObject canvas;
     #region PREFABS
     public GameObject charcoSangre;
+    float deltaTime;
     #endregion
     private void Awake()
     {
@@ -36,6 +36,8 @@ public class Ambulancia : Coche
 
     void Update()
     {
+        deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+        float fps = 1.0f / deltaTime;
         if (view.IsMine) {
             RecogerInputMovimientoBasico();
             int habilidad = RecogerInputHabilidades();

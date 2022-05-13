@@ -28,8 +28,8 @@ public class TrackCheckpoints : MonoBehaviour
             //ORDEN CORRECTO
             siguientePuntoLista[cochesLista.IndexOf(carT)] = (siguientePunto + 1) % puntosLista.Count;
             Debug.Log(carT.transform.name + "CORRECTO");
-            if (siguientePunto == 0) { 
-                //SE HA COMPLETADO UNA VUELTA
+            if (siguientePunto == 0) {
+                carT.gameObject.GetComponent<Coche>().SumaVuelta();
             }
 
         }

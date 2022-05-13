@@ -16,6 +16,7 @@ public class ControlMenus : MonoBehaviour
 
     private void Start()
     {
+        QualitySettings.vSyncCount = 1;
         player = new Usuario();
     }
     //=======================ESCENA INICIO SESION=======================
@@ -25,7 +26,6 @@ public class ControlMenus : MonoBehaviour
         if (_email != null && _password != null)
         {
             //player = new Usuario(usuario, password); //ESTO HAY QUE SUSTITUIRLO POR CARGAR DATOS DE LA BASE DE DATOS
-            Debug.Log(player.email + player.password);
             //SI EL USUARIO SE CARGA CORRECTAMENTE ABRIR MENU
             SceneManager.LoadScene("Loading(2)");
          }
@@ -56,7 +56,7 @@ public class ControlMenus : MonoBehaviour
             {
                 inputs[1].textComponent.color = Color.red;
                 todoOk = false;
-                MostrarFeedback("Rellena la contraseña");
+                MostrarFeedback("Rellena la contraseï¿½a");
             }
         }
 
@@ -103,7 +103,7 @@ public class ControlMenus : MonoBehaviour
             {
                 inputs[2].textComponent.color = Color.red;
                 todoOk = false;
-                MostrarFeedback("La contraseña debe tener más de 8 caracteres");
+                MostrarFeedback("La contraseï¿½a debe tener mï¿½s de 8 caracteres");
             }
         }
         else if (!inputs[2].textComponent.text.Equals(inputs[3].textComponent.text))
@@ -113,7 +113,7 @@ public class ControlMenus : MonoBehaviour
                 inputs[2].textComponent.color = Color.red;
                 inputs[3].textComponent.color = Color.red;
                 todoOk = false;
-                MostrarFeedback("Las contraseñas no coinciden");
+                MostrarFeedback("Las contraseï¿½as no coinciden");
             }
         }
         else
@@ -132,7 +132,7 @@ public class ControlMenus : MonoBehaviour
             {
                 inputs[1].textComponent.color = Color.red;
                 todoOk = false;
-                MostrarFeedback("Introduce un correo válido");
+                MostrarFeedback("Introduce un correo vï¿½lido");
             }
         }
         else
@@ -148,7 +148,7 @@ public class ControlMenus : MonoBehaviour
             {
                 inputs[0].textComponent.color = Color.red;
                 todoOk = false;
-                MostrarFeedback("El nombre debe de tener más de 4 caracteres");
+                MostrarFeedback("El nombre debe de tener mï¿½s de 4 caracteres");
             }
         }
         else

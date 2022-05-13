@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class SeleccionCampeon : MonoBehaviour
 {
@@ -12,5 +13,9 @@ public class SeleccionCampeon : MonoBehaviour
         btn.enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    public void ToGame() {
+        PhotonNetwork.LoadLevel("Ovalo");
     }
 }

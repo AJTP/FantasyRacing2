@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using System;
 
 public class Coche : MonoBehaviour
 {
@@ -31,7 +32,10 @@ public class Coche : MonoBehaviour
     public Image[] imagenes = new Image[4];
     //public GameObject[] camaras = new GameObject[2];
     public GameObject camarillas;
+    public Text contadorVueltas;
     #endregion
+
+    int vuelta = 1;
 
     
     public void RecogerInputMovimientoBasico() {
@@ -71,6 +75,13 @@ public class Coche : MonoBehaviour
             camarillas.transform.GetChild(2).gameObject.SetActive(false);
             camarillas.transform.GetChild(0).gameObject.SetActive(true);
         }
+    }
+
+    internal void SumaVuelta()
+    {
+        vuelta++;
+        contadorVueltas.text = vuelta + "/3";
+
     }
 
     public void AplicarVelocidad() {
