@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    GameObject miJugador;
     //SPAWNS
     private List<Transform> spawns = new List<Transform>();
     public GameObject prefabJugador;
@@ -18,7 +19,22 @@ public class GameManager : MonoBehaviour
         //CARGAR SPAWNS
         CargarSpawns();
         Transform randomSpawn = GetRandomSpawn();
-        PhotonNetwork.Instantiate(prefabJugador.name, randomSpawn.position, randomSpawn.rotation);
+        miJugador = PhotonNetwork.Instantiate(prefabJugador.name, randomSpawn.position, randomSpawn.rotation);
+        GameObject camara = GameObject.FindWithTag("MainCamera");
+        if (camara != null)
+        {
+            camara.GetComponent<CameraFollower>().Objetivo = miJugador.transform;
+            camara.GetComponent<CameraFollower>().PuntoCamara = miJugador.GetComponent<Ambulancia>().puntoNormal;
+
+        }
+        GameObject camaraMinimapa = GameObject.FindWithTag("MiniCamera");
+        camaraMinimapa.transform.position = miJugador.GetComponent<Ambulancia>().puntoMinimapa.transform.position;
+        GameObject camaraRetro = GameObject.FindWithTag("RetroCamera");
+        camaraRetro.GetComponent<CameraFollower>().Objetivo = miJugador.transform;
+        camaraRetro.GetComponent<CameraFollower>().PuntoCamara = miJugador.GetComponent<Ambulancia>().puntoRetrovisor;
+        camaraRetro.SetActive(false);
+
+
         //PUNTOS DE CONTROL CARGADOS
         puntosControl = GameObject.Find("PuntosControl");
         for(int i=0;i<puntosControl.transform.childCount;i++){

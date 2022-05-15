@@ -17,6 +17,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     }
 
     public override void OnJoinedRoom() {
-        PhotonNetwork.LoadLevel("SeleccionCampeon(4)");
+        PhotonNetwork.LoadLevel("Ovalo");
+
     }
 }

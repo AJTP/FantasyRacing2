@@ -1,43 +1,81 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
-using System;
 
-public class Coche : MonoBehaviour,Habilidades
+public class Coche : MonoBehaviour
 {
-    protected PhotonView view;
+    //ESTA CLASE RECOGE LAS CARACTERISTICAS COMUNES A TODOS LOS COCHES TALES COMO EL MOVIMIENTO, EFECTOS, ETC
     public Rigidbody esfera;
-    public float aceleracion = 8f, marchaAtras = 4f, velocidadMaxima = 50f, fuerzaGiro = 180f, gravedad = 10f, dragEnSuelo = 3f;
+
+    #region ESTADISTICAS BASICAS
+
+    public float aceleracion = 8f;
+    public float marchaAtras = 4f;
+    public float velocidadMaxima = 50f;
+    public float fuerzaGiro = 180f;
+    public float gravedad = 10f;
+    public float dragEnSuelo = 3f;
+    public float vida;
+    public float vidaMaxima;
+    public bool boosted = false;
+    public float cantidadBoost;
+
+
+    #endregion
+
+    #region UTILIDADES MOVIMIENTO
 
     public LayerMask suelo, carretera;
     public float longitudRayoSuelo = 0.5f;
+    private bool tocandoSuelo;
     public Transform puntoRayoSuelo;
     public Transform ruedaIzquierda, ruedaDerecha;
     public float maximaRotacionRuedas = 25f;
-    public Transform puntoPrefabs;
-
     private float multiplicador = 1000f;
     private float velocidadInput, giroInput;
-    private bool tocandoSuelo;
-    #region STATS COCHE
-    //COOLDOWNS
+
+    #endregion
+
+    #region COOLDOWNS
+
     protected bool[] isCD = new bool[4];
     protected float[] coolDowns = new float[4];
     protected float[] timerCD = new float[4];
-    public int vida, vidaMaxima;
+
     #endregion
-    #region UI
+
+    #region HUD
+
     public Image[] imagenes = new Image[4];
-    //public GameObject[] camaras = new GameObject[2];
-    public GameObject camarillas;
+
     public Text contadorVueltas;
+
     #endregion
+
+    #region INFORMACION JUGADOR
 
     int vuelta = 1;
+    int numPuntoControl;
 
-    
+    #endregion
+
+    #region UTILIDADES HABILIDADES
+        public Transform puntoPrefabs;
+    #endregion
+
+    #region ONLINE
+    protected PhotonView vista;
+    #endregion
+
+    #region CAMARAS
+    private GameObject camara, camaraMinimapa, camaraRetro;
+    public Transform puntoNormal, puntoMinimapa, puntoRetrovisor;
+    #endregion
+
+
+    //=================FUNCIONES=================
+
+    #region MOVIMIENTO COCHE
     public void RecogerInputMovimientoBasico() {
         velocidadInput = 0f;
         //RECOGIDA ACELERACION
@@ -67,24 +105,19 @@ public class Coche : MonoBehaviour,Habilidades
 
         transform.position = esfera.position - new Vector3(0, 0.275f, 0);
 
-        if (Input.GetKey(KeyCode.R))
+
+        //CAMBIO CAMARA (RETROVISOR)
+        /*if (Input.GetKey(KeyCode.R))
         {
             camarillas.transform.GetChild(0).gameObject.SetActive(false);
             camarillas.transform.GetChild(2).gameObject.SetActive(true);
         } else {
             camarillas.transform.GetChild(2).gameObject.SetActive(false);
             camarillas.transform.GetChild(0).gameObject.SetActive(true);
-        }
+        }*/
     }
-
-    internal void SumaVuelta()
+    public void AplicarVelocidad()
     {
-        vuelta++;
-        contadorVueltas.text = vuelta + "/3";
-
-    }
-
-    public void AplicarVelocidad() {
         tocandoSuelo = false;
         RaycastHit hit;
 
@@ -94,7 +127,9 @@ public class Coche : MonoBehaviour,Habilidades
             tocandoSuelo = true;
 
             transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
-        } else if (Physics.Raycast(puntoRayoSuelo.position, -transform.up, out hit, longitudRayoSuelo, suelo)) {
+        }
+        else if (Physics.Raycast(puntoRayoSuelo.position, -transform.up, out hit, longitudRayoSuelo, suelo))
+        {
 
             tocandoSuelo = true;
             transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
@@ -110,18 +145,38 @@ public class Coche : MonoBehaviour,Habilidades
                 //SUMAR VELOCIDAD
                 esfera.AddForce(transform.forward * velocidadInput);
             }
-        } else {
+        }
+        else
+        {
             //ESTA EN EL AIRE
             esfera.drag = 0.1f;
             esfera.AddForce(Vector3.up * -gravedad * 100f);
         }
     }
+    #endregion
 
 
-    public void RecibirBoost(float cantidad) {
-        //NO FUNCIONA
-        esfera.AddForce(transform.forward * cantidad);
+    #region ACTUALIZACION HUD
+    public void SumaVuelta()
+    {
+        vuelta++;
+        contadorVueltas.text = vuelta + "/3";
+
     }
+
+    public void CargarCooldowns(int cdh1,int cdh2,int cdh3,int cdh4) {
+        coolDowns[0] = cdh1;
+        coolDowns[1] = cdh2;
+        coolDowns[2] = cdh3;
+        coolDowns[3] = cdh4;
+        for (int i = 0; i < timerCD.Length; i++)
+        {
+            timerCD[i] = coolDowns[i];
+        }
+    }
+    #endregion
+
+    #region EFECTOS SOBRE JUGADOR (HABILIDADES)
 
     public void RecibirStun(float tiempo) {
 
@@ -130,31 +185,72 @@ public class Coche : MonoBehaviour,Habilidades
     public void SoltarPrefab(GameObject prefab) {
         Instantiate(prefab,puntoPrefabs.position,Quaternion.identity);
     }
-
-    public void RecuperarVida() { 
-    }
-    public void PerderVida()
+    protected void ReducirCoolDown(int i)
     {
-        
-    }
-
-    public void Habilidad0()
-    {
-        
-    }
-
-    public void Habilidad1()
-    {
-        
-    }
-
-    public void Habilidad2()
-    {
-       
+        if (timerCD[i] < coolDowns[i])
+        {
+            imagenes[i].color = Color.red;
+            timerCD[i] += Time.deltaTime;
+            imagenes[i].fillAmount = timerCD[i] / coolDowns[i];
+        }
+        else if (timerCD[i] >= coolDowns[i])
+        {
+            imagenes[i].color = Color.cyan;
+            timerCD[i] = coolDowns[i];
+            imagenes[i].fillAmount = 1;
+            isCD[i] = false;
+        }
     }
 
-    public void Habilidad3()
+    public int RecogerInputHabilidades()
     {
-        
+        if (Input.GetKeyDown("u"))
+        {
+            return 0;
+        }
+        else if (Input.GetKeyDown("i"))
+        {
+            return 1;
+        }
+        else if (Input.GetKeyDown("o"))
+        {
+            return 2;
+        }
+        else if (Input.GetKeyDown("p"))
+        {
+            return 3;
+        }
+
+        return 5;
     }
+
+
+    #endregion
+
+    #region ONLINE
+    public void CargarVista() {
+        vista = GetComponent<PhotonView>();
+    }
+    #endregion
+
+    #region INFORMACION JUGADOR
+    public void CargarPuntosControl() {
+        TrackCheckpoints tracker = GameObject.Find("Tracking").GetComponent<TrackCheckpoints>();
+        tracker.AddCocheTransform(esfera.transform);
+    }
+    #endregion
+
+    #region CONTROL CAMARAS
+   /* public void CargarCamaras() {
+        camara = GameObject.FindWithTag("MainCamera");
+        camara.GetComponent<CameraFollower>().Objetivo = this.transform;
+        camara.GetComponent<CameraFollower>().PuntoCamara = puntoNormal;
+        camaraMinimapa = GameObject.FindWithTag("MiniCamera");
+        camaraMinimapa.transform.position = puntoMinimapa.position;
+        camaraRetro = GameObject.FindWithTag("RetroCamera");
+        camaraRetro.GetComponent<CameraFollower>().Objetivo = this.transform;
+        camaraRetro.GetComponent<CameraFollower>().PuntoCamara = puntoRetrovisor;
+        camaraRetro.SetActive(false);
+    }*/
+    #endregion
 }
