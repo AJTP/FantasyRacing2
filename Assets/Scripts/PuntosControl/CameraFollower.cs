@@ -12,8 +12,10 @@ public class CameraFollower : MonoBehaviour
 
     private void LateUpdate()
     {
-        puntoCamara.rotation = new Quaternion(-objetivo.rotation.eulerAngles.x,puntoCamara.rotation.eulerAngles.y,-objetivo.rotation.eulerAngles.z,0f);
-        transform.position = new Vector3(puntoCamara.transform.position.x, puntoCamara.transform.position.y, puntoCamara.transform.position.z);
-        transform.LookAt(objetivo);
+        if (puntoCamara != null && objetivo != null) {
+            puntoCamara.rotation = new Quaternion(-objetivo.rotation.eulerAngles.x, puntoCamara.rotation.eulerAngles.y, -objetivo.rotation.eulerAngles.z, 0f);
+            transform.position = new Vector3(puntoCamara.transform.position.x, puntoCamara.transform.position.y, puntoCamara.transform.position.z);
+            transform.LookAt(objetivo);
+        }        
     }
 }

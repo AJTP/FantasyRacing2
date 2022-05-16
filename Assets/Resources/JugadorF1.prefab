@@ -252,7 +252,6 @@ MonoBehaviour:
   - {fileID: 2363894617071798731}
   contadorVueltas: {fileID: 3340014147084440198}
   puntoPrefabs: {fileID: 2898648638968777553}
-  prefab: {fileID: 0}
 --- !u!114 &6449115049114338945
 MonoBehaviour:
   m_ObjectHideFlags: 0

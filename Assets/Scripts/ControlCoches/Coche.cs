@@ -230,6 +230,7 @@ public class Coche : MonoBehaviour
 
     #region ONLINE
     public void CargarVista() {
+        GameManager.Instancia.AddCoche(this);
         vista = GetComponent<PhotonView>();
     }
     #endregion
@@ -245,5 +246,7 @@ public class Coche : MonoBehaviour
         yield return new WaitForSeconds(2f);
         boosted = false;
     }
+
+    
 }
     

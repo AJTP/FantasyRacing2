@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 1581172}
   - component: {fileID: 1581171}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: Policia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,7 +154,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2141195373}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 121502727}
   - component: {fileID: 121502726}
   m_Layer: 5
-  m_Name: Button (4)
+  m_Name: Formula
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -298,7 +298,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2141195373}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -424,7 +424,7 @@ GameObject:
   - component: {fileID: 138168126}
   - component: {fileID: 138168125}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Ambulancia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -645,7 +645,7 @@ GameObject:
   - component: {fileID: 351374268}
   - component: {fileID: 351374267}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Bomberos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -789,7 +789,7 @@ GameObject:
   - component: {fileID: 354581185}
   - component: {fileID: 354581184}
   m_Layer: 5
-  m_Name: Button (5)
+  m_Name: Pickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -956,6 +956,15 @@ MonoBehaviour:
   - {fileID: 1581171}
   - {fileID: 121502726}
   - {fileID: 354581184}
+  gameManager: {fileID: 532064651}
+  prefabs:
+  - {fileID: 5353619409612602473, guid: 57dce5d2eecb1db44a8589da78cc82be, type: 3}
+  - {fileID: 5353619409612602473, guid: 01fe38524ad773e4a8f212e5bc914e17, type: 3}
+  - {fileID: 5353619409612602473, guid: 287dfcc235f2358419fac88daabd63e4, type: 3}
+  - {fileID: 5353619409612602473, guid: 74cd2e4ed0c78d6469081fd9cd572679, type: 3}
+  - {fileID: 5353619409612602473, guid: 4a25b53acf7d3f54695930eb4d016523, type: 3}
+  - {fileID: 5353619409612602473, guid: ca7a6ed4af4f3724dbc5cfb561a389f2, type: 3}
+  prefabElegido: {fileID: 0}
 --- !u!4 &372595124
 Transform:
   m_ObjectHideFlags: 0
@@ -1049,6 +1058,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 380296320}
   m_CullTransparentMesh: 1
+--- !u!1 &532064649
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 532064650}
+  - component: {fileID: 532064651}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &532064650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532064649}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1123.4623, y: 430.47836, z: -451.88626}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &532064651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532064649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d13eeb65a7b184363a10c7cda2b005d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1454189759
 GameObject:
   m_ObjectHideFlags: 0
@@ -1304,7 +1356,7 @@ GameObject:
   - component: {fileID: 1946411474}
   - component: {fileID: 1946411473}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Basura
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1529,8 +1581,8 @@ RectTransform:
   - {fileID: 138168124}
   - {fileID: 351374266}
   - {fileID: 1946411472}
-  - {fileID: 1581170}
   - {fileID: 121502725}
+  - {fileID: 1581170}
   - {fileID: 354581183}
   - {fileID: 380296321}
   m_Father: {fileID: 0}
