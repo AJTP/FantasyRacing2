@@ -1,9 +1,9 @@
 using UnityEngine;
 using Photon.Pun;
 
-public class CamionBomberos : Coche
+public class Pickup : Coche
 {
-    public GameObject prefab;
+    public GameObject prefab, prefab2;
 
     private void Awake()
     {
@@ -75,28 +75,25 @@ public class CamionBomberos : Coche
     public void Habilidad0()
     {
         print("HABILIDA 0 LANZADA");
-        boosted = true;
-        cantidadBoost = 2000f;
+        SoltarPrefab(prefab);//TRONCO RODANTE
     }
 
     public void Habilidad1()
     {
         print("HABILIDA 1 LANZADA");
-        SoltarPrefab(prefab);
+        SoltarPrefab(prefab2);//CAJA DE HERRAMIENTAS
     }
 
     public void Habilidad2()
     {
         print("HABILIDA 2 LANZADA");
-        hp += maxHP / 3;
-        if (hp > maxHP)
-            hp = maxHP;
+        //CATAPULTA UNA BOMBA QUE EXPLOTA AL TOCAR EL SUELO
     }
 
     public void Habilidad3()
     {
         print("HABILIDA 3 LANZADA");
-        //ELECTROCUTA AL RESTO DE JUGADORES
+        //ACTIVA EL 4X4, NO LE AFECTAN LOS EFECTOS NEGATIVOS NI CUALQUIER TIPO DE TERRENO
     }
 
     #endregion
