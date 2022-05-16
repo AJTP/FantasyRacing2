@@ -14,7 +14,6 @@ public class CameraFollower : MonoBehaviour
     {
         puntoCamara.rotation = new Quaternion(-objetivo.rotation.eulerAngles.x,puntoCamara.rotation.eulerAngles.y,-objetivo.rotation.eulerAngles.z,0f);
         transform.position = new Vector3(puntoCamara.transform.position.x, puntoCamara.transform.position.y, puntoCamara.transform.position.z);
-        //transform.rotation = new Quaternion(0f, puntoCamara.rotation.eulerAngles.y,0f, 0f);
         transform.LookAt(objetivo);
     }
 }

@@ -24,14 +24,14 @@ public class GameManager : MonoBehaviour
         if (camara != null)
         {
             camara.GetComponent<CameraFollower>().Objetivo = miJugador.transform;
-            camara.GetComponent<CameraFollower>().PuntoCamara = miJugador.GetComponent<Ambulancia>().puntoNormal;
+            camara.GetComponent<CameraFollower>().PuntoCamara = miJugador.GetComponent<ControlCamaras>().puntoNormal;
 
         }
         GameObject camaraMinimapa = GameObject.FindWithTag("MiniCamera");
-        camaraMinimapa.transform.position = miJugador.GetComponent<Ambulancia>().puntoMinimapa.transform.position;
+        camaraMinimapa.transform.position = miJugador.GetComponent<ControlCamaras>().puntoMinimapa.transform.position;
         GameObject camaraRetro = GameObject.FindWithTag("RetroCamera");
         camaraRetro.GetComponent<CameraFollower>().Objetivo = miJugador.transform;
-        camaraRetro.GetComponent<CameraFollower>().PuntoCamara = miJugador.GetComponent<Ambulancia>().puntoRetrovisor;
+        camaraRetro.GetComponent<CameraFollower>().PuntoCamara = miJugador.GetComponent<ControlCamaras>().puntoRetrovisor;
         camaraRetro.SetActive(false);
 
 

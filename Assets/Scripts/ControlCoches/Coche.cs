@@ -1,6 +1,8 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+
 
 public class Coche : MonoBehaviour
 {
@@ -15,8 +17,8 @@ public class Coche : MonoBehaviour
     public float fuerzaGiro = 180f;
     public float gravedad = 10f;
     public float dragEnSuelo = 3f;
-    public float vida;
-    public float vidaMaxima;
+    public float hp=50;
+    public float maxHP=100;
     public bool boosted = false;
     public float cantidadBoost;
 
@@ -65,11 +67,6 @@ public class Coche : MonoBehaviour
 
     #region ONLINE
     protected PhotonView vista;
-    #endregion
-
-    #region CAMARAS
-    private GameObject camara, camaraMinimapa, camaraRetro;
-    public Transform puntoNormal, puntoMinimapa, puntoRetrovisor;
     #endregion
 
 
@@ -224,6 +221,10 @@ public class Coche : MonoBehaviour
         return 5;
     }
 
+    public void ModificarSize(int factor) {
+        Vector3 escala = new Vector3(transform.localScale.x*factor, transform.localScale.y * factor, transform.localScale.z * factor);
+        transform.localScale = escala;
+    }
 
     #endregion
 
@@ -240,17 +241,9 @@ public class Coche : MonoBehaviour
     }
     #endregion
 
-    #region CONTROL CAMARAS
-   /* public void CargarCamaras() {
-        camara = GameObject.FindWithTag("MainCamera");
-        camara.GetComponent<CameraFollower>().Objetivo = this.transform;
-        camara.GetComponent<CameraFollower>().PuntoCamara = puntoNormal;
-        camaraMinimapa = GameObject.FindWithTag("MiniCamera");
-        camaraMinimapa.transform.position = puntoMinimapa.position;
-        camaraRetro = GameObject.FindWithTag("RetroCamera");
-        camaraRetro.GetComponent<CameraFollower>().Objetivo = this.transform;
-        camaraRetro.GetComponent<CameraFollower>().PuntoCamara = puntoRetrovisor;
-        camaraRetro.SetActive(false);
-    }*/
-    #endregion
+    public IEnumerator DesactivarBoost() {
+        yield return new WaitForSeconds(2f);
+        boosted = false;
+    }
 }
+    
