@@ -8,6 +8,8 @@ public class Coche : MonoBehaviour
 {
     //ESTA CLASE RECOGE LAS CARACTERISTICAS COMUNES A TODOS LOS COCHES TALES COMO EL MOVIMIENTO, EFECTOS, ETC
     public Rigidbody esfera;
+    public int id;
+    private static int idContador = 0;
 
     #region ESTADISTICAS BASICAS
 
@@ -59,7 +61,7 @@ public class Coche : MonoBehaviour
     public string nombreJugador;
     public int vuelta = 0;
     public int numPuntoControl;
-
+    private GameObject rank;
     #endregion
 
     #region UTILIDADES HABILIDADES
@@ -162,7 +164,7 @@ public class Coche : MonoBehaviour
         ActualizarRanking();
         if (vuelta > 3)
         {
-            GameObject.Find("RANKING").GetComponent<Ranking>().AddCocheFinal(this);
+           rank.GetComponent<Ranking>().AddCocheFinal(this);
         }
         else {
             contadorVueltas.text = vuelta + "/3";
@@ -180,16 +182,8 @@ public class Coche : MonoBehaviour
 
     public void ActualizarRanking() {
         //ESTA FUNCION ACTUALIZA EL HUD PARA VER EL RANKING IN GAME
-        List<Coche> ranking = GameObject.Find("RANKING").GetComponent<Ranking>().ActualizarRanking();
-        string texto = "";
-        int posicion = 1;
-        foreach(Coche c in ranking) {
-            texto+=posicion+". "+c.nombreJugador+"\n";
-            posicion++;
-        }
-        rankingTexto.text = texto;
-
-    }
+       rank.GetComponent<Ranking>().ActualizarRanking();
+      }
 
     public void CargarCooldowns(int cdh1,int cdh2,int cdh3,int cdh4) {
         coolDowns[0] = cdh1;
@@ -261,8 +255,12 @@ public class Coche : MonoBehaviour
     #region ONLINE
     public void CargarVista() {
         GameManager.Instancia.AddCoche(this);
-        GameObject.Find("RANKING").GetComponent<Ranking>().AddCoche(this);
+        id = idContador;
+        idContador++;
+        rank = GameObject.Find("RANKING");
+        rank.GetComponent<Ranking>().AddCoche(this);
         vista = GetComponent<PhotonView>();
+        
     }
     #endregion
 

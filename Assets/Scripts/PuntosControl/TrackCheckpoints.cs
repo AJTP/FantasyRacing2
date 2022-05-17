@@ -29,7 +29,7 @@ public class TrackCheckpoints : MonoBehaviour
             //ORDEN CORRECTO
             siguientePuntoLista[transformCochesLista.IndexOf(carT)] = (siguientePunto + 1) % puntosLista.Count;
             cochesLista[transformCochesLista.IndexOf(carT)].ActualizaControl(siguientePunto);
-            Debug.Log(carT.transform.name + "CORRECTO" + siguientePunto);
+            Debug.Log(carT + "CORRECTO" + siguientePunto);
             if (siguientePunto == 0) {
                 cochesLista[transformCochesLista.IndexOf(carT)].SumaVuelta();
             }

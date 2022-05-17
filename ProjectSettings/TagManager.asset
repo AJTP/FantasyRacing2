@@ -7,6 +7,7 @@ TagManager:
   - Canvas
   - MiniCamera
   - RetroCamera
+  - Coche
   layers:
   - Default
   - TransparentFX

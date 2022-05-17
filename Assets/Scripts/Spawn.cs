@@ -5,7 +5,6 @@ using Photon.Pun;
 public class Spawn : MonoBehaviour
 {
     private GameObject miJugador;
-
     GameObject puntosControl;
     GameObject meta;
     List<GameObject> puntos = new List<GameObject>();
@@ -27,6 +26,14 @@ public class Spawn : MonoBehaviour
     }
 
     public void SpawnJugador(GameObject prefab) {
+        /*if (!GameObject.Find("RANKING(Clone)"))
+        {
+            Debug.Log("NO EXISTE, LO CREO");
+            PhotonNetwork.Instantiate("RANKING", Vector3.zero, Quaternion.identity);
+        }
+        else {
+            Debug.Log("YA EXISTE, ME QUEDO QUIETO");
+        }*/
         Transform randomSpawn = GameManager.Instancia.GetRandomSpawn();
         miJugador = PhotonNetwork.Instantiate(prefab.name, randomSpawn.position, randomSpawn.rotation);
         GameObject camara = GameObject.FindWithTag("MainCamera");
