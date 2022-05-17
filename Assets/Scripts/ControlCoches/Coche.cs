@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
-
+using System.Collections.Generic;
 
 public class Coche : MonoBehaviour
 {
@@ -50,14 +50,15 @@ public class Coche : MonoBehaviour
 
     public Image[] imagenes = new Image[4];
 
-    public Text contadorVueltas;
+    public Text contadorVueltas,rankingTexto;
+
 
     #endregion
 
     #region INFORMACION JUGADOR
-
-    int vuelta = 1;
-    int numPuntoControl;
+    public string nombreJugador;
+    public int vuelta = 0;
+    public int numPuntoControl;
 
     #endregion
 
@@ -157,7 +158,36 @@ public class Coche : MonoBehaviour
     public void SumaVuelta()
     {
         vuelta++;
-        contadorVueltas.text = vuelta + "/3";
+        
+        ActualizarRanking();
+        if (vuelta > 3)
+        {
+            GameObject.Find("RANKING").GetComponent<Ranking>().AddCocheFinal(this);
+        }
+        else {
+            contadorVueltas.text = vuelta + "/3";
+        }
+        
+
+    }
+
+    public void ActualizaControl(int n)
+    {
+        numPuntoControl=n;
+        ActualizarRanking();
+
+    }
+
+    public void ActualizarRanking() {
+        //ESTA FUNCION ACTUALIZA EL HUD PARA VER EL RANKING IN GAME
+        List<Coche> ranking = GameObject.Find("RANKING").GetComponent<Ranking>().ActualizarRanking();
+        string texto = "";
+        int posicion = 1;
+        foreach(Coche c in ranking) {
+            texto+=posicion+". "+c.nombreJugador+"\n";
+            posicion++;
+        }
+        rankingTexto.text = texto;
 
     }
 
@@ -231,6 +261,7 @@ public class Coche : MonoBehaviour
     #region ONLINE
     public void CargarVista() {
         GameManager.Instancia.AddCoche(this);
+        GameObject.Find("RANKING").GetComponent<Ranking>().AddCoche(this);
         vista = GetComponent<PhotonView>();
     }
     #endregion
@@ -238,6 +269,7 @@ public class Coche : MonoBehaviour
     #region INFORMACION JUGADOR
     public void CargarPuntosControl() {
         TrackCheckpoints tracker = GameObject.Find("Tracking").GetComponent<TrackCheckpoints>();
+        tracker.AddCoche(this);
         tracker.AddCocheTransform(esfera.transform);
     }
     #endregion
