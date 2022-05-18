@@ -16,68 +16,8 @@ public class ControlMenus : MonoBehaviour
 
     private void Start()
     {
-        QualitySettings.vSyncCount = 1;
         player = new Usuario();
     }
-    //=======================ESCENA INICIO SESION=======================
-
-    public void Login()
-    {
-        if (_email != null && _password != null)
-        {
-            //player = new Usuario(usuario, password); //ESTO HAY QUE SUSTITUIRLO POR CARGAR DATOS DE LA BASE DE DATOS
-            //SI EL USUARIO SE CARGA CORRECTAMENTE ABRIR MENU
-            SceneManager.LoadScene("Loading(2)");
-         }
-        else
-        {
-            MostrarFeedback("Rellena todos los campos");
-        }
-    }
-
-    public void ToRegistrar()
-    {
-        SceneManager.LoadScene("NuevoUsuario(0)");
-    }
-
-    public void ComprobarDatosLogin()
-    {
-        feedback.gameObject.SetActive(false);
-        todoOk = true;
-        //PASSWORD
-        if (inputs[1].textComponent.text.Length>0)
-        {
-            inputs[1].textComponent.color = Color.black;
-            _password = inputs[1].textComponent.text;
-        }
-        else
-        {
-            if (inputs[1].textComponent.text.Length > 0)
-            {
-                inputs[1].textComponent.color = Color.red;
-                todoOk = false;
-                MostrarFeedback("Rellena la contrase�a");
-            }
-        }
-
-        //CORREO
-        if (inputs[0].textComponent.text.Length > 0)
-        {
-            inputs[0].textComponent.color = Color.black;
-            _email = inputs[0].textComponent.text;
-        }
-        else
-        {
-            if (inputs[0].textComponent.text.Length > 0)
-            {
-                inputs[0].textComponent.color = Color.red;
-                todoOk = false;
-                MostrarFeedback("Rellena el correo");
-            }
-        }
-    }
-
-
 
     //=======================ESCENA CREAR USUARIO=======================
     public void ToInicioSesion()

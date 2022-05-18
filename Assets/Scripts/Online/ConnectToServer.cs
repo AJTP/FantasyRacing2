@@ -2,22 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class ConnectToServer : MonoBehaviourPunCallbacks
 {
-    void Start()
+    public InputField nombreInput;
+    public InputField passwordInput;
+
+    public Text textoBoton;
+
+    public void OnClickConnect()
     {
-        //LANZA LA ORDEN PARA CONECTARSE AL SERVIDOR
-        PhotonNetwork.ConnectUsingSettings();
-    }
-    public override void OnConnectedToMaster() {
-        //CUANDO SE CONECTA SATISFACTORIAMENTE AL SERVIDOR
-        PhotonNetwork.JoinLobby();
+        if (nombreInput.text.Length > 0) {
+            PhotonNetwork.NickName = nombreInput.text;
+            textoBoton.text = "Conectando...";
+            PhotonNetwork.ConnectUsingSettings();
+        }
     }
 
-    public override void OnJoinedLobby() {
-        //CUANDO SE CONECTA AL LOBBY
+    public override void OnConnectedToMaster() {
         SceneManager.LoadScene("Rooms(3)");
     }
+
+    void Start()
+    {
+        
+    }
+
+    
 }
