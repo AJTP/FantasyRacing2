@@ -9831,7 +9831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &655957772
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11042,6 +11042,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aa6926d8193a5f49ae73feac0f2f4a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabsJugadores:
+  - {fileID: 5353619409612602473, guid: 57dce5d2eecb1db44a8589da78cc82be, type: 3}
+  - {fileID: 5353619409612602473, guid: 01fe38524ad773e4a8f212e5bc914e17, type: 3}
+  - {fileID: 5353619409612602473, guid: 287dfcc235f2358419fac88daabd63e4, type: 3}
+  - {fileID: 5353619409612602473, guid: 4a25b53acf7d3f54695930eb4d016523, type: 3}
+  - {fileID: 5353619409612602473, guid: 74cd2e4ed0c78d6469081fd9cd572679, type: 3}
+  - {fileID: 5353619409612602473, guid: ca7a6ed4af4f3724dbc5cfb561a389f2, type: 3}
+  puntosSpawn:
+  - {fileID: 585463582}
+  - {fileID: 1836824508}
+  - {fileID: 823718064}
+  - {fileID: 1116646479}
+  - {fileID: 1380472551}
+  - {fileID: 993661024}
 --- !u!1001 &712304183
 PrefabInstance:
   m_ObjectHideFlags: 0

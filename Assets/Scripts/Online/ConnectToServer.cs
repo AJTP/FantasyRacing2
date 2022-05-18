@@ -17,6 +17,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
         if (nombreInput.text.Length > 0) {
             PhotonNetwork.NickName = nombreInput.text;
             textoBoton.text = "Conectando...";
+            PhotonNetwork.AutomaticallySyncScene = true;
             PhotonNetwork.ConnectUsingSettings();
         }
     }
@@ -24,11 +25,5 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster() {
         SceneManager.LoadScene("Rooms(3)");
     }
-
-    void Start()
-    {
-        
-    }
-
-    
+  
 }
