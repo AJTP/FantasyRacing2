@@ -11,7 +11,7 @@ public class Ranking : MonoBehaviour
     //NUEVO RANKING -------------------------- 19/05
 
     private List<Coche> posiciones = new List<Coche>();
-    private List<ItemRanking> listaItemsRanking = new List<ItemRanking>();
+    public List<ItemRanking> listaItemsRanking = new List<ItemRanking>();
     public ItemRanking itemRankingPrefab;
     public Transform itemRankingParent;
 
@@ -43,47 +43,45 @@ public class Ranking : MonoBehaviour
                     Debug.Log("EL NICK DEL JUGADOR ES: " + x.GetComponent<Coche>().nickJugador);
                     tipoCoche = x.GetComponent<Coche>();
                     break;
-                    //switch (x.name)
-                    //{
-                    //    case "JugadorAmbulancia(Clone)":
-                    //        tipoCoche = x.GetComponent<Ambulancia>();
-                    //        break;
-                    //    case "JugadorBasura(Clone)":
-                    //        tipoCoche = x.GetComponent<CamionBasura>();
-                    //        break;
-                    //    case "JugadorBomberos(Clone)":
-                    //        tipoCoche = x.GetComponent<CamionBomberos>();
-                    //        break;
-                    //    case "JugadorF1(Clone)":
-                    //        tipoCoche = x.GetComponent<FormulaOne>();
-                    //        break;
-                    //    case "JugadorPickup(Clone)":
-                    //        tipoCoche = x.GetComponent<Pickup>();
-                    //        break;
-                    //    case "JugadorPolicia(Clone)":
-                    //        tipoCoche = x.GetComponent<Policia>();
-                    //        break;
-                    //}
+/*                    switch (x.name)
+                    {
+                        case "JugadorAmbulancia(Clone)":
+                            tipoCoche = x.GetComponent<Ambulancia>();
+                            break;
+                        case "JugadorBasura(Clone)":
+                            tipoCoche = x.GetComponent<CamionBasura>();
+                            break;
+                        case "JugadorBomberos(Clone)":
+                            tipoCoche = x.GetComponent<CamionBomberos>();
+                            break;
+                        case "JugadorF1(Clone)":
+                            tipoCoche = x.GetComponent<FormulaOne>();
+                            break;
+                        case "JugadorPickup(Clone)":
+                            tipoCoche = x.GetComponent<Pickup>();
+                            break;
+                        case "JugadorPolicia(Clone)":
+                            tipoCoche = x.GetComponent<Policia>();
+                            break;
+                    }*/
                 }
             }
             if (tipoCoche != null)
             {
-                nuevoItemRanking.SetPlayerInfo(player.Value, tipoCoche);
-               
+                nuevoItemRanking.SetRankingItemInfo(player.Value, tipoCoche);
                 if (player.Value == PhotonNetwork.LocalPlayer)
                 {
                     nuevoItemRanking.AplicarCambiosLocales();
                 }
-                listaItemsRanking.Add(nuevoItemRanking);
-            }
+            }/*
             else {
                 Destroy(nuevoItemRanking);
-            }
-            
+            }*/
+            listaItemsRanking.Add(nuevoItemRanking);
         }  
     }
 
-    public void ActualizaMiPosicion(Coche _coche)
+    /*public void ActualizaMiPosicion(Coche _coche)
     {
         foreach (Coche c in posiciones)
         {
@@ -96,7 +94,7 @@ public class Ranking : MonoBehaviour
 
         posiciones.Add(_coche);
         posiciones.OrderByDescending(c => c.vuelta).ThenByDescending(c => c.numPuntoControl);
-    }
+    }*/
 
     public int MiPosicion(Coche _coche) {
         foreach (Coche c in posiciones) {
@@ -107,5 +105,15 @@ public class Ranking : MonoBehaviour
 
         //NO ESTÁ EN LA LISTA (?)
         return -1;
+    }
+
+    public void ActualizarPosiciones() {
+        GameObject[] coches = GameObject.FindGameObjectsWithTag("Coche");
+        foreach (GameObject c in coches)
+        {
+            posiciones.Add(c.GetComponent<Coche>());
+            Debug.Log(c.GetComponent<Coche>().vuelta + "-" + c.GetComponent<Coche>().numPuntoControl);
+        }
+        posiciones.OrderByDescending(c => c.vuelta).ThenByDescending(c => c.numPuntoControl);
     }
 }

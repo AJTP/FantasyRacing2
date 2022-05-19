@@ -162,8 +162,6 @@ public class Coche : MonoBehaviour
     public void SumaVuelta()
     {
         vuelta++;
-        
-        ActualizarRanking();
         if (vuelta <=3)
         {
             contadorVueltas.text = vuelta + "/3";
@@ -180,7 +178,7 @@ public class Coche : MonoBehaviour
     public void ActualizarRanking() {
         //ESTA FUNCION ACTUALIZA EL HUD PARA VER EL RANKING IN GAME
         
-        rank.GetComponent<Ranking>().ActualizaMiPosicion(this);
+        rank.GetComponent<Ranking>().ActualizarPosiciones();
         this.posicion = rank.GetComponent<Ranking>().MiPosicion(this);
         rank.GetComponent<Ranking>().UpdateListaJugadores();
     }
