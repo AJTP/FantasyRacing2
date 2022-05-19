@@ -19,8 +19,9 @@ public class Coche : MonoBehaviour
     public float fuerzaGiro = 180f;
     public float gravedad = 10f;
     public float dragEnSuelo = 3f;
-    public float hp=50;
-    public float maxHP=100;
+    public int hp=50;
+    public int maxHP=100;
+    public int posicion;
     public bool boosted = false;
     public float cantidadBoost;
 
@@ -52,7 +53,7 @@ public class Coche : MonoBehaviour
 
     public Image[] imagenes = new Image[4];
 
-    public Text contadorVueltas,rankingTexto;
+    public Text contadorVueltas;
 
 
     #endregion
@@ -162,15 +163,10 @@ public class Coche : MonoBehaviour
         vuelta++;
         
         ActualizarRanking();
-        if (vuelta > 3)
+        if (vuelta <=3)
         {
-           rank.GetComponent<Ranking>().AddCocheFinal(this);
-        }
-        else {
             contadorVueltas.text = vuelta + "/3";
         }
-        
-
     }
 
     public void ActualizaControl(int n)
@@ -182,8 +178,8 @@ public class Coche : MonoBehaviour
 
     public void ActualizarRanking() {
         //ESTA FUNCION ACTUALIZA EL HUD PARA VER EL RANKING IN GAME
-       rank.GetComponent<Ranking>().ActualizarRanking();
-      }
+       rank.GetComponent<Ranking>().UpdateListaJugadores();
+    }
 
     public void CargarCooldowns(int cdh1,int cdh2,int cdh3,int cdh4) {
         coolDowns[0] = cdh1;
@@ -258,7 +254,6 @@ public class Coche : MonoBehaviour
         id = idContador;
         idContador++;
         rank = GameObject.Find("RANKING");
-        rank.GetComponent<Ranking>().AddCoche(this);
         vista = GetComponent<PhotonView>();
         
     }

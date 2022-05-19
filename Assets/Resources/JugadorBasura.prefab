@@ -233,6 +233,7 @@ MonoBehaviour:
   dragEnSuelo: 3
   hp: 50
   maxHP: 100
+  posicion: 0
   boosted: 0
   cantidadBoost: 0
   suelo:
@@ -252,7 +253,6 @@ MonoBehaviour:
   - {fileID: 2363894618162931285}
   - {fileID: 2363894617071798731}
   contadorVueltas: {fileID: 2363894617257843043}
-  rankingTexto: {fileID: 0}
   nombreJugador: "Cami\xF3n Basura"
   vuelta: 0
   numPuntoControl: 0

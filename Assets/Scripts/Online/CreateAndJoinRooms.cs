@@ -123,7 +123,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount >1)
+        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount >0)//CAMBIAR EL 0 POR 1 CUANDO NO ESTÉ EN PRUEBA EL JUEGO
         {
             botonJugar.SetActive(true);
         }
