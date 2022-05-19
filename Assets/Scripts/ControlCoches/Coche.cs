@@ -9,6 +9,7 @@ public class Coche : MonoBehaviour
     //ESTA CLASE RECOGE LAS CARACTERISTICAS COMUNES A TODOS LOS COCHES TALES COMO EL MOVIMIENTO, EFECTOS, ETC
     public Rigidbody esfera;
     public int id;
+    public string nickJugador;
     private static int idContador = 0;
 
     #region ESTADISTICAS BASICAS
@@ -178,7 +179,10 @@ public class Coche : MonoBehaviour
 
     public void ActualizarRanking() {
         //ESTA FUNCION ACTUALIZA EL HUD PARA VER EL RANKING IN GAME
-       rank.GetComponent<Ranking>().UpdateListaJugadores();
+        
+        rank.GetComponent<Ranking>().ActualizaMiPosicion(this);
+        this.posicion = rank.GetComponent<Ranking>().MiPosicion(this);
+        rank.GetComponent<Ranking>().UpdateListaJugadores();
     }
 
     public void CargarCooldowns(int cdh1,int cdh2,int cdh3,int cdh4) {
@@ -272,6 +276,9 @@ public class Coche : MonoBehaviour
         boosted = false;
     }
 
+    public void SetNickJugador(string nick) {
+        nickJugador = nick;
+    }
     
 }
     

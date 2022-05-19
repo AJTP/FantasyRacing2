@@ -8,12 +8,6 @@ public class Spawn : MonoBehaviour
     public GameObject[] prefabsJugadores;
     public Transform[] puntosSpawn;
 
-
-
-
-
-
-
     private GameObject miJugador;
     GameObject puntosControl;
     GameObject meta;
@@ -25,6 +19,30 @@ public class Spawn : MonoBehaviour
         Transform puntoSpawn = puntosSpawn[numeroRandom];
         GameObject jugadorAlSpawn = prefabsJugadores[(int)PhotonNetwork.LocalPlayer.CustomProperties["avatarJugador"]];
         miJugador = PhotonNetwork.Instantiate(jugadorAlSpawn.name, puntoSpawn.position, puntoSpawn.rotation);
+        miJugador.GetComponent<Coche>().SetNickJugador(PhotonNetwork.LocalPlayer.NickName);
+        //switch (miJugador.name)
+        //{
+        //    case "JugadorAmbulancia(Clone)":
+        //        miJugador.GetComponent<Ambulancia>().SetNickJugador(PhotonNetwork.LocalPlayer.NickName);
+        //        break;
+        //    case "JugadorBasura(Clone)":
+        //        miJugador.GetComponent<CamionBasura>().SetNickJugador(PhotonNetwork.LocalPlayer.NickName);
+        //        break;
+        //    case "JugadorBomberos(Clone)":
+        //        miJugador.GetComponent<CamionBomberos>().SetNickJugador(PhotonNetwork.LocalPlayer.NickName);
+        //        break;
+        //    case "JugadorF1(Clone)":
+        //        miJugador.GetComponent<FormulaOne>().SetNickJugador(PhotonNetwork.LocalPlayer.NickName);
+        //        break;
+        //    case "JugadorPickup(Clone)":
+        //        miJugador.GetComponent<Pickup>().SetNickJugador(PhotonNetwork.LocalPlayer.NickName);
+        //        break;
+        //    case "JugadorPolicia(Clone)":
+        //        miJugador.GetComponent<Policia>().SetNickJugador(PhotonNetwork.LocalPlayer.NickName);
+        //        break;
+        //}
+
+
         GameObject camara = GameObject.FindWithTag("MainCamera");
         if (camara != null)
         {

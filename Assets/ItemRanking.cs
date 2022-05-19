@@ -24,6 +24,10 @@ public class ItemRanking : MonoBehaviourPunCallbacks
         nombreJugador.text = _jugador.NickName;
         jugador = _jugador;
         carro = _coche;
+        propiedadesJugador["jugadorNickName"] = jugador.NickName;
+        propiedadesJugador["jugadorHP"] = _coche.hp;
+        propiedadesJugador["jugadorPosicion"] = _coche.posicion;
+        PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
         UpdateRankingItem(jugador);
     }
 
@@ -34,7 +38,9 @@ public class ItemRanking : MonoBehaviourPunCallbacks
 
     public void UpdatePlayerInfo(Coche _coche)
     {
-        propiedadesJugador["infoRanking"] = new ElementoRanking(jugador.NickName,_coche.hp,_coche.posicion);
+        propiedadesJugador["jugadorNickName"] = jugador.NickName;
+        propiedadesJugador["jugadorHP"] = _coche.hp;
+        propiedadesJugador["jugadorPosicion"] = _coche.posicion;
         PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
     }
 
@@ -48,35 +54,22 @@ public class ItemRanking : MonoBehaviourPunCallbacks
 
     private void UpdateRankingItem(Player targetPlayer)
     {
-        if (targetPlayer.CustomProperties.ContainsKey("infoRanking"))
+        if (targetPlayer.CustomProperties.ContainsKey("jugadorNickName"))
         {
-            ElementoRanking info = (ElementoRanking)targetPlayer.CustomProperties["infoRanking"];
-            nombreJugador.text = info.Nombre;
-            posicion.text = info.Posicion.ToString();
-            vida.text = info.Vida.ToString();
+            nombreJugador.text = propiedadesJugador["jugadorNickName"].ToString();
+            vida.text = propiedadesJugador["jugadorHP"].ToString();
+            posicion.text = propiedadesJugador["jugadorPosicion"].ToString();
 
-            propiedadesJugador["infoRanking"] = (ElementoRanking)targetPlayer.CustomProperties["infoRanking"];
+            propiedadesJugador["jugadorNickName"] = targetPlayer.CustomProperties["jugadorNickName"];
+            propiedadesJugador["jugadorHP"] = targetPlayer.CustomProperties["jugadorHP"];
+            propiedadesJugador["jugadorPosicion"] = targetPlayer.CustomProperties["jugadorPosicion"];
         }
         else
         {
-            propiedadesJugador["infoRanking"] = new ElementoRanking(jugador.NickName, carro.hp, carro.posicion);
+            Debug.Log("NO SE HA ENCONTRADO UN OBJETO DEL TIPO infoRanking");
+            //propiedadesJugador["jugadorNickName"] = jugador.NickName;
+            //propiedadesJugador["jugadorHP"] = _coche.hp;
+            //propiedadesJugador["jugadorPosicion"] = _coche.posicion;    
         }
-    }
-}
-
-public class ElementoRanking {
-    private string nombre;
-    private int vida;
-    private int posicion;
-
-    public string Nombre { get => nombre; set => nombre = value; }
-    public int Posicion { get => posicion; set => posicion = value; }
-    public int Vida { get => vida; set => vida = value; }
-
-    public ElementoRanking(string nombre, int vida, int posicion)
-    {
-        this.nombre = nombre;
-        this.vida = vida;
-        this.posicion = posicion;
     }
 }

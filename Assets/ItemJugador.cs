@@ -21,6 +21,8 @@ public class ItemJugador : MonoBehaviourPunCallbacks
         nombreJugador.text = _jugador.NickName;
         jugador = _jugador;
         UpdatePlayerItem(jugador);
+        propiedadesJugador["avatarJugador"] = 0;
+        PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
     }
 
     public void AplicarCambiosLocales() {
