@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class Coche : MonoBehaviour
 {
+    ExitGames.Client.Photon.Hashtable propiedadesJugador = new ExitGames.Client.Photon.Hashtable();
     //ESTA CLASE RECOGE LAS CARACTERISTICAS COMUNES A TODOS LOS COCHES TALES COMO EL MOVIMIENTO, EFECTOS, ETC
     public Rigidbody esfera;
     public int id;
@@ -60,9 +61,11 @@ public class Coche : MonoBehaviour
     #endregion
 
     #region INFORMACION JUGADOR
-    public string nombreJugador;
-    public int vuelta = 0;
-    public int numPuntoControl;
+    private string nombreJugador;
+    private int vuelta = 0;
+    private int numPuntoControl;
+    private float distanciaSiguientePunto;
+    private GameObject puntosControl;
     private GameObject rank;
     #endregion
 
@@ -162,6 +165,9 @@ public class Coche : MonoBehaviour
     public void SumaVuelta()
     {
         vuelta++;
+        propiedadesJugador["jugadorVuelta"] = vuelta;
+        PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+        ActualizarRanking();
         if (vuelta <=3)
         {
             contadorVueltas.text = vuelta + "/3";
@@ -171,6 +177,8 @@ public class Coche : MonoBehaviour
     public void ActualizaControl(int n)
     {
         numPuntoControl=n;
+        propiedadesJugador["jugadorPuntoControl"] = numPuntoControl;
+        PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
         ActualizarRanking();
 
     }
@@ -179,7 +187,7 @@ public class Coche : MonoBehaviour
         //ESTA FUNCION ACTUALIZA EL HUD PARA VER EL RANKING IN GAME
         
         rank.GetComponent<Ranking>().ActualizarPosiciones();
-        this.posicion = rank.GetComponent<Ranking>().MiPosicion(this);
+        this.posicion = rank.GetComponent<Ranking>().MiPosicion(PhotonNetwork.LocalPlayer);
         rank.GetComponent<Ranking>().UpdateListaJugadores();
     }
 
@@ -256,8 +264,13 @@ public class Coche : MonoBehaviour
         id = idContador;
         idContador++;
         rank = GameObject.Find("RANKING");
+        puntosControl = GameObject.Find("PuntosControl");
         vista = GetComponent<PhotonView>();
-        
+        propiedadesJugador["jugadorVuelta"] = 0;
+        propiedadesJugador["jugadorDistancia"] = 0;
+        propiedadesJugador["jugadorPuntoControl"] = numPuntoControl;
+        PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+        ActualizarRanking();
     }
     #endregion
 
@@ -276,6 +289,13 @@ public class Coche : MonoBehaviour
 
     public void SetNickJugador(string nick) {
         nickJugador = nick;
+    }
+
+    public void ActualizarDistanciaPuntoControl() {
+        distanciaSiguientePunto = Vector3.Distance(transform.position, puntosControl.transform.GetChild(numPuntoControl).transform.position);
+        propiedadesJugador["jugadorDistancia"] = distanciaSiguientePunto;
+        PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+        //ActualizarRanking();
     }
     
 }

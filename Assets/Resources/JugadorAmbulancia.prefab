@@ -254,9 +254,6 @@ MonoBehaviour:
   - {fileID: 2363894618162931285}
   - {fileID: 2363894617071798731}
   contadorVueltas: {fileID: 3340014147084440198}
-  nombreJugador: Ambulancia
-  vuelta: 0
-  numPuntoControl: 0
   puntoPrefabs: {fileID: 2898648638968777553}
   prefab: {fileID: 4817196190462784772, guid: 4ee18583ea384a74da1985d837d4bd76, type: 3}
 --- !u!114 &6449115049114338945

@@ -20,6 +20,7 @@ public class Ambulancia : Coche
     void Update()
     {
         if (vista.IsMine) {
+            ActualizarDistanciaPuntoControl();
             RecogerInputMovimientoBasico();
             int habilidad = RecogerInputHabilidades();
             if (habilidad != 5)

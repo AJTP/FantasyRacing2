@@ -10,24 +10,20 @@ public class ItemRanking : MonoBehaviourPunCallbacks
 {
     public Text nombreJugador;
     public Text posicion;
-    public Text vida;
+
     public Image backgroundImage;
     public Color colorResalto;
 
     ExitGames.Client.Photon.Hashtable propiedadesJugador = new ExitGames.Client.Photon.Hashtable();
 
     Player jugador;
-    Coche carro; //?
-    public void SetRankingItemInfo(Player _jugador,Coche _coche)
+    public void SetPlayerInfo(Player _jugador)
     {
         nombreJugador.text = _jugador.NickName;
         jugador = _jugador;
-        carro = _coche;
+        UpdateRankingItem(jugador);
         propiedadesJugador["jugadorNickName"] = jugador.NickName;
-        propiedadesJugador["jugadorHP"] = _coche.hp;
-        propiedadesJugador["jugadorPosicion"] = _coche.posicion;
-        PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
-        //UpdateRankingItem(jugador);
+        PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);   
     }
 
     public void AplicarCambiosLocales()
@@ -35,11 +31,9 @@ public class ItemRanking : MonoBehaviourPunCallbacks
         backgroundImage.color = colorResalto;
     }
 
-    public void UpdatePlayerInfo(Coche _coche)
+    public void UpdatePlayerInfo()
     {
         propiedadesJugador["jugadorNickName"] = jugador.NickName;
-        propiedadesJugador["jugadorHP"] = _coche.hp;
-        propiedadesJugador["jugadorPosicion"] = _coche.posicion;
         PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
     }
 
@@ -56,18 +50,13 @@ public class ItemRanking : MonoBehaviourPunCallbacks
         if (targetPlayer.CustomProperties.ContainsKey("jugadorNickName"))
         {
             nombreJugador.text = targetPlayer.CustomProperties["jugadorNickName"].ToString();
-            vida.text = targetPlayer.CustomProperties["jugadorHP"].ToString();
-            posicion.text = targetPlayer.CustomProperties["jugadorPosicion"].ToString()+".";
-
+            posicion.text = targetPlayer.CustomProperties["jugadorPosicion"].ToString();
             propiedadesJugador["jugadorNickName"] = targetPlayer.CustomProperties["jugadorNickName"];
-            propiedadesJugador["jugadorHP"] = targetPlayer.CustomProperties["jugadorHP"];
-            propiedadesJugador["jugadorPosicion"] = targetPlayer.CustomProperties["jugadorPosicion"];
         }
         else
         {
             propiedadesJugador["jugadorNickName"] = jugador.NickName;
-            propiedadesJugador["jugadorHP"] = carro.hp;
-            propiedadesJugador["jugadorPosicion"] = carro.posicion;    
+            propiedadesJugador["jugadorPosicion"] = 0;
         }
     }
 }
