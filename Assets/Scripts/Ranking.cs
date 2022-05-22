@@ -73,8 +73,14 @@ public class Ranking : MonoBehaviour
             ok = true;
             foreach (KeyValuePair<int, Player> player in PhotonNetwork.CurrentRoom.Players)
             {
-                if ((int)player.Value.CustomProperties["jugadorVuelta"] < 4)
+                if (player.Value.CustomProperties.ContainsKey("jugadorVuelta"))
                 {
+                    if ((int)player.Value.CustomProperties["jugadorVuelta"] < 4)
+                    {
+                        ok = false;
+                    }
+                }
+                else {
                     ok = false;
                 }
             }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 public class Spawn : MonoBehaviour
@@ -8,6 +9,8 @@ public class Spawn : MonoBehaviour
 
     public GameObject[] prefabsJugadores;
     public Transform[] puntosSpawn;
+    public Text cuentaAtras;
+    public int i = 5;
 
     private GameObject miJugador;
     GameObject puntosControl;
@@ -16,7 +19,7 @@ public class Spawn : MonoBehaviour
     ExitGames.Client.Photon.Hashtable propiedadesJugador = new ExitGames.Client.Photon.Hashtable();
     void Start()
     {
-       
+        StartCoroutine(CuentaAtras());
         GameObject jugadorAlSpawn = prefabsJugadores[(int)PhotonNetwork.LocalPlayer.CustomProperties["avatarJugador"]];
         int spawn = DameUnSpawn();
         Transform puntoSpawn = puntosSpawn[spawn];
@@ -72,5 +75,17 @@ public class Spawn : MonoBehaviour
                 break;
         }
         return numeroRandom;
+    }
+
+    private IEnumerator CuentaAtras() {
+        i = 5;
+        while (i > 0) {
+            cuentaAtras.text = i.ToString();
+            yield return new WaitForSeconds(1);
+            i--;
+        }
+        cuentaAtras.text = "GO!!";
+        yield return new WaitForSeconds(1);
+        cuentaAtras.gameObject.SetActive(false);
     }
 }

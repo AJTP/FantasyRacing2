@@ -23,6 +23,10 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     private void Start()
     {
         PhotonNetwork.JoinLobby();
+        if (PhotonNetwork.CurrentRoom != null)
+        {
+            PhotonNetwork.LeaveRoom();
+        }
     }
 
     public void CrearSala() {

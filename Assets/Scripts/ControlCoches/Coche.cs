@@ -55,6 +55,7 @@ public class Coche : MonoBehaviour
 
     public Text contadorVueltas;
 
+    public Spawn spawn;
 
     #endregion
 
@@ -81,7 +82,7 @@ public class Coche : MonoBehaviour
 
     #region MOVIMIENTO COCHE
     public void RecogerInputMovimientoBasico() {
-        if (acabado)
+        if (acabado || spawn.i>0)
             return;
         velocidadInput = 0f;
         //RECOGIDA ACELERACION
@@ -124,7 +125,7 @@ public class Coche : MonoBehaviour
     }
     public void AplicarVelocidad()
     {
-        if (acabado)
+        if (acabado || spawn.i > 0)
             return;
 
         tocandoSuelo = false;
@@ -225,7 +226,7 @@ public class Coche : MonoBehaviour
     }
     protected void ReducirCoolDown(int i)
     {
-        if (acabado)
+        if (acabado || spawn.i > 0)
             return;
         if (timerCD[i] < coolDowns[i])
         {
@@ -244,7 +245,7 @@ public class Coche : MonoBehaviour
 
     public int RecogerInputHabilidades()
     {
-        if (acabado)
+        if (acabado || spawn.i > 0)
             return 5;
         if (Input.GetKeyDown("u"))
         {
@@ -275,6 +276,7 @@ public class Coche : MonoBehaviour
 
     #region ONLINE
     public void CargarDatos() {
+        spawn = GameObject.Find("Spawner").GetComponent<Spawn>();
         GameManager.Instancia.AddCoche(this);
         rank = GameObject.Find("RANKING");
         puntosControl = GameObject.Find("PuntosControl");
