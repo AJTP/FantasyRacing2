@@ -224,7 +224,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   esfera: {fileID: 1079443662}
-  id: 0
   nickJugador: 
   aceleracion: 8
   marchaAtras: 4

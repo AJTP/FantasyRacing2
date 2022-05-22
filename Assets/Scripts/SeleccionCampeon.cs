@@ -37,10 +37,4 @@ public class SeleccionCampeon : MonoBehaviour
                 break;
         }
     }
-
-    public void ToGame() {
-        canvas.SetActive(false);
-        gameObject.SetActive(false);
-        scriptSpawns.SpawnJugador(prefabElegido);        
-    }
 }

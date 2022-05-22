@@ -19,10 +19,8 @@ public class ItemRanking : MonoBehaviourPunCallbacks
     Player jugador;
     public void SetPlayerInfo(Player _jugador)
     {
-        nombreJugador.text = _jugador.NickName;
         jugador = _jugador;
         UpdateRankingItem(jugador);
-        propiedadesJugador["jugadorNickName"] = jugador.NickName;
         PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);   
     }
 
@@ -31,11 +29,11 @@ public class ItemRanking : MonoBehaviourPunCallbacks
         backgroundImage.color = colorResalto;
     }
 
-    public void UpdatePlayerInfo()
+   /* public void UpdatePlayerInfo()
     {
         propiedadesJugador["jugadorNickName"] = jugador.NickName;
         PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
-    }
+    }*/
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
     {

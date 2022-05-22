@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Circuitos/Ovalo.unity
     guid: 34201d2f278123742b00137592ccc0f5
+  - enabled: 1
+    path: Assets/Scenes/Circuitos/Karting.unity
+    guid: 4885e54836235864c9d66f983137bdc8
+  - enabled: 1
+    path: Assets/Scenes/Circuitos/Castillo.unity
+    guid: 5a2da26cd6c06b744a698d59fe795618
   m_configObjects: {}

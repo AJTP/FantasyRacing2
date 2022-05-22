@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
 
 public class Ranking : MonoBehaviour
 {
     //NUEVO RANKING -------------------------- 19/05
-
     private List<Photon.Realtime.Player> posiciones = new List<Photon.Realtime.Player>();
     private List<ItemRanking> listaItemsRanking = new List<ItemRanking>();
     public ItemRanking itemRankingPrefab;
@@ -17,6 +17,8 @@ public class Ranking : MonoBehaviour
 
     ExitGames.Client.Photon.Hashtable propiedadesJugador = new ExitGames.Client.Photon.Hashtable();
 
+    private bool ok;
+    private int veces = 0;
     public void UpdateListaJugadores()
     {
         foreach (ItemRanking item in listaItemsRanking)
@@ -43,10 +45,10 @@ public class Ranking : MonoBehaviour
         }  
     }
 
-    public int MiPosicion(Photon.Realtime.Player jugador) {
+    /*public int MiPosicion(Photon.Realtime.Player jugador) {
 
         return posiciones.IndexOf(jugador)+1;
-    }
+    }*/
 
     public void ActualizarPosiciones()
     {
@@ -62,5 +64,64 @@ public class Ranking : MonoBehaviour
             propiedadesJugador["jugadorPosicion"] = posiciones.IndexOf(player.Value)+1;
             player.Value.SetCustomProperties(propiedadesJugador);
         }
+    }
+
+    private void Update()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            ok = true;
+            foreach (KeyValuePair<int, Player> player in PhotonNetwork.CurrentRoom.Players)
+            {
+                if ((int)player.Value.CustomProperties["jugadorVuelta"] < 4)
+                {
+                    ok = false;
+                }
+            }
+
+            if (ok)
+            {
+                //TODOS LOS JUGADORES HAN ACABADO, DESPUÉS DE UN TIEMPO ENSEÑANDO EL RANKING FINAL PASAMOS A LA SIGUIENTE CARRERA
+                if (veces == 0)
+                {
+                    StartCoroutine(TodosALaSiguiente());
+                    veces++;
+                }
+            }
+        }
+    }
+
+    private IEnumerator TodosALaSiguiente() {
+        //ACTIVAMOS EL RANKING FINAL
+        yield return new WaitForSeconds(10);
+        switch (SceneManager.GetActiveScene().name) {
+            case "Ovalo":
+                PhotonNetwork.LoadLevel("Karting");
+                break;
+            case "Karting":
+                PhotonNetwork.LoadLevel("Castillo");
+                break;
+            case "Castillo":
+                //ACABA LA PARTIDA, RANKING FINAL DE PUNTOS TOTALES Y AL LOBBY
+                yield return new WaitForSeconds(10);
+                PhotonNetwork.LoadLevel("Rooms(3)");
+                break;
+
+        }
+    }
+
+    public int PuestoFinal() {
+        int pos = 0;
+        foreach (KeyValuePair<int, Player> player in PhotonNetwork.CurrentRoom.Players)
+        {
+            if ((int)player.Value.CustomProperties["jugadorPosicion"]!=null)
+            {
+                if ((int)player.Value.CustomProperties["jugadorPosicion"] > pos) {
+                    pos = (int)player.Value.CustomProperties["jugadorPosicion"];
+                }
+            }
+        }
+        pos++;
+        return pos;
     }
 }

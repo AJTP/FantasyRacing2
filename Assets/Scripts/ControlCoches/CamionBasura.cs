@@ -11,7 +11,7 @@ public class CamionBasura : Coche
     }
     void Start()
     {
-        CargarVista();
+        CargarDatos();
         CargarCooldowns(4, 8, 12, 20);
         esfera.transform.parent = null;
         //CargarCamaras();

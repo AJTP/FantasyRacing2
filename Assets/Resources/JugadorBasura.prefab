@@ -224,7 +224,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   esfera: {fileID: 1079443662}
-  id: 0
   nickJugador: 
   aceleracion: 8
   marchaAtras: 4
@@ -254,9 +253,6 @@ MonoBehaviour:
   - {fileID: 2363894618162931285}
   - {fileID: 2363894617071798731}
   contadorVueltas: {fileID: 2363894617257843043}
-  nombreJugador: "Cami\xF3n Basura"
-  vuelta: 0
-  numPuntoControl: 0
   puntoPrefabs: {fileID: 2898648638968777553}
   prefab: {fileID: 0}
   prefab2: {fileID: 0}

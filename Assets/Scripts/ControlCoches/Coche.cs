@@ -9,9 +9,7 @@ public class Coche : MonoBehaviour
     ExitGames.Client.Photon.Hashtable propiedadesJugador = new ExitGames.Client.Photon.Hashtable();
     //ESTA CLASE RECOGE LAS CARACTERISTICAS COMUNES A TODOS LOS COCHES TALES COMO EL MOVIMIENTO, EFECTOS, ETC
     public Rigidbody esfera;
-    public int id;
     public string nickJugador;
-    private static int idContador = 0;
 
     #region ESTADISTICAS BASICAS
 
@@ -77,11 +75,14 @@ public class Coche : MonoBehaviour
     protected PhotonView vista;
     #endregion
 
+    private bool acabado = false;
 
     //=================FUNCIONES=================
 
     #region MOVIMIENTO COCHE
     public void RecogerInputMovimientoBasico() {
+        if (acabado)
+            return;
         velocidadInput = 0f;
         //RECOGIDA ACELERACION
         if (Input.GetAxis("Vertical") > 0)
@@ -123,6 +124,9 @@ public class Coche : MonoBehaviour
     }
     public void AplicarVelocidad()
     {
+        if (acabado)
+            return;
+
         tocandoSuelo = false;
         RaycastHit hit;
 
@@ -168,10 +172,17 @@ public class Coche : MonoBehaviour
         propiedadesJugador["jugadorVuelta"] = vuelta;
         PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
         ActualizarRanking();
-        if (vuelta <=3)
+        if (vuelta <= 3)
         {
             contadorVueltas.text = vuelta + "/3";
         }
+        else {
+            //ESTE JUGADOR HA ACABADO
+            acabado = true;
+            propiedadesJugador["jugadorPFinal"] = rank.GetComponent<Ranking>().PuestoFinal();
+            PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+        }
+
     }
 
     public void ActualizaControl(int n)
@@ -187,7 +198,7 @@ public class Coche : MonoBehaviour
         //ESTA FUNCION ACTUALIZA EL HUD PARA VER EL RANKING IN GAME
         
         rank.GetComponent<Ranking>().ActualizarPosiciones();
-        this.posicion = rank.GetComponent<Ranking>().MiPosicion(PhotonNetwork.LocalPlayer);
+        //this.posicion = rank.GetComponent<Ranking>().MiPosicion(PhotonNetwork.LocalPlayer);
         rank.GetComponent<Ranking>().UpdateListaJugadores();
     }
 
@@ -214,6 +225,8 @@ public class Coche : MonoBehaviour
     }
     protected void ReducirCoolDown(int i)
     {
+        if (acabado)
+            return;
         if (timerCD[i] < coolDowns[i])
         {
             imagenes[i].color = Color.red;
@@ -231,6 +244,8 @@ public class Coche : MonoBehaviour
 
     public int RecogerInputHabilidades()
     {
+        if (acabado)
+            return 5;
         if (Input.GetKeyDown("u"))
         {
             return 0;
@@ -259,16 +274,19 @@ public class Coche : MonoBehaviour
     #endregion
 
     #region ONLINE
-    public void CargarVista() {
+    public void CargarDatos() {
         GameManager.Instancia.AddCoche(this);
-        id = idContador;
-        idContador++;
         rank = GameObject.Find("RANKING");
         puntosControl = GameObject.Find("PuntosControl");
+
         vista = GetComponent<PhotonView>();
+        propiedadesJugador["jugadorNickName"] = PhotonNetwork.LocalPlayer.NickName;
         propiedadesJugador["jugadorVuelta"] = 0;
-        propiedadesJugador["jugadorDistancia"] = 0;
+        propiedadesJugador["jugadorDistancia"] = Vector3.Distance(transform.position, puntosControl.transform.GetChild(numPuntoControl).transform.position);
         propiedadesJugador["jugadorPuntoControl"] = numPuntoControl;
+        propiedadesJugador["jugadorPosicion"] = 0;
+        propiedadesJugador["jugadorPFinal"] = null;
+        propiedadesJugador["jugadorPuntos"] = 0;
         PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
         ActualizarRanking();
     }
@@ -294,7 +312,7 @@ public class Coche : MonoBehaviour
     public void ActualizarDistanciaPuntoControl() {
         distanciaSiguientePunto = Vector3.Distance(transform.position, puntosControl.transform.GetChild(numPuntoControl).transform.position);
         propiedadesJugador["jugadorDistancia"] = distanciaSiguientePunto;
-        PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+        //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
         //ActualizarRanking();
     }
     
