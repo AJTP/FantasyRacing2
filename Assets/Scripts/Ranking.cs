@@ -59,8 +59,15 @@ public class Ranking : MonoBehaviour
         }
 
         posiciones.OrderByDescending(c => (int)c.CustomProperties["jugadorVuelta"]).ThenByDescending(c => (int)c.CustomProperties["jugadorPuntoControl"]).ThenByDescending(c => (int)c.CustomProperties["jugadorDistancia"]);
+
+
+        foreach (Photon.Realtime.Player player in posiciones) {
+            Debug.Log(player.NickName +"--" + player.CustomProperties["jugadorVuelta"]+"--"+ player.CustomProperties["jugadorPuntoControl"] + "--" + player.CustomProperties["jugadorDistancia"]);
+        }
+        
         foreach (KeyValuePair<int, Player> player in PhotonNetwork.CurrentRoom.Players)
         {
+            propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
             propiedadesJugador["jugadorPosicion"] = posiciones.IndexOf(player.Value)+1;
             player.Value.SetCustomProperties(propiedadesJugador);
         }

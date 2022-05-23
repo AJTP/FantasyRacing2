@@ -20,6 +20,7 @@ public class Spawn : MonoBehaviour
     void Start()
     {
         StartCoroutine(CuentaAtras());
+        propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
         GameObject jugadorAlSpawn = prefabsJugadores[(int)PhotonNetwork.LocalPlayer.CustomProperties["avatarJugador"]];
         int spawn = DameUnSpawn();
         Transform puntoSpawn = puntosSpawn[spawn];

@@ -169,6 +169,7 @@ public class Coche : MonoBehaviour
     #region ACTUALIZACION HUD
     public void SumaVuelta()
     {
+        propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
         vuelta++;
         propiedadesJugador["jugadorVuelta"] = vuelta;
         PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
@@ -179,6 +180,7 @@ public class Coche : MonoBehaviour
         }
         else {
             //ESTE JUGADOR HA ACABADO
+            propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
             acabado = true;
             propiedadesJugador["jugadorPFinal"] = rank.GetComponent<Ranking>().PuestoFinal();
             PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
@@ -188,7 +190,8 @@ public class Coche : MonoBehaviour
 
     public void ActualizaControl(int n)
     {
-        numPuntoControl=n;
+        propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
+        numPuntoControl =n;
         propiedadesJugador["jugadorPuntoControl"] = numPuntoControl;
         PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
         ActualizarRanking();
@@ -282,6 +285,7 @@ public class Coche : MonoBehaviour
         puntosControl = GameObject.Find("PuntosControl");
 
         vista = GetComponent<PhotonView>();
+        propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
         propiedadesJugador["jugadorNickName"] = PhotonNetwork.LocalPlayer.NickName;
         propiedadesJugador["jugadorVuelta"] = 0;
         propiedadesJugador["jugadorDistancia"] = Vector3.Distance(transform.position, puntosControl.transform.GetChild(numPuntoControl).transform.position);
@@ -311,10 +315,12 @@ public class Coche : MonoBehaviour
         nickJugador = nick;
     }
 
-    public void ActualizarDistanciaPuntoControl() {
+    public IEnumerator ActualizarDistanciaPuntoControl() {
+        propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
         distanciaSiguientePunto = Vector3.Distance(transform.position, puntosControl.transform.GetChild(numPuntoControl).transform.position);
         propiedadesJugador["jugadorDistancia"] = distanciaSiguientePunto;
-        //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+        PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+        yield return new WaitForSeconds(2);
         //ActualizarRanking();
     }
     

@@ -45,6 +45,7 @@ public class ItemRanking : MonoBehaviourPunCallbacks
 
     private void UpdateRankingItem(Player targetPlayer)
     {
+        propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
         if (targetPlayer.CustomProperties.ContainsKey("jugadorNickName"))
         {
             nombreJugador.text = targetPlayer.CustomProperties["jugadorNickName"].ToString();

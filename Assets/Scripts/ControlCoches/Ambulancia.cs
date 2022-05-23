@@ -14,13 +14,14 @@ public class Ambulancia : Coche
         CargarDatos();
         CargarCooldowns(4,8,12,20);
         esfera.transform.parent = null;
+        StartCoroutine(ActualizarDistanciaPuntoControl());
         //CargarCamaras();
     }
 
     void Update()
     {
         if (vista.IsMine) {
-            ActualizarDistanciaPuntoControl();
+            //
             RecogerInputMovimientoBasico();
             int habilidad = RecogerInputHabilidades();
             if (habilidad != 5)
