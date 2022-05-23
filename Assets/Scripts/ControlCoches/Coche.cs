@@ -172,7 +172,8 @@ public class Coche : MonoBehaviour
         propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
         vuelta++;
         propiedadesJugador["jugadorVuelta"] = vuelta;
-        PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+        PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
+        //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
         ActualizarRanking();
         if (vuelta <= 3)
         {
@@ -183,7 +184,8 @@ public class Coche : MonoBehaviour
             propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
             acabado = true;
             propiedadesJugador["jugadorPFinal"] = rank.GetComponent<Ranking>().PuestoFinal();
-            PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+            PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
+            //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
         }
 
     }
@@ -193,7 +195,8 @@ public class Coche : MonoBehaviour
         propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
         numPuntoControl =n;
         propiedadesJugador["jugadorPuntoControl"] = numPuntoControl;
-        PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+        PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
+        //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
         ActualizarRanking();
 
     }
@@ -202,8 +205,6 @@ public class Coche : MonoBehaviour
         //ESTA FUNCION ACTUALIZA EL HUD PARA VER EL RANKING IN GAME
         
         rank.GetComponent<Ranking>().ActualizarPosiciones();
-        //this.posicion = rank.GetComponent<Ranking>().MiPosicion(PhotonNetwork.LocalPlayer);
-        rank.GetComponent<Ranking>().UpdateListaJugadores();
     }
 
     public void CargarCooldowns(int cdh1,int cdh2,int cdh3,int cdh4) {
@@ -293,7 +294,8 @@ public class Coche : MonoBehaviour
         propiedadesJugador["jugadorPosicion"] = 0;
         propiedadesJugador["jugadorPFinal"] = null;
         propiedadesJugador["jugadorPuntos"] = 0;
-        PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+        PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
+        //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
         ActualizarRanking();
     }
     #endregion
@@ -316,12 +318,16 @@ public class Coche : MonoBehaviour
     }
 
     public IEnumerator ActualizarDistanciaPuntoControl() {
-        propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
-        distanciaSiguientePunto = Vector3.Distance(transform.position, puntosControl.transform.GetChild(numPuntoControl).transform.position);
-        propiedadesJugador["jugadorDistancia"] = distanciaSiguientePunto;
-        PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
-        yield return new WaitForSeconds(2);
-        //ActualizarRanking();
+        while (true)
+        {
+            propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
+            distanciaSiguientePunto = Vector3.Distance(transform.position, puntosControl.transform.GetChild(numPuntoControl).transform.position);
+            propiedadesJugador["jugadorDistancia"] = distanciaSiguientePunto;
+            PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
+            //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+            yield return new WaitForSeconds(2);
+            ActualizarRanking();
+        }
     }
     
 }

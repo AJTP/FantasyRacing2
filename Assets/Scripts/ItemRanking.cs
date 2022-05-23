@@ -15,18 +15,16 @@ public class ItemRanking : MonoBehaviourPunCallbacks
     public Color colorResalto;
 
     ExitGames.Client.Photon.Hashtable propiedadesJugador = new ExitGames.Client.Photon.Hashtable();
-
-    Player jugador;
-    public void SetPlayerInfo(Player _jugador)
+    public void SetPlayerInfo(Player _jugador,int puesto)
     {
-        jugador = _jugador;
-        UpdateRankingItem(jugador);
+        UpdateRankingItem(_jugador, puesto);
         PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);   
     }
 
     public void AplicarCambiosLocales()
     {
         backgroundImage.color = colorResalto;
+        nombreJugador.text = PhotonNetwork.LocalPlayer.NickName;
     }
 
    /* public void UpdatePlayerInfo()
@@ -35,26 +33,18 @@ public class ItemRanking : MonoBehaviourPunCallbacks
         PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
     }*/
 
-    public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
-    {
-        if (jugador == targetPlayer)
-        {
-            UpdateRankingItem(targetPlayer);
-        }
-    }
-
-    private void UpdateRankingItem(Player targetPlayer)
+    private void UpdateRankingItem(Player targetPlayer,int puesto)
     {
         propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
         if (targetPlayer.CustomProperties.ContainsKey("jugadorNickName"))
         {
-            nombreJugador.text = targetPlayer.CustomProperties["jugadorNickName"].ToString();
-            posicion.text = targetPlayer.CustomProperties["jugadorPosicion"].ToString();
-            propiedadesJugador["jugadorNickName"] = targetPlayer.CustomProperties["jugadorNickName"];
+            nombreJugador.text = targetPlayer.NickName;
+            posicion.text = ""+puesto;
+            propiedadesJugador["jugadorNickName"] = targetPlayer.NickName;
         }
         else
         {
-            propiedadesJugador["jugadorNickName"] = jugador.NickName;
+            propiedadesJugador["jugadorNickName"] = targetPlayer.NickName;
             propiedadesJugador["jugadorPosicion"] = 0;
         }
     }

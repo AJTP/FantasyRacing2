@@ -33,22 +33,17 @@ public class Ranking : MonoBehaviour
             return;
         }
 
-        foreach (KeyValuePair<int, Player> player in PhotonNetwork.CurrentRoom.Players)
+        foreach (Photon.Realtime.Player player in posiciones)
         {
             ItemRanking nuevoItemRanking = Instantiate(itemRankingPrefab, itemRankingParent);
-            nuevoItemRanking.SetPlayerInfo(player.Value);
-            if (player.Value == PhotonNetwork.LocalPlayer)
+            nuevoItemRanking.SetPlayerInfo(player,posiciones.IndexOf(player)+1);
+            if (player == PhotonNetwork.LocalPlayer)
             {
                 nuevoItemRanking.AplicarCambiosLocales();
             }
             listaItemsRanking.Add(nuevoItemRanking);
-        }  
+        }
     }
-
-    /*public int MiPosicion(Photon.Realtime.Player jugador) {
-
-        return posiciones.IndexOf(jugador)+1;
-    }*/
 
     public void ActualizarPosiciones()
     {
@@ -58,19 +53,9 @@ public class Ranking : MonoBehaviour
             posiciones.Add(player.Value);
         }
 
-        posiciones.OrderByDescending(c => (int)c.CustomProperties["jugadorVuelta"]).ThenByDescending(c => (int)c.CustomProperties["jugadorPuntoControl"]).ThenByDescending(c => (int)c.CustomProperties["jugadorDistancia"]);
+        posiciones = (List<Player>) posiciones.OrderByDescending(c => c.CustomProperties["jugadorVuelta"]).ThenByDescending(c => c.CustomProperties["jugadorPuntoControl"]).ThenByDescending(c =>c.CustomProperties["jugadorDistancia"]).ToList();
 
-
-        foreach (Photon.Realtime.Player player in posiciones) {
-            Debug.Log(player.NickName +"--" + player.CustomProperties["jugadorVuelta"]+"--"+ player.CustomProperties["jugadorPuntoControl"] + "--" + player.CustomProperties["jugadorDistancia"]);
-        }
-        
-        foreach (KeyValuePair<int, Player> player in PhotonNetwork.CurrentRoom.Players)
-        {
-            propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
-            propiedadesJugador["jugadorPosicion"] = posiciones.IndexOf(player.Value)+1;
-            player.Value.SetCustomProperties(propiedadesJugador);
-        }
+        UpdateListaJugadores();
     }
 
     private void Update()
