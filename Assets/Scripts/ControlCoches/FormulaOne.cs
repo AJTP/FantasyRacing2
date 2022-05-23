@@ -3,6 +3,7 @@ using Photon.Pun;
 
 public class FormulaOne : Coche
 {
+    #region PARTE COMUN
     private void Awake()
     {
         CargarPuntosControl();
@@ -12,6 +13,7 @@ public class FormulaOne : Coche
         CargarDatos();
         CargarCooldowns(4, 8, 12, 20);
         esfera.transform.parent = null;
+        StartCoroutine(ActualizarDistanciaPuntoControl());
         //CargarCamaras();
     }
 
@@ -19,6 +21,7 @@ public class FormulaOne : Coche
     {
         if (vista.IsMine)
         {
+            //
             RecogerInputMovimientoBasico();
             int habilidad = RecogerInputHabilidades();
             if (habilidad != 5)
@@ -68,12 +71,12 @@ public class FormulaOne : Coche
             }
         }
     }
+    #endregion
 
     #region HABILIDADES
     public void Habilidad0()
     {
         print("HABILIDA 0 LANZADA");
-        boosted = true;
         // Repara sus ruedas
     }
 
@@ -91,9 +94,9 @@ public class FormulaOne : Coche
 
     public void Habilidad3()
     {
-        print("HABILIDA 3 LANZADA");
         boosted = true;
-        cantidadBoost = 3000f;
+        cantidadBoost = 50000f;
+        //FALTA RASTRO FUEGO
     }
 
     #endregion

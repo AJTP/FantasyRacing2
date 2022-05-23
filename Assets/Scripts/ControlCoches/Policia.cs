@@ -5,6 +5,7 @@ public class Policia : Coche
 {
     public GameObject prefab,prefab2;
 
+    #region PARTE COMUN
     private void Awake()
     {
         CargarPuntosControl();
@@ -14,6 +15,7 @@ public class Policia : Coche
         CargarDatos();
         CargarCooldowns(4, 8, 12, 20);
         esfera.transform.parent = null;
+        StartCoroutine(ActualizarDistanciaPuntoControl());
         //CargarCamaras();
     }
 
@@ -21,6 +23,7 @@ public class Policia : Coche
     {
         if (vista.IsMine)
         {
+            //
             RecogerInputMovimientoBasico();
             int habilidad = RecogerInputHabilidades();
             if (habilidad != 5)
@@ -70,18 +73,18 @@ public class Policia : Coche
             }
         }
     }
+    #endregion
 
     #region HABILIDADES
     public void Habilidad0()
     {
-        print("HABILIDA 0 LANZADA");
+        //FALTA QUE SUENEN LAS SIRENAS
         boosted = true;
-        cantidadBoost = 2000f;
+        cantidadBoost = 20000f;
     }
 
     public void Habilidad1()
     {
-        print("HABILIDA 1 LANZADA");
         SoltarPrefab(prefab);
     }
 
@@ -93,7 +96,7 @@ public class Policia : Coche
     public void Habilidad3()
     {
         print("HABILIDA 3 LANZADA");
-        //ESPOSA OTROS DOS COCHES DURANTE X SEGUNDOS
+        //ESPOSA OTROS DOS COCHES DURANTE X SEGUNDOS ?? SE PUEDE HACER??
     }
 
     #endregion

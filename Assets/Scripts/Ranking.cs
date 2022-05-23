@@ -15,10 +15,17 @@ public class Ranking : MonoBehaviour
     public ItemRanking itemRankingPrefab;
     public Transform itemRankingParent;
 
+    public Transform itemRFinalParent;
+
     ExitGames.Client.Photon.Hashtable propiedadesJugador = new ExitGames.Client.Photon.Hashtable();
 
     private bool ok;
     private int veces = 0;
+
+    private void Start()
+    {
+        itemRFinalParent.gameObject.SetActive(false);
+    }
     public void UpdateListaJugadores()
     {
         foreach (ItemRanking item in listaItemsRanking)
@@ -60,8 +67,7 @@ public class Ranking : MonoBehaviour
 
     private void Update()
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
+
             ok = true;
             foreach (KeyValuePair<int, Player> player in PhotonNetwork.CurrentRoom.Players)
             {
@@ -82,24 +88,34 @@ public class Ranking : MonoBehaviour
                 //TODOS LOS JUGADORES HAN ACABADO, DESPUÉS DE UN TIEMPO ENSEÑANDO EL RANKING FINAL PASAMOS A LA SIGUIENTE CARRERA
                 if (veces == 0)
                 {
-                    StartCoroutine(TodosALaSiguiente());
+                    ActivarRankingFinal();
+                    if (PhotonNetwork.IsMasterClient)
+                    {
+                        
+                        StartCoroutine(TodosALaSiguiente());
+                        
+                    }
                     veces++;
                 }
             }
-        }
+
     }
 
     private IEnumerator TodosALaSiguiente() {
         //ACTIVAMOS EL RANKING FINAL
+        //ActivarRankingFinal();
         yield return new WaitForSeconds(10);
         switch (SceneManager.GetActiveScene().name) {
             case "Ovalo":
+                itemRFinalParent.gameObject.SetActive(false);
                 PhotonNetwork.LoadLevel("Karting");
                 break;
             case "Karting":
+                itemRFinalParent.gameObject.SetActive(false);
                 PhotonNetwork.LoadLevel("Castillo");
                 break;
             case "Castillo":
+                itemRFinalParent.gameObject.SetActive(false);
                 //ACABA LA PARTIDA, RANKING FINAL DE PUNTOS TOTALES Y AL LOBBY
                 yield return new WaitForSeconds(10);
                 PhotonNetwork.LoadLevel("Rooms(3)");
@@ -108,18 +124,40 @@ public class Ranking : MonoBehaviour
         }
     }
 
-    public int PuestoFinal() {
+    public int MiPuestoFinal() {
         int pos = 0;
         foreach (KeyValuePair<int, Player> player in PhotonNetwork.CurrentRoom.Players)
         {
-            if (player.Value.CustomProperties.ContainsKey("jugadorPosicion"))
+            if (player.Value.CustomProperties.ContainsKey("jugadorPFinal"))
             {
-                if ((int)player.Value.CustomProperties["jugadorPosicion"] > pos) {
-                    pos = (int)player.Value.CustomProperties["jugadorPosicion"];
+                if ((int)player.Value.CustomProperties["jugadorPFinal"] > pos) {
+                    pos = (int)player.Value.CustomProperties["jugadorPFinal"];
                 }
             }
         }
         pos++;
         return pos;
+    }
+
+    public void ActivarRankingFinal() {
+        List<Player> jugadoresOrdenados = new List<Player>();
+        foreach (KeyValuePair<int, Player> player in PhotonNetwork.CurrentRoom.Players)
+        {
+            jugadoresOrdenados.Add(player.Value);
+        }
+
+        jugadoresOrdenados = jugadoresOrdenados.OrderBy(p => p.CustomProperties["jugadorPFinal"]).ToList();
+
+        foreach (Player player in jugadoresOrdenados)
+        {
+            ItemRanking nuevoItemRanking = Instantiate(itemRankingPrefab, itemRFinalParent);
+            nuevoItemRanking.SetFinalInfo(player, posiciones.IndexOf(player) + 1);
+            if (player == PhotonNetwork.LocalPlayer)
+            {
+                nuevoItemRanking.AplicarCambiosLocales();
+            }
+        }
+        itemRankingParent.gameObject.SetActive(false);
+        itemRFinalParent.gameObject.SetActive(true);
     }
 }

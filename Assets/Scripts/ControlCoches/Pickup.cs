@@ -4,7 +4,7 @@ using Photon.Pun;
 public class Pickup : Coche
 {
     public GameObject prefab, prefab2;
-
+    #region PARTE COMUN
     private void Awake()
     {
         CargarPuntosControl();
@@ -14,6 +14,7 @@ public class Pickup : Coche
         CargarDatos();
         CargarCooldowns(4, 8, 12, 20);
         esfera.transform.parent = null;
+        StartCoroutine(ActualizarDistanciaPuntoControl());
         //CargarCamaras();
     }
 
@@ -21,6 +22,7 @@ public class Pickup : Coche
     {
         if (vista.IsMine)
         {
+            //
             RecogerInputMovimientoBasico();
             int habilidad = RecogerInputHabilidades();
             if (habilidad != 5)
@@ -44,6 +46,12 @@ public class Pickup : Coche
         {
             esfera.AddForce(transform.forward * cantidadBoost);
             StartCoroutine(DesactivarBoost());
+        }
+
+        if (invencible)
+        {
+            //lo que sea que haga invencible+efecto visual
+            StartCoroutine(DesactivarInvencible(30));
         }
     }
 
@@ -70,6 +78,7 @@ public class Pickup : Coche
             }
         }
     }
+    #endregion
 
     #region HABILIDADES
     public void Habilidad0()
@@ -93,6 +102,7 @@ public class Pickup : Coche
     public void Habilidad3()
     {
         print("HABILIDA 3 LANZADA");
+        invencible = true;
         //ACTIVA EL 4X4, NO LE AFECTAN LOS EFECTOS NEGATIVOS NI CUALQUIER TIPO DE TERRENO
     }
 

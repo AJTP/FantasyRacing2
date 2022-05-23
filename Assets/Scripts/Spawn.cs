@@ -38,8 +38,6 @@ public class Spawn : MonoBehaviour
             camara.GetComponent<CameraFollower>().PuntoCamara = miJugador.GetComponent<ControlCamaras>().puntoNormal;
 
         }
-        GameObject camaraMinimapa = GameObject.FindWithTag("MiniCamera");
-        camaraMinimapa.transform.position = miJugador.GetComponent<ControlCamaras>().puntoMinimapa.transform.position;
         GameObject camaraRetro = GameObject.FindWithTag("RetroCamera");
         camaraRetro.GetComponent<CameraFollower>().Objetivo = miJugador.transform;
         camaraRetro.GetComponent<CameraFollower>().PuntoCamara = miJugador.GetComponent<ControlCamaras>().puntoRetrovisor;

@@ -21,6 +21,12 @@ public class ItemRanking : MonoBehaviourPunCallbacks
         PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);   
     }
 
+    public void SetFinalInfo(Player _jugador, int puesto)
+    {
+        UpdateFinalItem(_jugador, puesto);
+        PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+    }
+
     public void AplicarCambiosLocales()
     {
         backgroundImage.color = colorResalto;
@@ -46,6 +52,17 @@ public class ItemRanking : MonoBehaviourPunCallbacks
         {
             propiedadesJugador["jugadorNickName"] = targetPlayer.NickName;
             propiedadesJugador["jugadorPosicion"] = 0;
+        }
+    }
+
+    private void UpdateFinalItem(Player targetPlayer, int puesto)
+    {
+        propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
+        if (targetPlayer.CustomProperties.ContainsKey("jugadorNickName"))
+        {
+            nombreJugador.text = targetPlayer.NickName;
+            posicion.text = targetPlayer.CustomProperties["jugadorPFinal"]+"";
+            propiedadesJugador["jugadorNickName"] = targetPlayer.NickName;
         }
     }
 }

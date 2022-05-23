@@ -4,7 +4,7 @@ using Photon.Pun;
 public class Ambulancia : Coche
 {
     public GameObject prefab;
-
+    #region PARTE COMUN
     private void Awake()
     {
         CargarPuntosControl();
@@ -68,21 +68,20 @@ public class Ambulancia : Coche
             }
         }
     }
+    #endregion
 
     #region HABILIDADES
     public void Habilidad0(){
-        print("HABILIDA 0 LANZADA");
+        //FALTA QUE SUENEN LAS SIRENAS
         boosted = true;
-        cantidadBoost = 2000f;
+        cantidadBoost = 20000f;
     }
 
     public void Habilidad1(){
-        print("HABILIDA 1 LANZADA");
-        SoltarPrefab(prefab); 
+       SoltarPrefab(prefab); 
     }
 
     public void Habilidad2(){
-        print("HABILIDA 2 LANZADA");
         hp += maxHP / 3;
         if (hp > maxHP)
             hp = maxHP;

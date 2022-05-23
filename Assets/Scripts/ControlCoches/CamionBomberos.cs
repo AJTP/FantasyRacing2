@@ -4,7 +4,7 @@ using Photon.Pun;
 public class CamionBomberos : Coche
 {
     public GameObject prefab;
-
+    #region PARTE COMUN
     private void Awake()
     {
         CargarPuntosControl();
@@ -14,6 +14,7 @@ public class CamionBomberos : Coche
         CargarDatos();
         CargarCooldowns(4, 8, 12, 20);
         esfera.transform.parent = null;
+        StartCoroutine(ActualizarDistanciaPuntoControl());
         //CargarCamaras();
     }
 
@@ -21,6 +22,7 @@ public class CamionBomberos : Coche
     {
         if (vista.IsMine)
         {
+            //
             RecogerInputMovimientoBasico();
             int habilidad = RecogerInputHabilidades();
             if (habilidad != 5)
@@ -45,6 +47,9 @@ public class CamionBomberos : Coche
             esfera.AddForce(transform.forward * cantidadBoost);
             StartCoroutine(DesactivarBoost());
         }
+
+
+
     }
 
     private void LanzarHabilidad(int i)
@@ -70,11 +75,12 @@ public class CamionBomberos : Coche
             }
         }
     }
+    #endregion
 
     #region HABILIDADES
     public void Habilidad0()
     {
-        print("HABILIDA 0 LANZADA");
+        //FALTA QUE SUENEN LAS SIRENAS
         boosted = true;
         cantidadBoost = 2000f;
     }
@@ -88,7 +94,7 @@ public class CamionBomberos : Coche
     public void Habilidad2()
     {
         print("HABILIDA 2 LANZADA");
-        // LANZA UNA BOMBA DE AGUA AL JUGADOR EN PRIMERA POSICION
+        // LANZA UNA BOMBA DE AGUA AL JUGADOR EN PRIMERA POSICION ?? QUE PASA SI ERES EL PRIMER JUGADOR? A LO MEJOR LA CAMBIO
     }
 
     public void Habilidad3()

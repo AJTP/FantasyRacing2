@@ -4,6 +4,7 @@ using Photon.Pun;
 public class CamionBasura : Coche
 {
     public GameObject prefab,prefab2;
+    #region PARTE COMUN
 
     private void Awake()
     {
@@ -14,6 +15,7 @@ public class CamionBasura : Coche
         CargarDatos();
         CargarCooldowns(4, 8, 12, 20);
         esfera.transform.parent = null;
+        StartCoroutine(ActualizarDistanciaPuntoControl());
         //CargarCamaras();
     }
 
@@ -45,6 +47,12 @@ public class CamionBasura : Coche
             esfera.AddForce(transform.forward * cantidadBoost);
             StartCoroutine(DesactivarBoost());
         }
+
+        if (invencible)
+        {
+            //lo que sea que haga invencible para camion de basura+efecto visual
+            StartCoroutine(DesactivarInvencible(5));
+        }
     }
 
     private void LanzarHabilidad(int i)
@@ -70,11 +78,11 @@ public class CamionBasura : Coche
             }
         }
     }
+    #endregion
 
     #region HABILIDADES
     public void Habilidad0()
     {
-        print("HABILIDA 0 LANZADA");
         SoltarPrefab(prefab);
     }
 
@@ -86,13 +94,11 @@ public class CamionBasura : Coche
 
     public void Habilidad2()
     {
-        print("HABILIDA 2 LANZADA");
-        SoltarPrefab(prefab2);
+        invencible = true;
     }
 
     public void Habilidad3()
     {
-        print("HABILIDA 3 LANZADA");
         //AUMENTA SU ESTATURA Y SI CHOCA CON OTRO VEHICULO LO APLASTA Y RALENTIZA
         ModificarSize(2);
     }

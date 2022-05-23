@@ -70,6 +70,7 @@ public class Coche : MonoBehaviour
 
     #region UTILIDADES HABILIDADES
         public Transform puntoPrefabs;
+        public bool invencible = false;
     #endregion
 
     #region ONLINE
@@ -183,7 +184,7 @@ public class Coche : MonoBehaviour
             //ESTE JUGADOR HA ACABADO
             propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
             acabado = true;
-            propiedadesJugador["jugadorPFinal"] = rank.GetComponent<Ranking>().PuestoFinal();
+            propiedadesJugador["jugadorPFinal"] = rank.GetComponent<Ranking>().MiPuestoFinal();
             PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
             //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
         }
@@ -226,7 +227,8 @@ public class Coche : MonoBehaviour
     }
 
     public void SoltarPrefab(GameObject prefab) {
-        Instantiate(prefab,puntoPrefabs.position,Quaternion.identity);
+        PhotonNetwork.Instantiate(prefab.name, puntoPrefabs.position, transform.rotation);
+        //Instantiate(prefab,puntoPrefabs.position,Quaternion.identity);
     }
     protected void ReducirCoolDown(int i)
     {
@@ -311,6 +313,12 @@ public class Coche : MonoBehaviour
     public IEnumerator DesactivarBoost() {
         yield return new WaitForSeconds(2f);
         boosted = false;
+    }
+
+    public IEnumerator DesactivarInvencible(int tiempo)
+    {
+        yield return new WaitForSeconds(tiempo);
+        invencible = false;
     }
 
     public void SetNickJugador(string nick) {

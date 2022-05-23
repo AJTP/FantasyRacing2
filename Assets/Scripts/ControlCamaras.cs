@@ -5,6 +5,6 @@ using UnityEngine;
 public class ControlCamaras : MonoBehaviour
 {
     #region CAMARAS
-    public Transform puntoNormal, puntoMinimapa, puntoRetrovisor;
+    public Transform puntoNormal, puntoRetrovisor;
     #endregion
 }
