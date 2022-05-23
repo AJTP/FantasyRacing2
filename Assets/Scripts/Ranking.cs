@@ -120,7 +120,7 @@ public class Ranking : MonoBehaviour
         int pos = 0;
         foreach (KeyValuePair<int, Player> player in PhotonNetwork.CurrentRoom.Players)
         {
-            if ((int)player.Value.CustomProperties["jugadorPosicion"]!=null)
+            if (player.Value.CustomProperties.ContainsKey("jugadorPosicion"))
             {
                 if ((int)player.Value.CustomProperties["jugadorPosicion"] > pos) {
                     pos = (int)player.Value.CustomProperties["jugadorPosicion"];

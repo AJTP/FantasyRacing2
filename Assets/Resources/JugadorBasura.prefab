@@ -253,6 +253,7 @@ MonoBehaviour:
   - {fileID: 2363894618162931285}
   - {fileID: 2363894617071798731}
   contadorVueltas: {fileID: 2363894617257843043}
+  spawn: {fileID: 0}
   puntoPrefabs: {fileID: 2898648638968777553}
   prefab: {fileID: 0}
   prefab2: {fileID: 0}
