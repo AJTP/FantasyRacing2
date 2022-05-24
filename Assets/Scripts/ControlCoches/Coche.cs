@@ -15,7 +15,6 @@ public class Coche : MonoBehaviour
     [Header("Estadísticas Básicas")]
     public float aceleracion = 8f;
     public float marchaAtras = 4f;
-    public float velocidadMaxima = 50f;
     public float fuerzaGiro = 180f;
     public float gravedad = 10f;
     public float dragEnSuelo = 3f;
@@ -23,6 +22,7 @@ public class Coche : MonoBehaviour
     public int maxHP=100;
     public int posicion;
     public bool boosted = false;
+    public bool resbalado = false;
     public float cantidadBoost;
 
 
@@ -74,6 +74,8 @@ public class Coche : MonoBehaviour
     [Header("Habilidades")]
     public Transform puntoPrefabs;
     public bool invencible = false;
+    public bool protegido = false;
+    public bool ralentizado = false;
     #endregion
 
     #region ONLINE
@@ -147,6 +149,10 @@ public class Coche : MonoBehaviour
             transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
             velocidadInput /= 2;
 
+        }
+
+        if (ralentizado) {
+            velocidadInput /= 3;
         }
 
         if (tocandoSuelo)
@@ -223,16 +229,69 @@ public class Coche : MonoBehaviour
 
     #region EFECTOS SOBRE JUGADOR (HABILIDADES)
 
-    public void RecibirStun(float tiempo) {
+    public void RecibirResbalar() {
+        if (protegido)
+        {
+            protegido = false;
+        }
+        else
+        {
+            int i = Random.Range(0, 1);
+            int o = Random.Range(0, 1);
+            if (i == 0)
+            {
+                i = -1;
+            }
+            if (o == 0)
+            {
+                o = -1;
+            }
+            int x, z;
+            x = Random.Range(500, 1500);
+            z = Random.Range(500, 1500);
+            x *= i;
+            z *= o;
+            esfera.AddForce(new Vector3(x, 0, z),ForceMode.Impulse);
+        }
+    }
 
+    public void RecibirRalentizar(int tiempo)
+    {
+        if (protegido)
+        {
+            protegido = false;
+        }
+        else
+        {
+            ralentizado = true;
+            StartCoroutine(DesactivarRalentizado(tiempo));
+        }
+    }
+    public void RecibirStun(float tiempo)
+    {
+        if (protegido)
+        {
+            protegido = false;
+        }
+        else
+        {
+            //EFECTO STUN
+        }
     }
 
     public IEnumerator AplicarCeguera() {
         if (vista.IsMine)
         {
-            panelGas.SetActive(true);
-            yield return new WaitForSeconds(5);
-            panelGas.SetActive(false);
+            if (protegido)
+            {
+                protegido = false;
+            }
+            else
+            {
+                panelGas.SetActive(true);
+                yield return new WaitForSeconds(5);
+                panelGas.SetActive(false);
+            }
         }
     }
 
@@ -290,8 +349,32 @@ public class Coche : MonoBehaviour
     }
 
     public void ModificarSize(int factor) {
-        Vector3 escala = new Vector3(transform.localScale.x*factor, transform.localScale.y * factor, transform.localScale.z * factor);
-        transform.localScale = escala;
+            Vector3 escala = new Vector3(transform.localScale.x * factor, transform.localScale.y * factor, transform.localScale.z * factor);
+            transform.localScale = escala;     
+    }
+
+    public IEnumerator DesactivarBoost()
+    {
+        yield return new WaitForSeconds(2f);
+        boosted = false;
+    }
+
+    public IEnumerator DesactivarResbalado()
+    {
+        yield return new WaitForSeconds(1f);
+        resbalado = false;
+    }
+
+    public IEnumerator DesactivarInvencible(int tiempo)
+    {
+        yield return new WaitForSeconds(tiempo);
+        invencible = false;
+    }
+
+    public IEnumerator DesactivarRalentizado(int tiempo)
+    {
+        yield return new WaitForSeconds(tiempo);
+        ralentizado = false;
     }
 
     #endregion
@@ -316,6 +399,8 @@ public class Coche : MonoBehaviour
         //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
         ActualizarRanking();
     }
+
+    
     #endregion
 
     #region INFORMACION JUGADOR
@@ -326,16 +411,7 @@ public class Coche : MonoBehaviour
     }
     #endregion
 
-    public IEnumerator DesactivarBoost() {
-        yield return new WaitForSeconds(2f);
-        boosted = false;
-    }
-
-    public IEnumerator DesactivarInvencible(int tiempo)
-    {
-        yield return new WaitForSeconds(tiempo);
-        invencible = false;
-    }
+    
 
     public void SetNickJugador(string nick) {
         nickJugador = nick;

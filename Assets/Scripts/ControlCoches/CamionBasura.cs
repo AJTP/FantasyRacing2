@@ -47,6 +47,11 @@ public class CamionBasura : Coche
             esfera.AddForce(transform.forward * cantidadBoost);
             StartCoroutine(DesactivarBoost());
         }
+        if (resbalado == true)
+        {
+            RecibirResbalar();
+            StartCoroutine(DesactivarResbalado());
+        }
 
         if (invencible)
         {
@@ -88,9 +93,8 @@ public class CamionBasura : Coche
 
     public void Habilidad1()
     {
-        print("HABILIDA 1 LANZADA");
-        //SE PONE UN ESCUDO QUE LE PROTEGE DE LA SIGUIENTE HABILIDAD RECIBIDA
-        invencible = true;
+        //#ESTETICO SE PONE EL ESCUDO
+        protegido = true;
     }
 
     public void Habilidad2()
@@ -100,7 +104,6 @@ public class CamionBasura : Coche
 
     public void Habilidad3()
     {
-        //AUMENTA SU ESTATURA Y SI CHOCA CON OTRO VEHICULO LO APLASTA Y RALENTIZA
         ModificarSize(2);
     }
 

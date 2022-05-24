@@ -47,6 +47,11 @@ public class CamionBomberos : Coche
             esfera.AddForce(transform.forward * cantidadBoost);
             StartCoroutine(DesactivarBoost());
         }
+        if (resbalado == true)
+        {
+            RecibirResbalar();
+            StartCoroutine(DesactivarResbalado());
+        }
 
 
 
@@ -80,9 +85,9 @@ public class CamionBomberos : Coche
     #region HABILIDADES
     public void Habilidad0()
     {
-        //FALTA QUE SUENEN LAS SIRENAS
+        //#SONIDO ONESHOT SIRENAS
         boosted = true;
-        cantidadBoost = 2000f;
+        cantidadBoost = 8000f;
     }
 
     public void Habilidad1()

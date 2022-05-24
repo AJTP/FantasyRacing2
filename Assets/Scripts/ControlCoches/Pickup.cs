@@ -47,6 +47,11 @@ public class Pickup : Coche
             esfera.AddForce(transform.forward * cantidadBoost);
             StartCoroutine(DesactivarBoost());
         }
+        if (resbalado == true)
+        {
+            RecibirResbalar();
+            StartCoroutine(DesactivarResbalado());
+        }
 
         if (invencible)
         {

@@ -237,6 +237,7 @@ MonoBehaviour:
   maxHP: 100
   posicion: 0
   boosted: 0
+  resbalado: 0
   cantidadBoost: 0
   suelo:
     serializedVersion: 2
@@ -259,6 +260,7 @@ MonoBehaviour:
   spawn: {fileID: 0}
   puntoPrefabs: {fileID: 2898648638968777553}
   invencible: 0
+  protegido: 0
 --- !u!114 &6449115049114338945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,7 +431,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7804736957127794327}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1006.744, y: -600.5802, z: 60}
+  m_LocalPosition: {x: -1006.744, y: -601, z: 60}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4530504258896429788}

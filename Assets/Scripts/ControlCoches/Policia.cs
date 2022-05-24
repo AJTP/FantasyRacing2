@@ -48,6 +48,11 @@ public class Policia : Coche
             esfera.AddForce(transform.forward * cantidadBoost);
             StartCoroutine(DesactivarBoost());
         }
+        if (resbalado == true)
+        {
+            RecibirResbalar();
+            StartCoroutine(DesactivarResbalado());
+        }
     }
 
     private void LanzarHabilidad(int i)
@@ -78,9 +83,9 @@ public class Policia : Coche
     #region HABILIDADES
     public void Habilidad0()
     {
-        //FALTA QUE SUENEN LAS SIRENAS
+        //#SONIDO ONESHOT SIRENAS
         boosted = true;
-        cantidadBoost = 20000f;
+        cantidadBoost = 8000f;
     }
 
     public void Habilidad1()

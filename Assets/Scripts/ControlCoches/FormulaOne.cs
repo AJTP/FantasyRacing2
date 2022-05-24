@@ -46,6 +46,11 @@ public class FormulaOne : Coche
             esfera.AddForce(transform.forward * cantidadBoost);
             StartCoroutine(DesactivarBoost());
         }
+        if (resbalado == true)
+        {
+            RecibirResbalar();
+            StartCoroutine(DesactivarResbalado());
+        }
     }
 
     private void LanzarHabilidad(int i)
@@ -88,15 +93,15 @@ public class FormulaOne : Coche
 
     public void Habilidad2()
     {
-        print("HABILIDA 2 LANZADA");
-        velocidadMaxima += 10;
+        //#SONIDO ONESHOT BOOST
+        aceleracion += 1;
     }
 
     public void Habilidad3()
     {
+        //#SONIDO ONESHOT FORMULA UNO
         boosted = true;
-        cantidadBoost = 50000f;
-        //FALTA RASTRO FUEGO
+        cantidadBoost = 30000f;
     }
 
     #endregion
