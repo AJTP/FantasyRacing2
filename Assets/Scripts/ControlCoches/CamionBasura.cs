@@ -90,11 +90,12 @@ public class CamionBasura : Coche
     {
         print("HABILIDA 1 LANZADA");
         //SE PONE UN ESCUDO QUE LE PROTEGE DE LA SIGUIENTE HABILIDAD RECIBIDA
+        invencible = true;
     }
 
     public void Habilidad2()
     {
-        invencible = true;
+        SoltarPrefab(prefab2,new Vector3(0,1.5f,0));
     }
 
     public void Habilidad3()

@@ -12,7 +12,7 @@ public class Coche : MonoBehaviour
     public string nickJugador;
 
     #region ESTADISTICAS BASICAS
-
+    [Header("Estadísticas Básicas")]
     public float aceleracion = 8f;
     public float marchaAtras = 4f;
     public float velocidadMaxima = 50f;
@@ -29,20 +29,21 @@ public class Coche : MonoBehaviour
     #endregion
 
     #region UTILIDADES MOVIMIENTO
-
-    public LayerMask suelo, carretera;
+    [Header("Movimiento")]
+    public LayerMask suelo;
+    public LayerMask carretera;
     public float longitudRayoSuelo = 0.5f;
-    private bool tocandoSuelo;
     public Transform puntoRayoSuelo;
     public Transform ruedaIzquierda, ruedaDerecha;
     public float maximaRotacionRuedas = 25f;
+    private bool tocandoSuelo;
     private float multiplicador = 1000f;
     private float velocidadInput, giroInput;
 
     #endregion
 
     #region COOLDOWNS
-
+    [Header("CoolDowns")]
     protected bool[] isCD = new bool[4];
     protected float[] coolDowns = new float[4];
     protected float[] timerCD = new float[4];
@@ -50,10 +51,11 @@ public class Coche : MonoBehaviour
     #endregion
 
     #region HUD
-
+    [Header("HUD")]
     public Image[] imagenes = new Image[4];
 
     public Text contadorVueltas;
+    public GameObject panelGas;
 
     public Spawn spawn;
 
@@ -69,8 +71,9 @@ public class Coche : MonoBehaviour
     #endregion
 
     #region UTILIDADES HABILIDADES
-        public Transform puntoPrefabs;
-        public bool invencible = false;
+    [Header("Habilidades")]
+    public Transform puntoPrefabs;
+    public bool invencible = false;
     #endregion
 
     #region ONLINE
@@ -226,9 +229,21 @@ public class Coche : MonoBehaviour
 
     }
 
-    public void SoltarPrefab(GameObject prefab) {
-        PhotonNetwork.Instantiate(prefab.name, puntoPrefabs.position, transform.rotation);
-        //Instantiate(prefab,puntoPrefabs.position,Quaternion.identity);
+    public IEnumerator AplicarCeguera() {
+        panelGas.SetActive(true);
+        yield return new WaitForSeconds(5);
+        panelGas.SetActive(false);
+    }
+
+    public GameObject SoltarPrefab(GameObject prefab)
+    {
+        GameObject go = PhotonNetwork.Instantiate(prefab.name, puntoPrefabs.position, transform.rotation);
+        return go;
+    }
+
+    public GameObject SoltarPrefab(GameObject prefab,Vector3 offset) {
+        GameObject go = PhotonNetwork.Instantiate(prefab.name, puntoPrefabs.position+offset, transform.rotation);
+        return go;
     }
     protected void ReducirCoolDown(int i)
     {

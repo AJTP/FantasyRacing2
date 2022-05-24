@@ -84,7 +84,9 @@ public class Pickup : Coche
     public void Habilidad0()
     {
         print("HABILIDA 0 LANZADA");
-        SoltarPrefab(prefab);//TRONCO RODANTE
+        GameObject tronco = SoltarPrefab(prefab);//TRONCO RODANTE
+        //VECTOR DEPENDIENDO DE LA DIRECCIÓN DE MI COCHE
+        tronco.GetComponent<TroncoRodante>().SetVector(new Vector3(0,2,0));
     }
 
     public void Habilidad1()
