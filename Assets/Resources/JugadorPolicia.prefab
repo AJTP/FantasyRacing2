@@ -229,11 +229,10 @@ MonoBehaviour:
   nickJugador: 
   aceleracion: 8
   marchaAtras: 4
-  velocidadMaxima: 50
   fuerzaGiro: 180
   gravedad: 10
   dragEnSuelo: 3
-  hp: 50
+  hp: 100
   maxHP: 100
   posicion: 0
   boosted: 0
@@ -255,6 +254,8 @@ MonoBehaviour:
   - {fileID: 2363894617966194406}
   - {fileID: 2363894618162931285}
   - {fileID: 2363894617071798731}
+  textoVida: {fileID: 2363894617257843043}
+  barraVida: {fileID: 2363894616233293899}
   contadorVueltas: {fileID: 3340014147084440198}
   panelGas: {fileID: 0}
   spawn: {fileID: 0}
@@ -769,6 +770,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 508190302113648050, guid: e4a79062a20f24c0388df599782158fb, type: 3}
   m_PrefabInstance: {fileID: 2865214887592622317}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2363894616233293899 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 508190303578308774, guid: e4a79062a20f24c0388df599782158fb, type: 3}
+  m_PrefabInstance: {fileID: 2865214887592622317}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2363894616652180832 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 508190303058695565, guid: e4a79062a20f24c0388df599782158fb, type: 3}
@@ -811,6 +823,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2363894617257843043 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 508190302453031310, guid: e4a79062a20f24c0388df599782158fb, type: 3}
+  m_PrefabInstance: {fileID: 2865214887592622317}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &3340014147084440198 stripped

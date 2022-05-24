@@ -18,8 +18,8 @@ public class Coche : MonoBehaviour
     public float fuerzaGiro = 180f;
     public float gravedad = 10f;
     public float dragEnSuelo = 3f;
-    public int hp=50;
-    public int maxHP=100;
+    public int hp=100;
+    public int maxHP =100;
     public int posicion;
     public bool boosted = false;
     public bool resbalado = false;
@@ -54,6 +54,8 @@ public class Coche : MonoBehaviour
     [Header("HUD")]
     public Image[] imagenes = new Image[4];
 
+    public Text textoVida;
+    public Image barraVida;
     public Text contadorVueltas;
     public GameObject panelGas;
 
@@ -381,6 +383,7 @@ public class Coche : MonoBehaviour
 
     #region ONLINE
     public void CargarDatos() {
+        ActualizarHP(maxHP);
         spawn = GameObject.Find("Spawner").GetComponent<Spawn>();
         GameManager.Instancia.AddCoche(this);
         rank = GameObject.Find("RANKING");
@@ -429,6 +432,24 @@ public class Coche : MonoBehaviour
             ActualizarRanking();
         }
     }
-    
+
+    public void ActualizarHP(int cantidad) {
+        hp += cantidad;
+        if (hp > maxHP)
+        {
+            hp = maxHP;
+        }
+        else if(hp<=0) {
+            hp = 0;
+            Respawn();
+        }
+        textoVida.text = ""+hp;
+        barraVida.fillAmount = (float)hp / (float)maxHP;
+    }
+
+    public void Respawn() {
+        ActualizarHP(maxHP);
+        esfera.position = puntosControl.transform.GetChild(numPuntoControl).transform.position+new Vector3(0,1,0);
+    }
 }
     

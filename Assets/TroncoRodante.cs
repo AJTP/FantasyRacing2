@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TroncoRodante : MonoBehaviour
+public class TroncoRodante : Prop
 {
     public Rigidbody rb;
-    public Vector3 direccion = new Vector3(0,0,0);
+    public Vector3 direccion = new Vector3(0, 0, 0);
+    private void Start()
+    {
+        StartCoroutine(MuerteProp());
+    }
+    
 
     void Update()
     {

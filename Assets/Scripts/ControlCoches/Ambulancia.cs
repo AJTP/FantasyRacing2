@@ -87,9 +87,7 @@ public class Ambulancia : Coche
     }
 
     public void Habilidad2(){
-        hp += maxHP / 3;
-        if (hp > maxHP)
-            hp = maxHP;
+        ActualizarHP(maxHP / 3);
     }
 
     public void Habilidad3(){
