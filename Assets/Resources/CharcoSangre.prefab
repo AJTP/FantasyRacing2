@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2633291263298208125}
   - component: {fileID: 2588602670388951772}
   - component: {fileID: 1729315491241829549}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: -4519957308381874873}
   - component: {fileID: 2675981279309181380}
   - component: {fileID: 4602307660538472444}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CharcoSangre
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 3103612047018468236}
   - component: {fileID: 5669596101233826817}
   - component: {fileID: 4298163606120879421}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 5529001100671115289}
   - component: {fileID: 4885231496092586926}
   - component: {fileID: 4120311532975245462}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 8959335596652911137}
   - component: {fileID: 4592013772040662245}
   - component: {fileID: 7281020551012088911}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -459,7 +459,7 @@ GameObject:
   - component: {fileID: 8090445697441978753}
   - component: {fileID: 628400266099183923}
   - component: {fileID: 2728795509581882853}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

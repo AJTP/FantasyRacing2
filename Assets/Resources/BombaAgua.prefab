@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -2590796824266020449}
   - component: {fileID: 167990731523561826}
   - component: {fileID: 6048929520193947077}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BombaAgua
   m_TagString: Untagged
   m_Icon: {fileID: 0}

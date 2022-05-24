@@ -86,8 +86,6 @@ public class Coche : MonoBehaviour
 
     #region MOVIMIENTO COCHE
     public void RecogerInputMovimientoBasico() {
-        if (acabado || spawn.i>0)
-            return;
         velocidadInput = 0f;
         //RECOGIDA ACELERACION
         if (Input.GetAxis("Vertical") > 0)
@@ -230,9 +228,12 @@ public class Coche : MonoBehaviour
     }
 
     public IEnumerator AplicarCeguera() {
-        panelGas.SetActive(true);
-        yield return new WaitForSeconds(5);
-        panelGas.SetActive(false);
+        if (vista.IsMine)
+        {
+            panelGas.SetActive(true);
+            yield return new WaitForSeconds(5);
+            panelGas.SetActive(false);
+        }
     }
 
     public GameObject SoltarPrefab(GameObject prefab)

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4461626641825644057}
   - component: {fileID: -2928835483410590319}
   - component: {fileID: 6575963921134043597}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Nube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 3516658543240832881}
   - component: {fileID: 1736842496875716155}
   - component: {fileID: 2972159345421679279}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}

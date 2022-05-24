@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3049613466596096410}
   - component: {fileID: 7121761681153821373}
   - component: {fileID: 1583244265645560457}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 3486557860815526583}
   - component: {fileID: 6243372976590456104}
   - component: {fileID: 1178416968497788835}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 8251451416915622545}
   - component: {fileID: 1481279796628131564}
   - component: {fileID: 1173349470112403722}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +298,7 @@ GameObject:
   - component: {fileID: -5764352925442358822}
   - component: {fileID: 9203894906783994114}
   - component: {fileID: 9121127230788277250}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Misil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -423,7 +423,7 @@ GameObject:
   - component: {fileID: 2682674427716941736}
   - component: {fileID: 1172612243869489504}
   - component: {fileID: 929416081750802371}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -517,7 +517,7 @@ GameObject:
   - component: {fileID: 6632646265769106502}
   - component: {fileID: 7395739385571964388}
   - component: {fileID: 8308061281577079988}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -598,7 +598,7 @@ GameObject:
   - component: {fileID: 5644854454537631046}
   - component: {fileID: 2647827830592426561}
   - component: {fileID: 7935301693670430552}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
