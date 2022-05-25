@@ -22,8 +22,6 @@ public class Coche : MonoBehaviour
     public int maxHP =100;
     public int posicion;
     public bool boosted = false;
-    public bool resbalado = false;
-    public bool stuneado = false;
     public float cantidadBoost;
 
 
@@ -79,6 +77,8 @@ public class Coche : MonoBehaviour
     public bool invencible = false;
     public bool protegido = false;
     public bool ralentizado = false;
+    public bool resbalado = false;
+    public bool stuneado = false;
     #endregion
 
     #region ONLINE
@@ -150,8 +150,9 @@ public class Coche : MonoBehaviour
 
             tocandoSuelo = true;
             transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
-            velocidadInput /= 2;
-
+            if (!invencible) {
+                velocidadInput /= 2;
+            }
         }
 
         if (ralentizado) {

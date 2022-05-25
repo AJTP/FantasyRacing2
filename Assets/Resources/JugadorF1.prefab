@@ -236,7 +236,6 @@ MonoBehaviour:
   maxHP: 100
   posicion: 0
   boosted: 0
-  resbalado: 0
   cantidadBoost: 0
   suelo:
     serializedVersion: 2
@@ -257,12 +256,15 @@ MonoBehaviour:
   textoVida: {fileID: 2363894617257843043}
   barraVida: {fileID: 2363894616233293899}
   contadorVueltas: {fileID: 3340014147084440198}
-  panelGas: {fileID: 0}
+  panelGas: {fileID: 1644577611717974728}
   spawn: {fileID: 0}
   puntoPrefabs: {fileID: 2898648638968777553}
   invencible: 0
   protegido: 0
   ralentizado: 0
+  resbalado: 0
+  stuneado: 0
+  prefab: {fileID: 3645080528210321728, guid: 77e55148aa092428ba4e76cadd5c7cff, type: 3}
 --- !u!114 &6449115049114338945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -567,14 +569,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a060a2860d8f552468d3a30c214a43d0, type: 3}
---- !u!4 &7778172328215887611 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6945619734755880702, guid: a060a2860d8f552468d3a30c214a43d0, type: 3}
-  m_PrefabInstance: {fileID: 833819989252608005}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &802084426845240261 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 50596594197605312, guid: a060a2860d8f552468d3a30c214a43d0, type: 3}
+  m_PrefabInstance: {fileID: 833819989252608005}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7778172328215887611 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6945619734755880702, guid: a060a2860d8f552468d3a30c214a43d0, type: 3}
   m_PrefabInstance: {fileID: 833819989252608005}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &871705607650473966 stripped
@@ -841,6 +843,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1644577611717974728 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3535887959978730021, guid: e4a79062a20f24c0388df599782158fb, type: 3}
+  m_PrefabInstance: {fileID: 2865214887592622317}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4777358738271714812
 PrefabInstance:
   m_ObjectHideFlags: 0

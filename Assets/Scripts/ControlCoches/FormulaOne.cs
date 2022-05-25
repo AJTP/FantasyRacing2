@@ -1,8 +1,10 @@
 using UnityEngine;
 using Photon.Pun;
+using System.Collections;
 
 public class FormulaOne : Coche
 {
+    public GameObject prefab;
     #region PARTE COMUN
     private void Awake()
     {
@@ -81,14 +83,15 @@ public class FormulaOne : Coche
     #region HABILIDADES
     public void Habilidad0()
     {
-        print("HABILIDA 0 LANZADA");
-        // Repara sus ruedas
+        stuneado = false;
+        ralentizado = false;
+        resbalado = false;
+        panelGas.SetActive(false);
     }
 
     public void Habilidad1()
     {
-        print("HABILIDA 1 LANZADA");
-        //Reposta Combustible
+        StartCoroutine(RastroFuego());
     }
 
     public void Habilidad2()
@@ -104,5 +107,14 @@ public class FormulaOne : Coche
         cantidadBoost = 30000f;
     }
 
+
+    public IEnumerator RastroFuego()
+    {
+        for (int i = 0; i < 20; i++)
+        {
+            SoltarPrefab(prefab,new Vector3(0,1.2f,0));
+            yield return new WaitForSeconds(0.125f);
+        }
+    }
     #endregion
 }

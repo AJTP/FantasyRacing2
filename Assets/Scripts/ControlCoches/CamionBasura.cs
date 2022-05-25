@@ -52,12 +52,6 @@ public class CamionBasura : Coche
             RecibirResbalar();
             StartCoroutine(DesactivarResbalado());
         }
-
-        if (invencible)
-        {
-            //lo que sea que haga invencible para camion de basura+efecto visual
-            StartCoroutine(DesactivarInvencible(5));
-        }
     }
 
     private void LanzarHabilidad(int i)

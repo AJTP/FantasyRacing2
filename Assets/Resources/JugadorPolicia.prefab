@@ -236,7 +236,6 @@ MonoBehaviour:
   maxHP: 100
   posicion: 0
   boosted: 0
-  resbalado: 0
   cantidadBoost: 0
   suelo:
     serializedVersion: 2
@@ -257,12 +256,14 @@ MonoBehaviour:
   textoVida: {fileID: 2363894617257843043}
   barraVida: {fileID: 2363894616233293899}
   contadorVueltas: {fileID: 3340014147084440198}
-  panelGas: {fileID: 0}
+  panelGas: {fileID: 1644577611717974728}
   spawn: {fileID: 0}
   puntoPrefabs: {fileID: 2898648638968777553}
   invencible: 0
   protegido: 0
   ralentizado: 0
+  resbalado: 0
+  stuneado: 0
   prefab: {fileID: 2510567411255420515, guid: 99867027bf334dd41b464ca2e4e3639a, type: 3}
   prefab2: {fileID: 5796150891760957922, guid: b6a6669af27e77148a53ec5883a98015, type: 3}
 --- !u!114 &4521937224393681332
@@ -573,14 +574,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa1780bf66ee3a544a7763ee7588fdfd, type: 3}
---- !u!4 &4930124344877107217 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6945619734755880702, guid: aa1780bf66ee3a544a7763ee7588fdfd, type: 3}
-  m_PrefabInstance: {fileID: 2596498503919658735}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2646811411166580015 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 50596594197605312, guid: aa1780bf66ee3a544a7763ee7588fdfd, type: 3}
+  m_PrefabInstance: {fileID: 2596498503919658735}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4930124344877107217 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6945619734755880702, guid: aa1780bf66ee3a544a7763ee7588fdfd, type: 3}
   m_PrefabInstance: {fileID: 2596498503919658735}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &2558648068149575940 stripped
@@ -847,6 +848,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1644577611717974728 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3535887959978730021, guid: e4a79062a20f24c0388df599782158fb, type: 3}
+  m_PrefabInstance: {fileID: 2865214887592622317}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4777358738271714812
 PrefabInstance:
   m_ObjectHideFlags: 0

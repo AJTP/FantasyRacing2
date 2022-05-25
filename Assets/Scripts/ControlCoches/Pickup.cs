@@ -110,7 +110,6 @@ public class Pickup : Coche
     {
         print("HABILIDA 3 LANZADA");
         invencible = true;
-        //ACTIVA EL 4X4, NO LE AFECTAN LOS EFECTOS NEGATIVOS NI CUALQUIER TIPO DE TERRENO
     }
 
     #endregion

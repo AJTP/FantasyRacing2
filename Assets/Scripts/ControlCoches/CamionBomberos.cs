@@ -1,9 +1,10 @@
 using UnityEngine;
 using Photon.Pun;
+using System.Collections;
 
 public class CamionBomberos : Coche
 {
-    public GameObject prefab;
+    public GameObject prefab,prefab2;
     #region PARTE COMUN
     private void Awake()
     {
@@ -92,8 +93,7 @@ public class CamionBomberos : Coche
 
     public void Habilidad1()
     {
-        print("HABILIDA 1 LANZADA");
-        //DEJA UN RASTRO DE AGUA QUE RESBALA
+        StartCoroutine(RastroAgua());
     }
 
     public void Habilidad2()
@@ -104,9 +104,15 @@ public class CamionBomberos : Coche
 
     public void Habilidad3()
     {
-        print("HABILIDA 3 LANZADA");
-        //QUEMA A LOS ENEMIGOS CERCANOS (BAJA SU VIDA POCO A POCO)
+        GameObject ob = SoltarPrefab(prefab2);
+        ob.GetComponent<FuegoRotatorio>().SetParent(this.puntoRayoSuelo.transform);
     }
 
+    public IEnumerator RastroAgua() {
+        for (int i = 0; i < 10; i++) {
+            SoltarPrefab(prefab);
+            yield return new WaitForSeconds(0.25f);
+        }        
+    }
     #endregion
 }

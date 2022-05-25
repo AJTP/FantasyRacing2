@@ -93,7 +93,6 @@ public class Ambulancia : Coche
     }
 
     public void Habilidad3(){
-        //#SONIDO LANZAR HABILIDAD
         protegido = true;
         GameObject desfibrilador = SoltarPrefab(prefab2);
     }
