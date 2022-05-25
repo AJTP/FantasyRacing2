@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 3221042379956546626}
   - component: {fileID: 1953624834986927079}
   - component: {fileID: 4393362755379664685}
-  - component: {fileID: -3982957292519590651}
-  - component: {fileID: -2590796824266020449}
-  - component: {fileID: 167990731523561826}
-  - component: {fileID: 6048929520193947077}
+  - component: {fileID: -3705546680233586554}
+  - component: {fileID: -6845094354597758695}
+  - component: {fileID: -2254096713235361346}
+  - component: {fileID: -5323842243328255541}
+  - component: {fileID: 3733329242689736978}
   m_Layer: 12
   m_Name: BombaAgua
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 2880228253291362040}
   m_LocalRotation: {x: -0.12153727, y: 0.03834621, z: -0.0044633877, w: 0.9918359}
   m_LocalPosition: {x: -0.8518591, y: 1.4233389, z: 0.95923823}
-  m_LocalScale: {x: 100, y: 100, z: 100.00001}
+  m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -85,7 +86,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-3982957292519590651
+--- !u!114 &-3705546680233586554
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,11 +105,11 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: -2590796824266020449}
+  - {fileID: -6845094354597758695}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-2590796824266020449
+--- !u!114 &-6845094354597758695
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,7 +142,7 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
---- !u!135 &167990731523561826
+--- !u!135 &-2254096713235361346
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -154,7 +155,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.01
   m_Center: {x: 0.009, y: -0.0115, z: -0.0122}
---- !u!54 &6048929520193947077
+--- !u!54 &-5323842243328255541
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,7 +163,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2880228253291362040}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -170,3 +171,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3733329242689736978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2880228253291362040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6d7f92463cfd354096de0d5ac6239b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1138678471039920340, guid: 703cd36879f0b6443b74a21b6f6c2c36, type: 3}
+  rb: {fileID: -5323842243328255541}
+  direccion: {x: 0, y: 0, z: 0}

@@ -235,7 +235,6 @@ MonoBehaviour:
   maxHP: 100
   posicion: 0
   boosted: 0
-  resbalado: 0
   cantidadBoost: 0
   suelo:
     serializedVersion: 2
@@ -262,8 +261,11 @@ MonoBehaviour:
   invencible: 0
   protegido: 0
   ralentizado: 0
+  resbalado: 0
+  stuneado: 0
   prefab: {fileID: 1728073874574283871, guid: ad11c09f680fd46698c0b8362b8401ec, type: 3}
   prefab2: {fileID: 3744262389064469651, guid: 8652abfce6999488c9a40f77cbe83937, type: 3}
+  aplastador: 0
 --- !u!114 &6449115049114338945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,7 +363,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &6286359641206775139
 GameObject:

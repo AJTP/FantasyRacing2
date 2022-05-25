@@ -3,7 +3,7 @@ using Photon.Pun;
 
 public class Pickup : Coche
 {
-    public GameObject prefab, prefab2;
+    public GameObject prefab, prefab2,prefab3;
     #region PARTE COMUN
     private void Awake()
     {
@@ -53,11 +53,6 @@ public class Pickup : Coche
             StartCoroutine(DesactivarResbalado());
         }
 
-        if (invencible)
-        {
-            //lo que sea que haga invencible+efecto visual
-            StartCoroutine(DesactivarInvencible(30));
-        }
     }
 
     private void LanzarHabilidad(int i)
@@ -88,28 +83,27 @@ public class Pickup : Coche
     #region HABILIDADES
     public void Habilidad0()
     {
-        print("HABILIDA 0 LANZADA");
-        GameObject tronco = SoltarPrefab(prefab);//TRONCO RODANTE
-        //VECTOR DEPENDIENDO DE LA DIRECCIÓN DE MI COCHE
-        tronco.GetComponent<TroncoRodante>().SetVector(new Vector3(0,2,0));
+        protegido = true;
+        GameObject tronco = SoltarPrefab(prefab,transform.forward*6);//TRONCO RODANTE
+        tronco.GetComponent<TroncoRodante>().SetVector(transform.forward*10);
     }
 
     public void Habilidad1()
     {
-        print("HABILIDA 1 LANZADA");
         SoltarPrefab(prefab2);//CAJA DE HERRAMIENTAS
     }
 
     public void Habilidad2()
     {
-        print("HABILIDA 2 LANZADA");
-        //CATAPULTA UNA BOMBA QUE EXPLOTA AL TOCAR EL SUELO
+        GameObject bomba = SoltarPrefab(prefab3,new Vector3(0,4,0));
+        bomba.GetComponent<Bomba>().SetVector((transform.forward)*1000);
     }
 
     public void Habilidad3()
     {
         print("HABILIDA 3 LANZADA");
         invencible = true;
+        StartCoroutine(DesactivarInvencible(30));
     }
 
     #endregion

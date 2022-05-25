@@ -742,7 +742,7 @@ GameObject:
   - component: {fileID: 1638243691645115535}
   - component: {fileID: -8846615916256258143}
   - component: {fileID: 7751900853901773331}
-  - component: {fileID: 8532718989558916166}
+  - component: {fileID: -1622704346972022520}
   m_Layer: 12
   m_Name: CajaHerramientas
   m_TagString: Untagged
@@ -759,7 +759,7 @@ Transform:
   m_GameObject: {fileID: 3504443752826010496}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.45, y: 0, z: 0.15}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 458415996451939671}
   - {fileID: 1123717616977492575}
@@ -862,7 +862,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4, y: 4.5, z: 6}
   m_Center: {x: 4.5, y: 2.25, z: -1.3}
---- !u!54 &8532718989558916166
+--- !u!54 &-1622704346972022520
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -870,9 +870,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3504443752826010496}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.00001
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0

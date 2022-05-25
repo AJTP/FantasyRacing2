@@ -94,7 +94,7 @@ public class Ambulancia : Coche
 
     public void Habilidad3(){
         protegido = true;
-        GameObject desfibrilador = SoltarPrefab(prefab2);
+        SoltarPrefab(prefab2);
     }
 
     #endregion

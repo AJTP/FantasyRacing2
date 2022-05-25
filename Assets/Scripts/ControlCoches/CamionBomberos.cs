@@ -4,7 +4,7 @@ using System.Collections;
 
 public class CamionBomberos : Coche
 {
-    public GameObject prefab,prefab2;
+    public GameObject prefab,prefab2,prefab3;
     #region PARTE COMUN
     private void Awake()
     {
@@ -98,13 +98,14 @@ public class CamionBomberos : Coche
 
     public void Habilidad2()
     {
-        print("HABILIDA 2 LANZADA");
-        // LANZA UNA BOMBA DE AGUA AL JUGADOR EN PRIMERA POSICION ?? QUE PASA SI ERES EL PRIMER JUGADOR? A LO MEJOR LA CAMBIO
+        GameObject bomba = SoltarPrefab(prefab3, new Vector3(0, 4, 0));
+        bomba.GetComponent<BombaAgua>().SetVector((transform.forward) * 1000);
     }
 
     public void Habilidad3()
     {
         GameObject ob = SoltarPrefab(prefab2);
+        protegido = true;
         ob.GetComponent<FuegoRotatorio>().SetParent(this.puntoRayoSuelo.transform);
     }
 

@@ -234,6 +234,8 @@ public class Coche : MonoBehaviour
     #region EFECTOS SOBRE JUGADOR (HABILIDADES)
 
     public void RecibirResbalar() {
+        if (invencible)
+            return;
         if (protegido)
         {
             protegido = false;
@@ -261,6 +263,9 @@ public class Coche : MonoBehaviour
 
     public void RecibirRalentizar(int tiempo)
     {
+        if (invencible)
+            return;
+
         if (protegido)
         {
             protegido = false;
@@ -273,6 +278,9 @@ public class Coche : MonoBehaviour
     }
     public void RecibirStun(int tiempo)
     {
+        if (invencible)
+            return;
+
         if (protegido)
         {
             protegido = false;
@@ -287,15 +295,18 @@ public class Coche : MonoBehaviour
     public IEnumerator AplicarCeguera() {
         if (vista.IsMine)
         {
-            if (protegido)
+            if (!invencible)
             {
-                protegido = false;
-            }
-            else
-            {
-                panelGas.SetActive(true);
-                yield return new WaitForSeconds(5);
-                panelGas.SetActive(false);
+                if (protegido)
+                {
+                    protegido = false;
+                }
+                else
+                {
+                    panelGas.SetActive(true);
+                    yield return new WaitForSeconds(5);
+                    panelGas.SetActive(false);
+                }
             }
         }
     }
@@ -312,7 +323,7 @@ public class Coche : MonoBehaviour
     }
     protected void ReducirCoolDown(int i)
     {
-        if (acabado || spawn.i > 0 || stuneado)
+        if (acabado || spawn.i > 0)
             return;
         if (timerCD[i] < coolDowns[i])
         {
@@ -353,7 +364,7 @@ public class Coche : MonoBehaviour
         return 5;
     }
 
-    public void ModificarSize(int factor,int tiempo,bool y) {
+    public void ModificarSize(float factor,int tiempo,bool y) {
         Vector3 escala;
         Vector3 escalaEsfera;
         if (y)
@@ -371,7 +382,7 @@ public class Coche : MonoBehaviour
         StartCoroutine(DesactivarCambioSize(factor,tiempo,y));
     }
 
-    public IEnumerator DesactivarCambioSize(int factor,int tiempo,bool y) {
+    public IEnumerator DesactivarCambioSize(float factor,int tiempo,bool y) {
         yield return new WaitForSeconds(tiempo);
         Vector3 escala;
         Vector3 escalaEsfera;

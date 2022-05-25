@@ -7809,7 +7809,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 549027904}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CircuitoBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29773,7 +29773,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2038874216}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CircuitoExtra
   m_TagString: Untagged
   m_Icon: {fileID: 0}

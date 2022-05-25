@@ -4,25 +4,30 @@ using UnityEngine;
 
 public class TroncoRodante : Prop
 {
+    public GameObject prefab;
     public Rigidbody rb;
     public Vector3 direccion = new Vector3(0, 0, 0);
+    int i = 0;
     private void Start()
     {
         StartCoroutine(MuerteProp());
     }
-    
 
-    void Update()
+    private void FixedUpdate()
     {
-        rb.AddForce(direccion, ForceMode.Acceleration);
+        transform.Translate(direccion*Time.deltaTime);
     }
 
-    public void SetVector(Vector3 v) {
+    public void SetVector(Vector3 v)
+    {
         this.direccion = v;
     }
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        //EL OTRO JUGADOR PIERDE VIDA Y SE STUNEA
+        if (other.CompareTag("Coche"))
+        {
+            other.GetComponent<Coche>().RecibirStun(2);
+        }
+
     }
 }

@@ -24,7 +24,8 @@ public class FuegoRotatorio : Prop
         if (other.CompareTag("Coche"))
         {
             //#SONIDO QUEMAR
-            other.GetComponent<Coche>().ActualizarHP(-20);
+            other.GetComponent<Coche>().ActualizarHP(-30);
+            Debug.Log(other.name);
         }
     }
 }

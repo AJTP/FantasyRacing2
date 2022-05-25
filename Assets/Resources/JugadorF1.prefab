@@ -379,7 +379,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &6286359641206775139
 GameObject:
@@ -569,14 +569,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a060a2860d8f552468d3a30c214a43d0, type: 3}
---- !u!4 &802084426845240261 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 50596594197605312, guid: a060a2860d8f552468d3a30c214a43d0, type: 3}
-  m_PrefabInstance: {fileID: 833819989252608005}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7778172328215887611 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6945619734755880702, guid: a060a2860d8f552468d3a30c214a43d0, type: 3}
+  m_PrefabInstance: {fileID: 833819989252608005}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &802084426845240261 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 50596594197605312, guid: a060a2860d8f552468d3a30c214a43d0, type: 3}
   m_PrefabInstance: {fileID: 833819989252608005}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &871705607650473966 stripped

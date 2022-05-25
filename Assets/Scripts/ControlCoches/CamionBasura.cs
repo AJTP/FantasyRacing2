@@ -1,9 +1,11 @@
 using UnityEngine;
 using Photon.Pun;
+using System.Collections;
 
 public class CamionBasura : Coche
 {
     public GameObject prefab,prefab2;
+    public bool aplastador = false;
     #region PARTE COMUN
 
     private void Awake()
@@ -99,7 +101,20 @@ public class CamionBasura : Coche
     public void Habilidad3()
     {
         ModificarSize(2,10,true);
+        aplastador = false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (aplastador && collision.other.CompareTag("Coche")) {
+            collision.other.GetComponent<Coche>().ModificarSize(0.5f, 3, false);
+        }        
     }
 
     #endregion
+    public IEnumerator DesactivarAplastador(int tiempo)
+    {
+        yield return new WaitForSeconds(tiempo);
+        aplastador = false;
+    }
 }
