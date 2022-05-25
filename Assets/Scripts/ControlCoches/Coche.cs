@@ -23,6 +23,7 @@ public class Coche : MonoBehaviour
     public int posicion;
     public bool boosted = false;
     public bool resbalado = false;
+    public bool stuneado = false;
     public float cantidadBoost;
 
 
@@ -131,7 +132,7 @@ public class Coche : MonoBehaviour
     }
     public void AplicarVelocidad()
     {
-        if (acabado || spawn.i > 0)
+        if (acabado || spawn.i > 0 || stuneado)
             return;
 
         tocandoSuelo = false;
@@ -269,7 +270,7 @@ public class Coche : MonoBehaviour
             StartCoroutine(DesactivarRalentizado(tiempo));
         }
     }
-    public void RecibirStun(float tiempo)
+    public void RecibirStun(int tiempo)
     {
         if (protegido)
         {
@@ -277,7 +278,8 @@ public class Coche : MonoBehaviour
         }
         else
         {
-            //EFECTO STUN
+            stuneado = true;
+            StartCoroutine(DesactivarStuneado(tiempo));
         }
     }
 
@@ -309,7 +311,7 @@ public class Coche : MonoBehaviour
     }
     protected void ReducirCoolDown(int i)
     {
-        if (acabado || spawn.i > 0)
+        if (acabado || spawn.i > 0 || stuneado)
             return;
         if (timerCD[i] < coolDowns[i])
         {
@@ -328,7 +330,7 @@ public class Coche : MonoBehaviour
 
     public int RecogerInputHabilidades()
     {
-        if (acabado || spawn.i > 0)
+        if (acabado || spawn.i > 0 || stuneado)
             return 5;
         if (Input.GetKeyDown("u"))
         {
@@ -350,9 +352,40 @@ public class Coche : MonoBehaviour
         return 5;
     }
 
-    public void ModificarSize(int factor) {
-            Vector3 escala = new Vector3(transform.localScale.x * factor, transform.localScale.y * factor, transform.localScale.z * factor);
-            transform.localScale = escala;     
+    public void ModificarSize(int factor,int tiempo,bool y) {
+        Vector3 escala;
+        Vector3 escalaEsfera;
+        if (y)
+        {
+            escala = new Vector3(transform.localScale.x * factor, transform.localScale.y * factor, transform.localScale.z * factor);
+            escalaEsfera = escala;
+        }
+        else {
+            escala = new Vector3(transform.localScale.x * factor, 0.5f, transform.localScale.z * factor);
+            escalaEsfera = new Vector3(transform.localScale.x * factor, transform.localScale.y * factor, transform.localScale.z * factor);
+        }
+
+        transform.localScale = escala;
+        esfera.transform.localScale = escalaEsfera;
+        StartCoroutine(DesactivarCambioSize(factor,tiempo,y));
+    }
+
+    public IEnumerator DesactivarCambioSize(int factor,int tiempo,bool y) {
+        yield return new WaitForSeconds(tiempo);
+        Vector3 escala;
+        Vector3 escalaEsfera;
+        if (y)
+        {
+            escala = new Vector3(transform.localScale.x / factor, transform.localScale.y / factor, transform.localScale.z / factor);
+            escalaEsfera = escala;
+        }
+        else
+        {
+            escala = new Vector3(transform.localScale.x / factor, 0.5f, transform.localScale.z / factor);
+            escalaEsfera = new Vector3(transform.localScale.x / factor, transform.localScale.y / factor, transform.localScale.z / factor);
+        }
+        transform.localScale = escala;
+        esfera.transform.localScale = escalaEsfera;
     }
 
     public IEnumerator DesactivarBoost()
@@ -377,6 +410,11 @@ public class Coche : MonoBehaviour
     {
         yield return new WaitForSeconds(tiempo);
         ralentizado = false;
+    }
+
+    public IEnumerator DesactivarStuneado(int tiempo) {
+        yield return new WaitForSeconds(tiempo);
+        stuneado = false;
     }
 
     #endregion

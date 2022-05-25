@@ -3,7 +3,7 @@ using Photon.Pun;
 
 public class Ambulancia : Coche
 {
-    public GameObject prefab;
+    public GameObject prefab,prefab2;
     #region PARTE COMUN
     private void Awake()
     {
@@ -83,16 +83,19 @@ public class Ambulancia : Coche
     }
 
     public void Habilidad1(){
+        //#SONIDO ONESHOT MASA VISCOSA
        SoltarPrefab(prefab); 
     }
 
     public void Habilidad2(){
+        //#SONIDO SANACIÓN
         ActualizarHP(maxHP / 3);
     }
 
     public void Habilidad3(){
-        print("HABILIDA 3 LANZADA");
-        //ELECTROCUTA AL RESTO DE JUGADORES
+        //#SONIDO LANZAR HABILIDAD
+        protegido = true;
+        GameObject desfibrilador = SoltarPrefab(prefab2);
     }
 
     #endregion

@@ -104,7 +104,7 @@ public class CamionBasura : Coche
 
     public void Habilidad3()
     {
-        ModificarSize(2);
+        ModificarSize(2,10,true);
     }
 
     #endregion
