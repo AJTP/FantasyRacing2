@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BombaBasura : Prop
 {
+    public GameObject explosion;
     void Start()
     {
         StartCoroutine(Explotar());    
@@ -11,7 +12,7 @@ public class BombaBasura : Prop
 
     public IEnumerator Explotar() {
         yield return new WaitForSeconds(4);
-        //GameObject.Instantiate();
+        GameObject.Instantiate(explosion,transform);
         yield return new WaitForSeconds(0.5f);
         Destroy(this.gameObject);
         Destroy(this);

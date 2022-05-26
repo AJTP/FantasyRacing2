@@ -247,6 +247,7 @@ MonoBehaviour:
   ruedaIzquierda: {fileID: 4331954830570500723}
   ruedaDerecha: {fileID: 6687349547705710413}
   maximaRotacionRuedas: 25
+  habilidades: {fileID: 2363894616152348466}
   imagenes:
   - {fileID: 2363894616652180832}
   - {fileID: 2363894617966194406}
@@ -266,7 +267,6 @@ MonoBehaviour:
   prefab: {fileID: 1728073874574283871, guid: ad11c09f680fd46698c0b8362b8401ec, type: 3}
   prefab2: {fileID: 3744262389064469651, guid: 8652abfce6999488c9a40f77cbe83937, type: 3}
   prefab3: {fileID: 2880228253291362040, guid: 3d2d4100c30934b41b3e9da89ac8d74c, type: 3}
-  aplastador: 0
 --- !u!114 &6449115049114338945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -658,6 +658,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2363894616152348466 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 508190303629766623, guid: e4a79062a20f24c0388df599782158fb, type: 3}
+  m_PrefabInstance: {fileID: 2865214887592622317}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2363894616652180832 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 508190303058695565, guid: e4a79062a20f24c0388df599782158fb, type: 3}

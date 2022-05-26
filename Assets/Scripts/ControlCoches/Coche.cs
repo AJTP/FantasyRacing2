@@ -51,6 +51,7 @@ public class Coche : MonoBehaviour
 
     #region HUD
     [Header("HUD")]
+    public GameObject habilidades;
     public Image[] imagenes = new Image[4];
 
     public Text textoVida;
@@ -240,6 +241,39 @@ public class Coche : MonoBehaviour
     #endregion
 
     #region EFECTOS SOBRE JUGADOR (HABILIDADES)
+    public void RecibirBoost(int cantidad) {
+        boosted = true;
+        cantidadBoost = cantidad;
+        StartCoroutine(DesactivarBoost());
+    }
+    public void RecibirResbalar(int min,int max)
+    {
+        if (invencible)
+            return;
+        if (protegido)
+        {
+            protegido = false;
+        }
+        else
+        {
+            int i = Random.Range(0, 1);
+            int o = Random.Range(0, 1);
+            if (i == 0)
+            {
+                i = -1;
+            }
+            if (o == 0)
+            {
+                o = -1;
+            }
+            int x, z;
+            x = Random.Range(min, max);
+            z = Random.Range(min, max);
+            x *= i;
+            z *= o;
+            esfera.AddForce(new Vector3(x, 0, z), ForceMode.Impulse);
+        }
+    }
 
     public void RecibirResbalar() {
         if (invencible)
@@ -452,6 +486,10 @@ public class Coche : MonoBehaviour
         puntosControl = GameObject.Find("PuntosControl");
 
         vista = GetComponent<PhotonView>();
+        if (vista.IsMine) {
+            barraVida.transform.parent.gameObject.SetActive(true);
+            habilidades.SetActive(true);
+        }
         propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
         propiedadesJugador["jugadorNickName"] = PhotonNetwork.LocalPlayer.NickName;
         propiedadesJugador["jugadorVuelta"] = 0;

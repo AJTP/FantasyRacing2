@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,7 +28,7 @@ public class Misil : Prop
             other.GetComponent<Coche>().ActualizarHP(-5);
         }
         //DESAPARECE LA BALA
-        Destroy(this.gameObject);
-        Destroy(this);
+        PhotonNetwork.Destroy(this.gameObject);
+        
     }
 }

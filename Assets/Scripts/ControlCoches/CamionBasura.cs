@@ -99,7 +99,7 @@ public class CamionBasura : Coche
 
     public void Habilidad3()
     {
-        SoltarPrefab(prefab3);
+        SoltarPrefab(prefab3,new Vector3(0,1,0));
     }
 
     #endregion
