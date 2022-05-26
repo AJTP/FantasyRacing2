@@ -32,7 +32,7 @@ public class Bomba : Prop
     private void OnCollisionEnter(Collision collision)
     {
         //SONIDO EXPLOSION
-        PhotonNetwork.Instantiate(prefab.name, transform.position+new Vector3(0,1.5f,0), Quaternion.identity);
+        GameObject.Instantiate(prefab, transform.position + new Vector3(0, 1.5f, 0), Quaternion.identity);
         Destroy(this.gameObject);
         Destroy(this);
     }

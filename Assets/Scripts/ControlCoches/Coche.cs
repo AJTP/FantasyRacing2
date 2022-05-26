@@ -181,25 +181,27 @@ public class Coche : MonoBehaviour
     #region ACTUALIZACION HUD
     public void SumaVuelta()
     {
-        propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
-        vuelta++;
-        propiedadesJugador["jugadorVuelta"] = vuelta;
-        PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
-        //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
-        ActualizarRanking();
-        if (vuelta <= 3)
-        {
-            contadorVueltas.text = vuelta + "/3";
-        }
-        else {
-            //ESTE JUGADOR HA ACABADO
+        if (vista.IsMine) {
             propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
-            acabado = true;
-            propiedadesJugador["jugadorPFinal"] = rank.GetComponent<Ranking>().MiPuestoFinal();
+            vuelta++;
+            propiedadesJugador["jugadorVuelta"] = vuelta;
             PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
             //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+            ActualizarRanking();
+            if (vuelta <= 3)
+            {
+                contadorVueltas.text = vuelta + "/3";
+            }
+            else
+            {
+                //ESTE JUGADOR HA ACABADO
+                propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
+                acabado = true;
+                propiedadesJugador["jugadorPFinal"] = rank.GetComponent<Ranking>().MiPuestoFinal();
+                PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
+                //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+            }
         }
-
     }
 
     public void ActualizaControl(int n)
@@ -215,20 +217,26 @@ public class Coche : MonoBehaviour
 
     public void ActualizarRanking() {
         //ESTA FUNCION ACTUALIZA EL HUD PARA VER EL RANKING IN GAME
-        
-        rank.GetComponent<Ranking>().ActualizarPosiciones();
+        if (vista.IsMine)
+        {
+            rank.GetComponent<Ranking>().ActualizarPosiciones();
+        }        
     }
 
     public void CargarCooldowns(int cdh1,int cdh2,int cdh3,int cdh4) {
-        coolDowns[0] = cdh1;
-        coolDowns[1] = cdh2;
-        coolDowns[2] = cdh3;
-        coolDowns[3] = cdh4;
-        for (int i = 0; i < timerCD.Length; i++)
+        if (vista.IsMine)
         {
-            timerCD[i] = coolDowns[i];
+            coolDowns[0] = cdh1;
+            coolDowns[1] = cdh2;
+            coolDowns[2] = cdh3;
+            coolDowns[3] = cdh4;
+            for (int i = 0; i < timerCD.Length; i++)
+            {
+                timerCD[i] = coolDowns[i];
+            }
         }
     }
+
     #endregion
 
     #region EFECTOS SOBRE JUGADOR (HABILIDADES)
@@ -323,21 +331,25 @@ public class Coche : MonoBehaviour
     }
     protected void ReducirCoolDown(int i)
     {
-        if (acabado || spawn.i > 0)
-            return;
-        if (timerCD[i] < coolDowns[i])
+        if (vista.IsMine)
         {
-            imagenes[i].color = Color.red;
-            timerCD[i] += Time.deltaTime;
-            imagenes[i].fillAmount = timerCD[i] / coolDowns[i];
-        }
-        else if (timerCD[i] >= coolDowns[i])
-        {
-            imagenes[i].color = Color.cyan;
-            timerCD[i] = coolDowns[i];
-            imagenes[i].fillAmount = 1;
-            isCD[i] = false;
-        }
+            if (acabado || spawn.i > 0)
+                return;
+            if (timerCD[i] < coolDowns[i])
+            {
+                imagenes[i].color = Color.red;
+                timerCD[i] += Time.deltaTime;
+                imagenes[i].fillAmount = timerCD[i] / coolDowns[i];
+            }
+            else if (timerCD[i] >= coolDowns[i])
+            {
+                imagenes[i].color = Color.cyan;
+                timerCD[i] = coolDowns[i];
+                imagenes[i].fillAmount = 1;
+                isCD[i] = false;
+            }
+
+        }        
     }
 
     public int RecogerInputHabilidades()
@@ -433,7 +445,7 @@ public class Coche : MonoBehaviour
 
     #region ONLINE
     public void CargarDatos() {
-        ActualizarHP(maxHP);
+        
         spawn = GameObject.Find("Spawner").GetComponent<Spawn>();
         GameManager.Instancia.AddCoche(this);
         rank = GameObject.Find("RANKING");
@@ -450,6 +462,7 @@ public class Coche : MonoBehaviour
         propiedadesJugador["jugadorPuntos"] = 0;
         PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
         //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+        ActualizarHP(maxHP);
         ActualizarRanking();
     }
 
@@ -484,17 +497,21 @@ public class Coche : MonoBehaviour
     }
 
     public void ActualizarHP(int cantidad) {
-        hp += cantidad;
-        if (hp > maxHP)
+        if (vista.IsMine)
         {
-            hp = maxHP;
+            hp += cantidad;
+            if (hp > maxHP)
+            {
+                hp = maxHP;
+            }
+            else if (hp <= 0)
+            {
+                hp = 0;
+                Respawn();
+            }
+            textoVida.text = "" + hp;
+            barraVida.fillAmount = (float)hp / (float)maxHP;
         }
-        else if(hp<=0) {
-            hp = 0;
-            Respawn();
-        }
-        textoVida.text = ""+hp;
-        barraVida.fillAmount = (float)hp / (float)maxHP;
     }
 
     public void Respawn() {

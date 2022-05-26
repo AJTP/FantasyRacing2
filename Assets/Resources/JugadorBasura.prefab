@@ -265,6 +265,7 @@ MonoBehaviour:
   stuneado: 0
   prefab: {fileID: 1728073874574283871, guid: ad11c09f680fd46698c0b8362b8401ec, type: 3}
   prefab2: {fileID: 3744262389064469651, guid: 8652abfce6999488c9a40f77cbe83937, type: 3}
+  prefab3: {fileID: 2880228253291362040, guid: 3d2d4100c30934b41b3e9da89ac8d74c, type: 3}
   aplastador: 0
 --- !u!114 &6449115049114338945
 MonoBehaviour:

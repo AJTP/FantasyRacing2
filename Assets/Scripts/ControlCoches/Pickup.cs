@@ -83,7 +83,6 @@ public class Pickup : Coche
     #region HABILIDADES
     public void Habilidad0()
     {
-        protegido = true;
         GameObject tronco = SoltarPrefab(prefab,transform.forward*6);//TRONCO RODANTE
         tronco.GetComponent<TroncoRodante>().SetVector(transform.forward*10);
     }

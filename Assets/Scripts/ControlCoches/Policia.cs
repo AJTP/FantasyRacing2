@@ -1,5 +1,6 @@
 using UnityEngine;
 using Photon.Pun;
+using System.Collections;
 
 public class Policia : Coche
 {
@@ -90,7 +91,8 @@ public class Policia : Coche
 
     public void Habilidad1()
     {
-        SoltarPrefab(prefab);
+        GameObject misil = SoltarPrefab(prefab, (transform.forward * 6)+new Vector3(0,1,0));
+        misil.GetComponent<Misil>().SetVector(-1*transform.forward * 100);
     }
 
     public void Habilidad2()
@@ -100,9 +102,15 @@ public class Policia : Coche
 
     public void Habilidad3()
     {
-        print("HABILIDA 3 LANZADA");
-        //ESPOSA OTROS DOS COCHES DURANTE X SEGUNDOS ?? SE PUEDE HACER??
+        StartCoroutine(Ultimate());   
     }
 
+    public IEnumerator Ultimate() {
+        for (int i = 0; i < 20; i++) {
+            GameObject misil = SoltarPrefab(prefab, (transform.forward * 6) + new Vector3(0, 1, 0));
+            misil.GetComponent<Misil>().SetVector(-1 * transform.forward * 100);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
     #endregion
 }

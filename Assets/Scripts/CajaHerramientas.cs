@@ -12,7 +12,7 @@ public class CajaHerramientas : Prop
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.other.CompareTag("Coche"))
-            collision.other.gameObject.GetComponent<Coche>().RecibirStun(3);
+        if(collision.transform.CompareTag("Coche"))
+            collision.transform.gameObject.GetComponent<Coche>().RecibirStun(3);
     }
 }
