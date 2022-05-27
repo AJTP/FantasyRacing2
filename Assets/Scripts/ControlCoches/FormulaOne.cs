@@ -25,6 +25,7 @@ public class FormulaOne : Coche
         {
             //
             RecogerInputMovimientoBasico();
+            RecogerInputDerrape();
             int habilidad = RecogerInputHabilidades();
             if (habilidad != 5)
             {

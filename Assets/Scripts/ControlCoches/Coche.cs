@@ -15,7 +15,7 @@ public class Coche : MonoBehaviour
     [Header("Estadísticas Básicas")]
     public float aceleracion = 8f;
     public float marchaAtras = 4f;
-    public float fuerzaGiro = 180f;
+    public float fuerzaGiro = 80f;
     public float gravedad = 10f;
     public float dragEnSuelo = 3f;
     public int hp=100;
@@ -38,6 +38,14 @@ public class Coche : MonoBehaviour
     private bool tocandoSuelo;
     private float multiplicador = 1000f;
     private float velocidadInput, giroInput;
+
+    #endregion
+
+    #region UTILIDADES DERRAPE
+    private bool drifting;
+    private int direccionDrift;
+    private float tiempoDrift = 0;
+    private GameObject carModel;
 
     #endregion
 
@@ -131,6 +139,47 @@ public class Coche : MonoBehaviour
             camaras.transform.GetChild(0).gameObject.SetActive(true);
         }
     }
+
+    public void RecogerInputDerrape() {
+        //EL JUGADOR ESTÁ PULSANDO ESPACIO, NO ESTÁ DERRAPANDO YA Y ESTÁ GIRANDO A IZQ O DRCH
+        if (Input.GetButtonDown("Jump") && !drifting && Input.GetAxis("Horizontal")!=0) {
+            drifting = true;
+            direccionDrift = Input.GetAxis("Horizontal") > 0 ? 1 : -1;
+            //GIRAMOS EL MODELO EN LA DIRECCION DEL DERRAPE
+            carModel.transform.eulerAngles = carModel.transform.eulerAngles + new Vector3(0, 25 * direccionDrift, 0);
+            fuerzaGiro /= 2.5f;
+        }
+
+        if (drifting)
+        {
+            
+            tiempoDrift += Time.deltaTime;
+        }
+        else {
+            carModel.transform.eulerAngles = this.transform.eulerAngles;
+
+        }
+
+
+        if (Input.GetButtonUp("Jump")) {
+            drifting = false;
+            int boost = 0;
+            if (tiempoDrift > 1 && tiempoDrift <= 2) {
+                boost = 7000;
+            } else if (tiempoDrift > 2 && tiempoDrift <= 4) {
+                boost = 9000;
+            } else if (tiempoDrift > 4) {
+                boost = 11000;
+            }
+            if(boost>0)
+                RecibirBoost(boost);
+            Debug.Log("Boost recibido: " + boost);
+            tiempoDrift = 0;
+            fuerzaGiro *= 2.5f;
+        }
+    }
+
+
     public void AplicarVelocidad()
     {
         if (acabado || spawn.i > 0 || stuneado)
@@ -499,6 +548,7 @@ public class Coche : MonoBehaviour
         propiedadesJugador["jugadorPFinal"] = null;
         propiedadesJugador["jugadorPuntos"] = 0;
         camaras = GameObject.Find("Camaras");
+        carModel = transform.GetChild(0).transform.GetChild(4).gameObject;
         PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
         //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
         ActualizarHP(maxHP);

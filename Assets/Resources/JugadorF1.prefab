@@ -229,7 +229,7 @@ MonoBehaviour:
   nickJugador: 
   aceleracion: 12
   marchaAtras: 6
-  fuerzaGiro: 180
+  fuerzaGiro: 80
   gravedad: 10
   dragEnSuelo: 3
   hp: 50
