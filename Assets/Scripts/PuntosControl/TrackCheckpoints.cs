@@ -8,6 +8,7 @@ public class TrackCheckpoints : MonoBehaviour
     [SerializeField] private List<Coche> cochesLista;
     private List<PuntoControl> puntosLista;
     private List<int> siguientePuntoLista;
+    public AudioClip[] sonido;
     private void Awake()
     {
        Transform puntosControlTransform = transform.Find("PuntosControl");
@@ -27,6 +28,7 @@ public class TrackCheckpoints : MonoBehaviour
         {
 
             //ORDEN CORRECTO
+            this.GetComponent<AudioSource>().PlayOneShot(sonido[1]);
             siguientePuntoLista[transformCochesLista.IndexOf(carT)] = (siguientePunto + 1) % puntosLista.Count;
             cochesLista[transformCochesLista.IndexOf(carT)].ActualizaControl(siguientePunto);
             Debug.Log(carT + "CORRECTO" + siguientePunto);
@@ -35,7 +37,7 @@ public class TrackCheckpoints : MonoBehaviour
             }
         }
         else {
-            //Punto de control incorrecto
+            this.GetComponent<AudioSource>().PlayOneShot(sonido[0]);
         }
     }
 

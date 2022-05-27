@@ -13,6 +13,7 @@ public class CadenaPinchos : Prop
         if (other.CompareTag("Coche"))
         {
             //#SONIDO RALENTIZAR
+            this.GetComponent<AudioSource>().PlayOneShot(sonido);
             other.GetComponent<Coche>().RecibirRalentizar(3);
         }
     }

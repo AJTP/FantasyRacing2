@@ -5,6 +5,7 @@ using System.Collections;
 public class CamionBomberos : Coche
 {
     public GameObject prefab,prefab2,prefab3;
+    public AudioClip[] sonidos = new AudioClip[3];
     #region PARTE COMUN
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class CamionBomberos : Coche
         {
             //
             RecogerInputMovimientoBasico();
+            RecogerInputDerrape();
             int habilidad = RecogerInputHabilidades();
             if (habilidad != 5)
             {
@@ -86,6 +88,7 @@ public class CamionBomberos : Coche
     #region HABILIDADES
     public void Habilidad0()
     {
+        this.GetComponent<AudioSource>().PlayOneShot(sonidos[0]);
         //#SONIDO ONESHOT SIRENAS
         RecibirBoost(8000);
         //boosted = true;
@@ -94,11 +97,13 @@ public class CamionBomberos : Coche
 
     public void Habilidad1()
     {
+       
         StartCoroutine(RastroAgua());
     }
 
     public void Habilidad2()
     {
+        this.GetComponent<AudioSource>().PlayOneShot(sonidos[2]);
         GameObject bomba = SoltarPrefab(prefab3, new Vector3(0, 4, 0));
         bomba.GetComponent<BombaAgua>().SetVector((transform.forward) * 1000);
     }
@@ -112,6 +117,7 @@ public class CamionBomberos : Coche
 
     public IEnumerator RastroAgua() {
         for (int i = 0; i < 10; i++) {
+            this.GetComponent<AudioSource>().PlayOneShot(sonidos[1]);
             SoltarPrefab(prefab);
             yield return new WaitForSeconds(0.25f);
         }        

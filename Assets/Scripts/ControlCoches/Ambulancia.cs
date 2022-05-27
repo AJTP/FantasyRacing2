@@ -4,6 +4,7 @@ using Photon.Pun;
 public class Ambulancia : Coche
 {
     public GameObject prefab,prefab2;
+    public AudioClip[] sonidos = new AudioClip[4];
     #region PARTE COMUN
     private void Awake()
     {
@@ -23,6 +24,7 @@ public class Ambulancia : Coche
         if (vista.IsMine) {
             //
             RecogerInputMovimientoBasico();
+            RecogerInputDerrape();
             int habilidad = RecogerInputHabilidades();
             if (habilidad != 5)
             {
@@ -77,23 +79,24 @@ public class Ambulancia : Coche
 
     #region HABILIDADES
     public void Habilidad0(){
-        //#SONIDO ONESHOT SIRENAS
+        this.GetComponent<AudioSource>().PlayOneShot(sonidos[0]);
         RecibirBoost(8000);
-        //boosted = true;
-        //cantidadBoost = 8000f;
     }
 
     public void Habilidad1(){
         //#SONIDO ONESHOT MASA VISCOSA
-       SoltarPrefab(prefab); 
+        this.GetComponent<AudioSource>().PlayOneShot(sonidos[1]);
+        SoltarPrefab(prefab); 
     }
 
     public void Habilidad2(){
         //#SONIDO SANACIÓN
+        this.GetComponent<AudioSource>().PlayOneShot(sonidos[2]);
         ActualizarHP(maxHP / 3);
     }
 
     public void Habilidad3(){
+        this.GetComponent<AudioSource>().PlayOneShot(sonidos[3]);
         protegido = true;
         SoltarPrefab(prefab2);
     }

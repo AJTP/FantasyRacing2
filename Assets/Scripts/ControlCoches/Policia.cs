@@ -5,7 +5,7 @@ using System.Collections;
 public class Policia : Coche
 {
     public GameObject prefab,prefab2;
-
+    public AudioClip[] sonidos = new AudioClip[4];
     #region PARTE COMUN
     private void Awake()
     {
@@ -26,6 +26,7 @@ public class Policia : Coche
         {
             //
             RecogerInputMovimientoBasico();
+            RecogerInputDerrape();
             int habilidad = RecogerInputHabilidades();
             if (habilidad != 5)
             {
@@ -84,6 +85,7 @@ public class Policia : Coche
     #region HABILIDADES
     public void Habilidad0()
     {
+        this.GetComponent<AudioSource>().PlayOneShot(sonidos[0]);
         //#SONIDO ONESHOT SIRENAS
         RecibirBoost(8000);
         //boosted = true;
@@ -92,12 +94,14 @@ public class Policia : Coche
 
     public void Habilidad1()
     {
+        this.GetComponent<AudioSource>().PlayOneShot(sonidos[1]);
         GameObject misil = SoltarPrefab(prefab, (transform.forward * 6)+new Vector3(0,1,0));
         misil.GetComponent<Misil>().SetVector(-1*transform.forward * 100);
     }
 
     public void Habilidad2()
     {
+        this.GetComponent<AudioSource>().PlayOneShot(sonidos[2]);
         SoltarPrefab(prefab2);
     }
 
@@ -108,6 +112,7 @@ public class Policia : Coche
 
     public IEnumerator Ultimate() {
         for (int i = 0; i < 20; i++) {
+            this.GetComponent<AudioSource>().PlayOneShot(sonidos[3]);
             GameObject misil = SoltarPrefab(prefab, (transform.forward * 6) + new Vector3(0, 1, 0));
             misil.GetComponent<Misil>().SetVector(-1 * transform.forward * 100);
             yield return new WaitForSeconds(0.1f);

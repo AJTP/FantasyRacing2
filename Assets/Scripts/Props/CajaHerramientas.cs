@@ -12,7 +12,10 @@ public class CajaHerramientas : Prop
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.transform.CompareTag("Coche"))
+        if (collision.transform.CompareTag("Coche"))
+        {
+            this.GetComponent<AudioSource>().PlayOneShot(sonido);
             collision.transform.gameObject.GetComponent<Coche>().RecibirStun(3);
+        }
     }
 }

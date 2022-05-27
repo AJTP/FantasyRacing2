@@ -16,6 +16,7 @@ public class Coche : MonoBehaviour
     public float aceleracion = 8f;
     public float marchaAtras = 4f;
     public float fuerzaGiro = 80f;
+    public float fuerzaGiroOriginal = 80f;
     public float gravedad = 10f;
     public float dragEnSuelo = 3f;
     public int hp=100;
@@ -147,13 +148,14 @@ public class Coche : MonoBehaviour
             direccionDrift = Input.GetAxis("Horizontal") > 0 ? 1 : -1;
             //GIRAMOS EL MODELO EN LA DIRECCION DEL DERRAPE
             carModel.transform.eulerAngles = carModel.transform.eulerAngles + new Vector3(0, 25 * direccionDrift, 0);
-            fuerzaGiro /= 2.5f;
+            fuerzaGiro /= 2f;
         }
 
         if (drifting)
         {
             
             tiempoDrift += Time.deltaTime;
+            
         }
         else {
             carModel.transform.eulerAngles = this.transform.eulerAngles;
@@ -171,11 +173,13 @@ public class Coche : MonoBehaviour
             } else if (tiempoDrift > 4) {
                 boost = 11000;
             }
-            if(boost>0)
+            if (boost > 0) {
                 RecibirBoost(boost);
+            }
+                
             Debug.Log("Boost recibido: " + boost);
             tiempoDrift = 0;
-            fuerzaGiro *= 2.5f;
+            fuerzaGiro = fuerzaGiroOriginal;
         }
     }
 
@@ -205,9 +209,11 @@ public class Coche : MonoBehaviour
             }
         }
 
-        if (ralentizado) {
+        if (ralentizado)
             velocidadInput /= 3;
-        }
+
+        if (drifting)
+            velocidadInput /= 1.3f;
 
         if (tocandoSuelo)
         {

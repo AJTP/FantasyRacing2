@@ -25,6 +25,7 @@ public class Misil : Prop
     {
         //LE DIGO AL OTRO QUE PIERDA VIDA
         if (other.CompareTag("Coche")) {
+            this.GetComponent<AudioSource>().PlayOneShot(sonido);
             other.GetComponent<Coche>().ActualizarHP(-5);
         }
         //DESAPARECE LA BALA

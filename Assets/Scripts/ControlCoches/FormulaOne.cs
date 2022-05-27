@@ -5,6 +5,7 @@ using System.Collections;
 public class FormulaOne : Coche
 {
     public GameObject prefab;
+    public AudioClip[] sonidos = new AudioClip[4];
     #region PARTE COMUN
     private void Awake()
     {
@@ -84,6 +85,7 @@ public class FormulaOne : Coche
     #region HABILIDADES
     public void Habilidad0()
     {
+        this.GetComponent<AudioSource>().PlayOneShot(sonidos[0]);
         stuneado = false;
         ralentizado = false;
         resbalado = false;
@@ -92,17 +94,20 @@ public class FormulaOne : Coche
 
     public void Habilidad1()
     {
+       
         StartCoroutine(RastroFuego());
     }
 
     public void Habilidad2()
     {
+        this.GetComponent<AudioSource>().PlayOneShot(sonidos[2]);
         //#SONIDO ONESHOT BOOST
         aceleracion += 1;
     }
 
     public void Habilidad3()
     {
+        this.GetComponent<AudioSource>().PlayOneShot(sonidos[3]);
         //#SONIDO ONESHOT FORMULA UNO
         RecibirBoost(30000);
         //boosted = true;
@@ -114,6 +119,7 @@ public class FormulaOne : Coche
     {
         for (int i = 0; i < 20; i++)
         {
+            this.GetComponent<AudioSource>().PlayOneShot(sonidos[1]);
             SoltarPrefab(prefab,new Vector3(0,1.2f,0));
             yield return new WaitForSeconds(0.125f);
         }

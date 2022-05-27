@@ -5,6 +5,7 @@ using System.Collections;
 public class CamionBasura : Coche
 {
     public GameObject prefab,prefab2,prefab3;
+    public AudioClip[] sonidos = new AudioClip[4];
     #region PARTE COMUN
 
     private void Awake()
@@ -25,6 +26,7 @@ public class CamionBasura : Coche
         if (vista.IsMine)
         {
             RecogerInputMovimientoBasico();
+            RecogerInputDerrape();
             int habilidad = RecogerInputHabilidades();
             if (habilidad != 5)
             {
@@ -83,22 +85,26 @@ public class CamionBasura : Coche
     #region HABILIDADES
     public void Habilidad0()
     {
+        this.GetComponent<AudioSource>().PlayOneShot(sonidos[0]);
         SoltarPrefab(prefab);
     }
 
     public void Habilidad1()
     {
         //#ESTETICO SE PONE EL ESCUDO
+        this.GetComponent<AudioSource>().PlayOneShot(sonidos[1]);
         protegido = true;
     }
 
     public void Habilidad2()
     {
+        this.GetComponent<AudioSource>().PlayOneShot(sonidos[2]);
         SoltarPrefab(prefab2,new Vector3(0,1.5f,0));
     }
 
     public void Habilidad3()
     {
+        this.GetComponent<AudioSource>().PlayOneShot(sonidos[3]);
         SoltarPrefab(prefab3,new Vector3(0,1,0));
     }
 

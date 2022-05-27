@@ -12,6 +12,7 @@ public class BombaBasura : Prop
 
     public IEnumerator Explotar() {
         yield return new WaitForSeconds(4);
+        this.GetComponent<AudioSource>().PlayOneShot(sonido);
         GameObject.Instantiate(explosion,transform);
         yield return new WaitForSeconds(0.5f);
         Destroy(this.gameObject);

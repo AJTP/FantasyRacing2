@@ -25,6 +25,7 @@ public class TroncoRodante : Prop
     {
         if (other.CompareTag("Coche"))
         {
+            this.GetComponent<AudioSource>().PlayOneShot(sonido);
             other.GetComponent<Coche>().RecibirStun(2);
         }
 

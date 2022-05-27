@@ -13,6 +13,7 @@ public class CharcoSangre : Prop
         if (other.CompareTag("Coche"))
         {
             //#SONIDO RESBALAR
+            this.GetComponent<AudioSource>().PlayOneShot(sonido);
             other.GetComponent<Coche>().RecibirResbalar();
         }
     }

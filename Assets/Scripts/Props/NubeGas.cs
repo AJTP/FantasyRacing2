@@ -12,6 +12,7 @@ public class NubeGas : Prop
     {
         if (other.CompareTag("Coche")) {
             //#SONIDO GAS
+            this.GetComponent<AudioSource>().PlayOneShot(sonido);
             StartCoroutine(other.GetComponent<Coche>().AplicarCeguera());       
         }
     }

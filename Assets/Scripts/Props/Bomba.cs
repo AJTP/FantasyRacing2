@@ -32,6 +32,7 @@ public class Bomba : Prop
     private void OnCollisionEnter(Collision collision)
     {
         //SONIDO EXPLOSION
+        this.GetComponent<AudioSource>().PlayOneShot(sonido);
         GameObject.Instantiate(prefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
         Destroy(this.gameObject);
         Destroy(this);

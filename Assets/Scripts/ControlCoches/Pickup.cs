@@ -4,6 +4,7 @@ using Photon.Pun;
 public class Pickup : Coche
 {
     public GameObject prefab, prefab2,prefab3;
+    public AudioClip[] sonidos = new AudioClip[2];
     #region PARTE COMUN
     private void Awake()
     {
@@ -23,7 +24,9 @@ public class Pickup : Coche
         if (vista.IsMine)
         {
             //
+            
             RecogerInputMovimientoBasico();
+            RecogerInputDerrape();
             int habilidad = RecogerInputHabilidades();
             if (habilidad != 5)
             {
@@ -83,23 +86,27 @@ public class Pickup : Coche
     #region HABILIDADES
     public void Habilidad0()
     {
+        this.GetComponent<AudioSource>().PlayOneShot(sonidos[0]);
         GameObject tronco = SoltarPrefab(prefab,transform.forward*6);//TRONCO RODANTE
         tronco.GetComponent<TroncoRodante>().SetVector(transform.forward*10);
     }
 
     public void Habilidad1()
     {
+        this.GetComponent<AudioSource>().PlayOneShot(sonidos[0]);
         SoltarPrefab(prefab2);//CAJA DE HERRAMIENTAS
     }
 
     public void Habilidad2()
     {
+        this.GetComponent<AudioSource>().PlayOneShot(sonidos[0]);
         GameObject bomba = SoltarPrefab(prefab3,new Vector3(0,4,0));
         bomba.GetComponent<Bomba>().SetVector((transform.forward)*1000);
     }
 
     public void Habilidad3()
     {
+        this.GetComponent<AudioSource>().PlayOneShot(sonidos[1]);
         print("HABILIDA 3 LANZADA");
         invencible = true;
         StartCoroutine(DesactivarInvencible(30));

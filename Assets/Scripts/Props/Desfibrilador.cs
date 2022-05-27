@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Desfibrilador : MonoBehaviour
 {
-
+    public AudioClip sonido;
     void Start()
     {
 
@@ -27,7 +27,7 @@ public class Desfibrilador : MonoBehaviour
         }
         yield return new WaitForSeconds(1);
         //#SONIDO CALAMBRE
-
+        this.GetComponent<AudioSource>().PlayOneShot(sonido);
         for (int i = 0; i < coches.Length; i++)
         {
             coches[i].GetComponent<Coche>().RecibirStun(3);

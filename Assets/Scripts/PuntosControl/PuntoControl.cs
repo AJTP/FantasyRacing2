@@ -8,6 +8,7 @@ public class PuntoControl : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) {
+
             track.CochePasaPuntoControl(this,other.transform);
         }
     }
