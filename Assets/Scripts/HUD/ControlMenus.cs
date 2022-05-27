@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class ControlMenus : MonoBehaviour
 {
@@ -22,7 +23,17 @@ public class ControlMenus : MonoBehaviour
     //=======================ESCENA CREAR USUARIO=======================
     public void ToInicioSesion()
     {
+        PhotonNetwork.Disconnect();
         SceneManager.LoadScene("InicioSesion(1)");
+    }
+
+    public void ToCrearUsuario() {
+        SceneManager.LoadScene("NuevoUsuario(0)");
+    }
+
+    public void ToLobby() {
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("Rooms(3)");
     }
 
     public void CrearUsuario() {
@@ -102,5 +113,10 @@ public class ControlMenus : MonoBehaviour
     {
         feedback.gameObject.SetActive(true);
         feedback.text = texto;
+    }
+
+
+    public void SalirJuego() {
+        Application.Quit();
     }
 }

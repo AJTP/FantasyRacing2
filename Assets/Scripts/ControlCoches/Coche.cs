@@ -58,8 +58,8 @@ public class Coche : MonoBehaviour
     public Image barraVida;
     public Text contadorVueltas;
     public GameObject panelGas;
-
     public Spawn spawn;
+    private GameObject camaras;
 
     #endregion
 
@@ -122,14 +122,14 @@ public class Coche : MonoBehaviour
 
 
         //CAMBIO CAMARA (RETROVISOR)
-        /*if (Input.GetKey(KeyCode.R))
+        if (Input.GetKey(KeyCode.R))
         {
-            camarillas.transform.GetChild(0).gameObject.SetActive(false);
-            camarillas.transform.GetChild(2).gameObject.SetActive(true);
+            camaras.transform.GetChild(0).gameObject.SetActive(false);
+            camaras.transform.GetChild(2).gameObject.SetActive(true);
         } else {
-            camarillas.transform.GetChild(2).gameObject.SetActive(false);
-            camarillas.transform.GetChild(0).gameObject.SetActive(true);
-        }*/
+            camaras.transform.GetChild(2).gameObject.SetActive(false);
+            camaras.transform.GetChild(0).gameObject.SetActive(true);
+        }
     }
     public void AplicarVelocidad()
     {
@@ -498,6 +498,7 @@ public class Coche : MonoBehaviour
         propiedadesJugador["jugadorPosicion"] = 0;
         propiedadesJugador["jugadorPFinal"] = null;
         propiedadesJugador["jugadorPuntos"] = 0;
+        camaras = GameObject.Find("Camaras");
         PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
         //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
         ActualizarHP(maxHP);

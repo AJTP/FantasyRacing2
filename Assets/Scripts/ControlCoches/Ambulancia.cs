@@ -78,8 +78,9 @@ public class Ambulancia : Coche
     #region HABILIDADES
     public void Habilidad0(){
         //#SONIDO ONESHOT SIRENAS
-        boosted = true;
-        cantidadBoost = 8000f;
+        RecibirBoost(8000);
+        //boosted = true;
+        //cantidadBoost = 8000f;
     }
 
     public void Habilidad1(){

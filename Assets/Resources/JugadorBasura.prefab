@@ -231,8 +231,8 @@ MonoBehaviour:
   fuerzaGiro: 180
   gravedad: 10
   dragEnSuelo: 3
-  hp: 100
-  maxHP: 100
+  hp: 200
+  maxHP: 200
   posicion: 0
   boosted: 0
   cantidadBoost: 0

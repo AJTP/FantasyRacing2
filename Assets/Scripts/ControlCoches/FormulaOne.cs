@@ -103,8 +103,9 @@ public class FormulaOne : Coche
     public void Habilidad3()
     {
         //#SONIDO ONESHOT FORMULA UNO
-        boosted = true;
-        cantidadBoost = 30000f;
+        RecibirBoost(30000);
+        //boosted = true;
+        //cantidadBoost = 30000f;
     }
 
 
