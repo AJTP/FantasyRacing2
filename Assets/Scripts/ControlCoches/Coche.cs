@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class Coche : MonoBehaviour
 {
+
     ExitGames.Client.Photon.Hashtable propiedadesJugador = new ExitGames.Client.Photon.Hashtable();
     //ESTA CLASE RECOGE LAS CARACTERISTICAS COMUNES A TODOS LOS COCHES TALES COMO EL MOVIMIENTO, EFECTOS, ETC
     public Rigidbody esfera;
@@ -19,8 +20,8 @@ public class Coche : MonoBehaviour
     public float fuerzaGiroOriginal = 80f;
     public float gravedad = 10f;
     public float dragEnSuelo = 3f;
-    public int hp=100;
-    public int maxHP =100;
+    public int hp = 100;
+    public int maxHP = 100;
     public int posicion;
     public bool boosted = false;
     public float cantidadBoost;
@@ -95,6 +96,13 @@ public class Coche : MonoBehaviour
     protected PhotonView vista;
     #endregion
 
+    #region VISUAL
+    [Header("Partículas")]
+    public GameObject particulasParent;
+    private Color[] colores = new Color[3];
+    private ParticleSystem[] particulas = new ParticleSystem[4];
+    #endregion
+
     private bool acabado = false;
 
     //=================FUNCIONES=================
@@ -142,24 +150,47 @@ public class Coche : MonoBehaviour
     }
 
     public void RecogerInputDerrape() {
+        
         //EL JUGADOR ESTÁ PULSANDO ESPACIO, NO ESTÁ DERRAPANDO YA Y ESTÁ GIRANDO A IZQ O DRCH
         if (Input.GetButtonDown("Jump") && !drifting && Input.GetAxis("Horizontal")!=0) {
             drifting = true;
             direccionDrift = Input.GetAxis("Horizontal") > 0 ? 1 : -1;
             //GIRAMOS EL MODELO EN LA DIRECCION DEL DERRAPE
             carModel.transform.eulerAngles = carModel.transform.eulerAngles + new Vector3(0, 25 * direccionDrift, 0);
+            particulasParent.transform.eulerAngles = carModel.transform.eulerAngles;
             fuerzaGiro /= 2f;
+            for (int i = 0; i < particulas.Length; i++) {
+                particulas[i].startColor = colores[0];
+                particulas[i].Play();
+            }
         }
 
         if (drifting)
         {
             
             tiempoDrift += Time.deltaTime;
-            
+            if (tiempoDrift > 2 && tiempoDrift <= 4)
+            {
+                for (int i = 0; i < particulas.Length; i++)
+                {
+                    particulas[i].startColor = colores[1];
+                }
+            }
+            else if (tiempoDrift > 4)
+            {
+                for (int i = 0; i < particulas.Length; i++)
+                {
+                    particulas[i].startColor = colores[2];
+                }
+            }
         }
         else {
             carModel.transform.eulerAngles = this.transform.eulerAngles;
-
+            particulasParent.transform.eulerAngles = carModel.transform.eulerAngles;
+            for (int i = 0; i < particulas.Length; i++)
+            {
+                particulas[i].Stop();
+            }
         }
 
 
@@ -555,6 +586,14 @@ public class Coche : MonoBehaviour
         propiedadesJugador["jugadorPuntos"] = 0;
         camaras = GameObject.Find("Camaras");
         carModel = transform.GetChild(0).transform.GetChild(4).gameObject;
+        //CARGAMOS LAS PARTICULAS Y COLORES
+        particulas[0] = particulasParent.transform.GetChild(0).transform.GetChild(0).GetComponent<ParticleSystem>();
+        particulas[1] = particulasParent.transform.GetChild(0).transform.GetChild(1).GetComponent<ParticleSystem>();
+        particulas[2] = particulasParent.transform.GetChild(1).transform.GetChild(0).GetComponent<ParticleSystem>();
+        particulas[3] = particulasParent.transform.GetChild(1).transform.GetChild(1).GetComponent<ParticleSystem>();
+        colores[0] = Color.yellow;
+        colores[1] = Color.cyan;
+        colores[2] = Color.magenta;
         PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
         //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
         ActualizarHP(maxHP);
