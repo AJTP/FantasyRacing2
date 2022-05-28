@@ -28,7 +28,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: paintGreen
-    second: {fileID: 2100000, guid: 02116374e2ad918489c782d43aff3359, type: 2}
+    second: {fileID: 2100000, guid: d7f918c17cdacb44bb42d7a6334f7825, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

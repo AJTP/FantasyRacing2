@@ -5,20 +5,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Photon.Pun;
+using PlayFab;
+using PlayFab.ClientModels;
 
-public class ControlMenus : MonoBehaviour
+public class ControlMenus : MonoBehaviourPunCallbacks
 {
     private bool todoOk;
     public Text feedback;
-    public InputField[] inputs;
+    public Text textoBoton;
+    public Button botonRegistrar;
+    public Text userName,userEmail,userPassword,userRepeatPassword;
 
-    private string _usuario, _password, _email, _comprobarPWD;
-    private Usuario player;
-
-    private void Start()
-    {
-        player = new Usuario();
-    }
+    string encryptedPassword;
 
     //=======================ESCENA CREAR USUARIO=======================
     public void ToInicioSesion()
@@ -36,76 +34,68 @@ public class ControlMenus : MonoBehaviour
         SceneManager.LoadScene("Rooms(3)");
     }
 
-    public void CrearUsuario() {
-        //REVISAR COMO SE GUARDA LA PWD
-        if (todoOk) {
-            //GUARDO LOS DATOS EN LA BBDD
-        }        
-    }
+
 
     public void ComprobarDatos()
     {
         feedback.gameObject.SetActive(false);
         todoOk = true;
         //PASSWORD
-        if (inputs[2].textComponent.text.Length < 8)
+        if (userPassword.text.Length < 8)
         {
-            if (inputs[2].textComponent.text.Length > 0)
+            if (userPassword.text.Length > 0)
             {
-                inputs[2].textComponent.color = Color.red;
+                userPassword.color = Color.red;
                 todoOk = false;
                 MostrarFeedback("La contrase�a debe tener m�s de 8 caracteres");
             }
         }
-        else if (!inputs[2].textComponent.text.Equals(inputs[3].textComponent.text))
+        else if (!userPassword.text.Equals(userRepeatPassword.text))
         {
-            if (inputs[2].textComponent.text.Length > 0 && inputs[3].textComponent.text.Length > 0)
+            if (userPassword.text.Length > 0 && userRepeatPassword.text.Length > 0)
             {
-                inputs[2].textComponent.color = Color.red;
-                inputs[3].textComponent.color = Color.red;
+                userPassword.color = Color.red;
+                userRepeatPassword.color = Color.red;
                 todoOk = false;
                 MostrarFeedback("Las contrase�as no coinciden");
             }
         }
         else
         {
-            inputs[2].textComponent.color = Color.black;
-            inputs[3].textComponent.color = Color.black;
-            _password = inputs[2].textComponent.text;
+            userPassword.color = Color.black;
+            userRepeatPassword.color = Color.black;
         }
 
         //CORREO
         Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-        Match match = regex.Match(inputs[1].textComponent.text);
+        Match match = regex.Match(userEmail.text);
         if (!match.Success)
         {
-            if (inputs[1].textComponent.text.Length > 0)
+            if (userEmail.text.Length > 0)
             {
-                inputs[1].textComponent.color = Color.red;
+                userEmail.color = Color.red;
                 todoOk = false;
                 MostrarFeedback("Introduce un correo v�lido");
             }
         }
         else
         {
-            inputs[1].textComponent.color = Color.black;
-            _email = inputs[1].textComponent.text;
+            userEmail.color = Color.black;
         }
 
         //NOMBRE
-        if (inputs[0].textComponent.text.Length < 4)
+        if (userName.text.Length < 4)
         {
-            if (inputs[0].textComponent.text.Length > 0)
+            if (userName.text.Length > 0)
             {
-                inputs[0].textComponent.color = Color.red;
+                userName.color = Color.red;
                 todoOk = false;
                 MostrarFeedback("El nombre debe de tener m�s de 4 caracteres");
             }
         }
         else
         {
-            inputs[0].textComponent.color = Color.black;
-            _usuario = inputs[0].textComponent.text;
+            userName.color = Color.black;
         }
     }
 
@@ -118,5 +108,62 @@ public class ControlMenus : MonoBehaviour
 
     public void SalirJuego() {
         Application.Quit();
+    }
+
+    string Encryptar(string pass) {
+        System.Security.Cryptography.MD5CryptoServiceProvider x = new System.Security.Cryptography.MD5CryptoServiceProvider();
+        byte[] bs = System.Text.Encoding.UTF8.GetBytes(pass);
+        bs = x.ComputeHash(bs);
+        System.Text.StringBuilder s = new System.Text.StringBuilder();
+        foreach (byte b in bs) {
+            s.Append(b.ToString("x2").ToLower());
+        }
+        return s.ToString();
+    }
+
+    public void CrearUsuario()
+    {
+        if (!userPassword.text.Equals("") && !userRepeatPassword.text.Equals("") && !userName.text.Equals("") && !userEmail.text.Equals(""))
+        {
+            var requestRegistro = new RegisterPlayFabUserRequest { Email = userEmail.text, Password = Encryptar(userPassword.text), Username = userName.text };
+            PlayFabClientAPI.RegisterPlayFabUser(requestRegistro, RegisterSuccess, RegisterError);
+        }
+        else {
+            MostrarFeedback("Rellena todos los campos");
+        }
+    }
+
+    public void RegisterSuccess(RegisterPlayFabUserResult result) {
+        ToInicioSesion();   
+    }
+
+    public void RegisterError(PlayFabError error) {
+        MostrarFeedback(error.GenerateErrorReport());
+    }
+
+
+    public void IniciarSesion() {
+        var requestRegistro = new LoginWithEmailAddressRequest { Email = userEmail.text, Password = Encryptar(userPassword.text) };
+        PlayFabClientAPI.LoginWithEmailAddress(requestRegistro, LoginSuccess, RegisterError);
+    }
+    public void LoginSuccess(LoginResult result)
+    {
+        OnClickConnect();
+    }
+
+    public void OnClickConnect()
+    {
+        if (userEmail.text.Length > 0)
+        {
+            PhotonNetwork.NickName = userEmail.text;
+            textoBoton.text = "Conectando...";
+            PhotonNetwork.AutomaticallySyncScene = true;
+            PhotonNetwork.ConnectUsingSettings();
+        }
+    }
+
+    public override void OnConnectedToMaster()
+    {
+        SceneManager.LoadScene("Rooms(3)");
     }
 }

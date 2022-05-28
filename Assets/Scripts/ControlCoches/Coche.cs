@@ -633,6 +633,8 @@ public class Coche : MonoBehaviour
     public void ActualizarHP(int cantidad) {
         if (vista.IsMine)
         {
+            if (invencible)
+                return;
             hp += cantidad;
             if (hp > maxHP)
             {

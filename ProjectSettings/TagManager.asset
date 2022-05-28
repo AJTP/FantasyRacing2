@@ -9,6 +9,7 @@ TagManager:
   - RetroCamera
   - Coche
   - Bullet
+  - Musica
   layers:
   - Default
   - TransparentFX

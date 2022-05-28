@@ -184,10 +184,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e0f243b2dc39c47b595386d7674e82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sonido: {fileID: 8300000, guid: 2f52516bfc750d4408ec34377ee6b165, type: 3}
   prefab: {fileID: 1138678471039920340, guid: 2368677badb3c394e86c9a74a695cfb3, type: 3}
   rb: {fileID: -5323842243328255541}
   direccion: {x: 0, y: 0, z: 0}
-  sonido: {fileID: 8300000, guid: 2f52516bfc750d4408ec34377ee6b165, type: 3}
 --- !u!82 &2880143128961909642
 AudioSource:
   m_ObjectHideFlags: 0

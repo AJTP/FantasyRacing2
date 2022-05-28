@@ -5,6 +5,7 @@ using System.Collections;
 public class CamionBasura : Coche
 {
     public GameObject prefab,prefab2,prefab3;
+    public GameObject escudo;
     public AudioClip[] sonidos = new AudioClip[4];
     #region PARTE COMUN
 
@@ -38,6 +39,9 @@ public class CamionBasura : Coche
                 {
                     ReducirCoolDown(i);
                 }
+            }
+            if (protegido == false) {
+                escudo.SetActive(false);
             }
         }
     }
@@ -93,6 +97,7 @@ public class CamionBasura : Coche
     {
         //#ESTETICO SE PONE EL ESCUDO
         this.GetComponent<AudioSource>().PlayOneShot(sonidos[1]);
+        escudo.SetActive(true);
         protegido = true;
     }
 

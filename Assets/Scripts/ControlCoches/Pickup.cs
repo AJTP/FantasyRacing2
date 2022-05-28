@@ -4,6 +4,8 @@ using Photon.Pun;
 public class Pickup : Coche
 {
     public GameObject prefab, prefab2,prefab3;
+    public GameObject body;
+    public Color colorBoost,colorNormal;
     public AudioClip[] sonidos = new AudioClip[2];
     #region PARTE COMUN
     private void Awake()
@@ -38,6 +40,9 @@ public class Pickup : Coche
                 {
                     ReducirCoolDown(i);
                 }
+            }
+            if (invencible == false) {
+                body.GetComponent<MeshRenderer>().materials[1].SetColor("_Color", colorNormal);
             }
         }
     }
@@ -107,9 +112,9 @@ public class Pickup : Coche
     public void Habilidad3()
     {
         this.GetComponent<AudioSource>().PlayOneShot(sonidos[1]);
-        print("HABILIDA 3 LANZADA");
         invencible = true;
-        StartCoroutine(DesactivarInvencible(30));
+        body.GetComponent<MeshRenderer>().materials[1].SetColor("_Color", colorBoost);
+        StartCoroutine(DesactivarInvencible(20));
     }
 
     #endregion

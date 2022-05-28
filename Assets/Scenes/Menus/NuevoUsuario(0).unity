@@ -678,11 +678,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedback: {fileID: 1833838491}
-  inputs:
-  - {fileID: 1738833915}
-  - {fileID: 1243321212}
-  - {fileID: 1968356602}
-  - {fileID: 32498664}
+  textoBoton: {fileID: 0}
+  botonRegistrar: {fileID: 705576675}
+  userName: {fileID: 2052814029}
+  userEmail: {fileID: 1726190732}
+  userPassword: {fileID: 1743343768}
+  userRepeatPassword: {fileID: 418452555}
 --- !u!4 &717242000
 Transform:
   m_ObjectHideFlags: 0
@@ -1651,13 +1652,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1738833916}
   m_TextComponent: {fileID: 2052814029}
   m_Placeholder: {fileID: 1401010218}
-  m_ContentType: 5
+  m_ContentType: 4
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 6
+  m_KeyboardType: 1
   m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 4
+  m_CharacterValidation: 3
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
