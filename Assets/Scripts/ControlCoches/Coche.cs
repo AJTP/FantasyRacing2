@@ -75,7 +75,7 @@ public class Coche : MonoBehaviour
 
     #region INFORMACION JUGADOR
     private string nombreJugador;
-    private int vuelta = 0;
+    private int vuelta = 3;
     private int numPuntoControl;
     private float distanciaSiguientePunto;
     private GameObject puntosControl;
@@ -271,7 +271,8 @@ public class Coche : MonoBehaviour
         if (vista.IsMine) {
             propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
             vuelta++;
-            propiedadesJugador["jugadorVuelta"] = vuelta;
+            //propiedadesJugador["jugadorVuelta"] = vuelta;
+            propiedadesJugador["jugadorVuelta"] = 4;
             PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
             //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
             ActualizarRanking();
@@ -284,7 +285,15 @@ public class Coche : MonoBehaviour
                 //ESTE JUGADOR HA ACABADO
                 propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
                 acabado = true;
-                propiedadesJugador["jugadorPFinal"] = rank.GetComponent<Ranking>().MiPuestoFinal();
+                int puestoFinal = rank.GetComponent<Ranking>().MiPuestoFinal();
+                propiedadesJugador["jugadorPFinal"] = puestoFinal;
+                if (propiedadesJugador.ContainsKey("jugadorPunFinal"))
+                {
+                    propiedadesJugador["jugadorPunFinal"] = (int)propiedadesJugador["jugadorPunFinal"] + (puestoFinal * 5);
+                }
+                else {
+                    propiedadesJugador["jugadorPunFinal"] = 0;
+                }
                 PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
                 //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
             }
