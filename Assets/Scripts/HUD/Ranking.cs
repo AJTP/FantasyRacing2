@@ -16,7 +16,6 @@ public class Ranking : MonoBehaviour
     public Transform itemRankingParent;
 
     public Transform itemRFinalParent;
-    public Transform itemRDefinitivoParent;
 
     ExitGames.Client.Photon.Hashtable propiedadesJugador = new ExitGames.Client.Photon.Hashtable();
     ExitGames.Client.Photon.Hashtable propiedadesAUX = new ExitGames.Client.Photon.Hashtable();
@@ -128,7 +127,7 @@ public class Ranking : MonoBehaviour
                 break;
             case "Castillo":
                 //itemRFinalParent.gameObject.SetActive(false);
-                ActivarRankingDefinitivo();
+                //ACABA LA PARTIDA, RANKING FINAL DE PUNTOS TOTALES Y AL LOBBY
                 yield return new WaitForSeconds(10);
                 PhotonNetwork.LoadLevel("Rooms(3)");
                 //StopCoroutine(TodosALaSiguiente());
@@ -152,6 +151,7 @@ public class Ranking : MonoBehaviour
         return pos;
     }
 
+
     public void ActivarRankingFinal() {
         List<Player> jugadoresOrdenados = new List<Player>();
         foreach (KeyValuePair<int, Player> player in PhotonNetwork.CurrentRoom.Players)
@@ -172,29 +172,5 @@ public class Ranking : MonoBehaviour
         }
         itemRankingParent.gameObject.SetActive(false);
         itemRFinalParent.gameObject.SetActive(true);
-    }
-
-    public void ActivarRankingDefinitivo()
-    {
-        List<Player> jugadoresOrdenados = new List<Player>();
-        foreach (KeyValuePair<int, Player> player in PhotonNetwork.CurrentRoom.Players)
-        {
-            jugadoresOrdenados.Add(player.Value);
-        }
-
-        jugadoresOrdenados = jugadoresOrdenados.OrderBy(p => p.CustomProperties["jugadorPunFinal"]).ToList();
-
-        foreach (Player player in jugadoresOrdenados)
-        {
-            ItemRanking nuevoItemRanking = Instantiate(itemRankingPrefab, itemRDefinitivoParent);
-            nuevoItemRanking.SetFinalInfo(player, posiciones.IndexOf(player) + 1);
-            if (player == PhotonNetwork.LocalPlayer)
-            {
-                nuevoItemRanking.AplicarCambiosLocales();
-            }
-        }
-        itemRankingParent.gameObject.SetActive(false);
-        itemRFinalParent.gameObject.SetActive(false);
-        itemRDefinitivoParent.gameObject.SetActive(true);
     }
 }
