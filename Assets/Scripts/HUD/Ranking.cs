@@ -16,15 +16,31 @@ public class Ranking : MonoBehaviour
     public Transform itemRankingParent;
 
     public Transform itemRFinalParent;
+    public Transform itemRDefinitivoParent;
 
     ExitGames.Client.Photon.Hashtable propiedadesJugador = new ExitGames.Client.Photon.Hashtable();
     ExitGames.Client.Photon.Hashtable propiedadesAUX = new ExitGames.Client.Photon.Hashtable();
 
     private bool ok;
     private int veces = 0;
+    private void Awake()
+    {
+        propiedadesAUX = PhotonNetwork.LocalPlayer.CustomProperties;
+        propiedadesAUX["jugadorVuelta"] = 3;
+        //player.Value.CustomProperties = propiedadesAUX;
+
+        PhotonNetwork.SetPlayerCustomProperties(propiedadesAUX);
+    }
 
     private void Start()
     {
+
+
+        /*propiedadesAUX = PhotonNetwork.LocalPlayer.CustomProperties;
+        propiedadesAUX["jugadorVuelta"] = 3;
+        //player.Value.CustomProperties = propiedadesAUX;
+
+        PhotonNetwork.SetPlayerCustomProperties(propiedadesAUX);*/
         itemRFinalParent.gameObject.SetActive(false);
     }
 
@@ -92,17 +108,17 @@ public class Ranking : MonoBehaviour
                 if (veces == 0)
                 {
                     
+                    
+                if (SceneManager.GetActiveScene().name.Equals("Castillo"))
+                {
+                    ActivarRankingDefinitivo();
+                }
+                else {
                     ActivarRankingFinal();
+                }
                         if (PhotonNetwork.IsMasterClient)
                         {
-                            foreach (KeyValuePair<int, Player> player in PhotonNetwork.CurrentRoom.Players)
-                            {
-                                propiedadesAUX = player.Value.CustomProperties;
-                                propiedadesAUX["jugadorVuelta"] = 3;
-                                player.Value.CustomProperties = propiedadesAUX;
-                            }
                             StartCoroutine(TodosALaSiguiente());
-                        
                         }
                         veces++;
                 }
@@ -172,5 +188,28 @@ public class Ranking : MonoBehaviour
         }
         itemRankingParent.gameObject.SetActive(false);
         itemRFinalParent.gameObject.SetActive(true);
+    }
+    
+    public void ActivarRankingDefinitivo() {
+        List<Player> jugadoresOrdenados = new List<Player>();
+        foreach (KeyValuePair<int, Player> player in PhotonNetwork.CurrentRoom.Players)
+        {
+            jugadoresOrdenados.Add(player.Value);
+        }
+
+        jugadoresOrdenados = jugadoresOrdenados.OrderByDescending(p => p.CustomProperties["jugadorPunFinal"]).ToList();
+
+        foreach (Player player in jugadoresOrdenados)
+        {
+            ItemRanking nuevoItemRanking = Instantiate(itemRankingPrefab, itemRDefinitivoParent);
+            nuevoItemRanking.SetDefinitiveInfo(player, (int)player.CustomProperties["jugadorPunFinal"]);
+            if (player == PhotonNetwork.LocalPlayer)
+            {
+                nuevoItemRanking.AplicarCambiosLocales();
+            }
+        }
+        itemRankingParent.gameObject.SetActive(false);
+        itemRFinalParent.gameObject.SetActive(false);
+        itemRDefinitivoParent.gameObject.SetActive(true);
     }
 }

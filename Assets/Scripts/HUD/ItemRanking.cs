@@ -10,6 +10,7 @@ public class ItemRanking : MonoBehaviourPunCallbacks
 {
     public Text nombreJugador;
     public Text posicion;
+    public Text puntuacion;
 
     public Image backgroundImage;
     public Color colorResalto;
@@ -25,7 +26,15 @@ public class ItemRanking : MonoBehaviourPunCallbacks
     {
         UpdateFinalItem(_jugador, puesto);
         PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+    } 
+    
+    public void SetDefinitiveInfo(Player _jugador, int puntos)
+    {
+        UpdateDefinitiveItem(_jugador, puntos);
+        PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
     }
+
+
 
     public void AplicarCambiosLocales()
     {
@@ -62,6 +71,19 @@ public class ItemRanking : MonoBehaviourPunCallbacks
         {
             nombreJugador.text = targetPlayer.NickName;
             posicion.text = targetPlayer.CustomProperties["jugadorPFinal"]+"";
+            propiedadesJugador["jugadorNickName"] = targetPlayer.NickName;
+        }
+    }
+
+    private void UpdateDefinitiveItem(Player targetPlayer, int puntos)
+    {
+        propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
+        if (targetPlayer.CustomProperties.ContainsKey("jugadorNickName"))
+        {
+            nombreJugador.text = targetPlayer.NickName;
+            posicion.gameObject.SetActive(false);
+            puntuacion.gameObject.SetActive(true);
+            puntuacion.text = targetPlayer.CustomProperties["jugadorPunFinal"] + "";
             propiedadesJugador["jugadorNickName"] = targetPlayer.NickName;
         }
     }

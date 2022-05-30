@@ -289,10 +289,11 @@ public class Coche : MonoBehaviour
                 propiedadesJugador["jugadorPFinal"] = puestoFinal;
                 if (propiedadesJugador.ContainsKey("jugadorPunFinal"))
                 {
-                    propiedadesJugador["jugadorPunFinal"] = (int)propiedadesJugador["jugadorPunFinal"] + (puestoFinal * 5);
+                    propiedadesJugador["jugadorPunFinal"] = (int)propiedadesJugador["jugadorPunFinal"] + (PhotonNetwork.CurrentRoom.PlayerCount+1 - puestoFinal) * 5;
+                    Debug.Log(propiedadesJugador["jugadorPunFinal"]);
                 }
                 else {
-                    propiedadesJugador["jugadorPunFinal"] = 0;
+                    propiedadesJugador["jugadorPunFinal"] = (PhotonNetwork.CurrentRoom.PlayerCount+1 - puestoFinal) * 5;
                 }
                 PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
                 //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
