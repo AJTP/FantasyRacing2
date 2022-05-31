@@ -10148,7 +10148,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedback: {fileID: 0}
-  inputs: []
+  textoBoton: {fileID: 0}
+  botonRegistrar: {fileID: 0}
+  userName: {fileID: 0}
+  userEmail: {fileID: 0}
+  userPassword: {fileID: 0}
+  userRepeatPassword: {fileID: 0}
 --- !u!1001 &668976717
 PrefabInstance:
   m_ObjectHideFlags: 0

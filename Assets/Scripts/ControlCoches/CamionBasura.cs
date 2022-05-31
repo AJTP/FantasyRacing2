@@ -16,7 +16,7 @@ public class CamionBasura : Coche
     void Start()
     {
         CargarDatos();
-        CargarCooldowns(4, 8, 12, 20);
+        CargarCooldowns(15, 25, 30, 40);
         esfera.transform.parent = null;
         StartCoroutine(ActualizarDistanciaPuntoControl());
         //CargarCamaras();

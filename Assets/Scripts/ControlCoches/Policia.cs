@@ -14,7 +14,7 @@ public class Policia : Coche
     void Start()
     {
         CargarDatos();
-        CargarCooldowns(4, 8, 12, 20);
+        CargarCooldowns(8, 5, 20, 40);
         esfera.transform.parent = null;
         StartCoroutine(ActualizarDistanciaPuntoControl());
         //CargarCamaras();
@@ -96,7 +96,7 @@ public class Policia : Coche
     {
         this.GetComponent<AudioSource>().PlayOneShot(sonidos[1]);
         GameObject misil = SoltarPrefab(prefab, (transform.forward * 6)+new Vector3(0,1,0));
-        misil.GetComponent<Misil>().SetVector(-1*transform.forward * 100);
+        misil.GetComponent<Misil>().SetVector(transform.forward * 100);
     }
 
     public void Habilidad2()
@@ -114,7 +114,7 @@ public class Policia : Coche
         for (int i = 0; i < 20; i++) {
             this.GetComponent<AudioSource>().PlayOneShot(sonidos[3]);
             GameObject misil = SoltarPrefab(prefab, (transform.forward * 6) + new Vector3(0, 1, 0));
-            misil.GetComponent<Misil>().SetVector(-1 * transform.forward * 100);
+            misil.GetComponent<Misil>().SetVector(transform.forward * 100);
             yield return new WaitForSeconds(0.1f);
         }
     }

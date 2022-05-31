@@ -14,9 +14,8 @@ public class ControlMenus : MonoBehaviourPunCallbacks
     public Text feedback;
     public Text textoBoton;
     public Button botonRegistrar;
-    public Text userName,userEmail,userPassword,userRepeatPassword;
-
-    string encryptedPassword;
+    //public Text userName,userEmail,userPassword,userRepeatPassword;
+    public InputField userName, userEmail, userPassword, userRepeatPassword;
 
     //=======================ESCENA CREAR USUARIO=======================
     public void ToInicioSesion()
@@ -45,7 +44,7 @@ public class ControlMenus : MonoBehaviourPunCallbacks
         {
             if (userPassword.text.Length > 0)
             {
-                userPassword.color = Color.red;
+                userPassword.transform.GetChild(1).GetComponent<Text>().color = Color.red;
                 todoOk = false;
                 MostrarFeedback("La contrase�a debe tener m�s de 8 caracteres");
             }
@@ -54,16 +53,16 @@ public class ControlMenus : MonoBehaviourPunCallbacks
         {
             if (userPassword.text.Length > 0 && userRepeatPassword.text.Length > 0)
             {
-                userPassword.color = Color.red;
-                userRepeatPassword.color = Color.red;
+                userPassword.transform.GetChild(1).GetComponent<Text>().color = Color.red;
+                userRepeatPassword.transform.GetChild(1).GetComponent<Text>().color = Color.red;
                 todoOk = false;
                 MostrarFeedback("Las contrase�as no coinciden");
             }
         }
         else
         {
-            userPassword.color = Color.black;
-            userRepeatPassword.color = Color.black;
+            userPassword.transform.GetChild(1).GetComponent<Text>().color = Color.black;
+            userRepeatPassword.transform.GetChild(1).GetComponent<Text>().color = Color.black;
         }
 
         //CORREO
@@ -73,14 +72,14 @@ public class ControlMenus : MonoBehaviourPunCallbacks
         {
             if (userEmail.text.Length > 0)
             {
-                userEmail.color = Color.red;
+                userEmail.transform.GetChild(1).GetComponent<Text>().color = Color.red;
                 todoOk = false;
                 MostrarFeedback("Introduce un correo v�lido");
             }
         }
         else
         {
-            userEmail.color = Color.black;
+            userEmail.transform.GetChild(1).GetComponent<Text>().color = Color.black;
         }
 
         //NOMBRE
@@ -88,14 +87,14 @@ public class ControlMenus : MonoBehaviourPunCallbacks
         {
             if (userName.text.Length > 0)
             {
-                userName.color = Color.red;
+                userName.transform.GetChild(1).GetComponent<Text>().color = Color.red;
                 todoOk = false;
-                MostrarFeedback("El nombre debe de tener m�s de 4 caracteres");
+                MostrarFeedback("El nombre debe de tener más de 4 caracteres");
             }
         }
         else
         {
-            userName.color = Color.black;
+            userName.transform.GetChild(1).GetComponent<Text>().color = Color.black;
         }
     }
 

@@ -15572,7 +15572,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedback: {fileID: 0}
-  inputs: []
+  textoBoton: {fileID: 0}
+  botonRegistrar: {fileID: 0}
+  userName: {fileID: 0}
+  userEmail: {fileID: 0}
+  userPassword: {fileID: 0}
+  userRepeatPassword: {fileID: 0}
 --- !u!114 &1708069475
 MonoBehaviour:
   m_ObjectHideFlags: 0

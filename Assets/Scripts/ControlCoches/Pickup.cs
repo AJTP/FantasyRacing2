@@ -15,7 +15,7 @@ public class Pickup : Coche
     void Start()
     {
         CargarDatos();
-        CargarCooldowns(4, 8, 12, 20);
+        CargarCooldowns(10, 15, 25, 60);
         esfera.transform.parent = null;
         StartCoroutine(ActualizarDistanciaPuntoControl());
         //CargarCamaras();
@@ -92,8 +92,8 @@ public class Pickup : Coche
     public void Habilidad0()
     {
         this.GetComponent<AudioSource>().PlayOneShot(sonidos[0]);
-        GameObject tronco = SoltarPrefab(prefab,transform.forward*6);//TRONCO RODANTE
-        tronco.GetComponent<TroncoRodante>().SetVector(transform.forward*10);
+        GameObject tronco = SoltarPrefab(prefab,transform.forward*6+new Vector3(0,0.5f,0));//TRONCO RODANTE
+        tronco.GetComponent<TroncoRodante>().SetVector(transform.forward*50);
     }
 
     public void Habilidad1()

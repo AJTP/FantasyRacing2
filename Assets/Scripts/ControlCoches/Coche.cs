@@ -329,7 +329,9 @@ public class Coche : MonoBehaviour
             coolDowns[3] = cdh4;
             for (int i = 0; i < timerCD.Length; i++)
             {
-                timerCD[i] = coolDowns[i];
+                //timerCD[i] = coolDowns[i];
+                timerCD[i] = 0;
+                isCD[i] = true;
             }
         }
     }
@@ -585,6 +587,8 @@ public class Coche : MonoBehaviour
         if (vista.IsMine) {
             barraVida.transform.parent.gameObject.SetActive(true);
             habilidades.SetActive(true);
+            textoVida.gameObject.SetActive(true);
+            contadorVueltas.gameObject.SetActive(true);
         }
         propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
         propiedadesJugador["jugadorNickName"] = PhotonNetwork.LocalPlayer.NickName;

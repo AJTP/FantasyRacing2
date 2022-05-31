@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1629,8 +1629,8 @@ MonoBehaviour:
   textoBoton: {fileID: 923422850}
   botonRegistrar: {fileID: 0}
   userName: {fileID: 0}
-  userEmail: {fileID: 566088421}
-  userPassword: {fileID: 184893577}
+  userEmail: {fileID: 1316732060}
+  userPassword: {fileID: 1263112338}
   userRepeatPassword: {fileID: 0}
 --- !u!1 &1792813911
 GameObject:

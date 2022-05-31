@@ -13,7 +13,7 @@ public class Ambulancia : Coche
     void Start()
     {
         CargarDatos();
-        CargarCooldowns(4,8,12,20);
+        CargarCooldowns(8,20,25,60);
         esfera.transform.parent = null;
         StartCoroutine(ActualizarDistanciaPuntoControl());
         //CargarCamaras();

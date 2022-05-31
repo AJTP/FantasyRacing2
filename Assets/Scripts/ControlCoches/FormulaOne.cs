@@ -14,7 +14,7 @@ public class FormulaOne : Coche
     void Start()
     {
         CargarDatos();
-        CargarCooldowns(4, 8, 12, 20);
+        CargarCooldowns(30, 20, 20, 30);
         esfera.transform.parent = null;
         StartCoroutine(ActualizarDistanciaPuntoControl());
         //CargarCamaras();

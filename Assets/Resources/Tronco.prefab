@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8448983780312182226}
   - component: {fileID: 2978512857861985806}
   - component: {fileID: -9081722594900891889}
+  - component: {fileID: 5787299242980857920}
   m_Layer: 12
   m_Name: Tronco
   m_TagString: Untagged
@@ -112,8 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sonido: {fileID: 8300000, guid: eb42a12c7ece3fd4fbb691a12b17068b, type: 3}
-  prefab: {fileID: 0}
-  rb: {fileID: 0}
+  rb: {fileID: 5787299242980857920}
   direccion: {x: 0, y: 0, z: 0}
 --- !u!114 &8448983780312182226
 MonoBehaviour:
@@ -267,3 +267,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!54 &5787299242980857920
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6780035162342542699}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

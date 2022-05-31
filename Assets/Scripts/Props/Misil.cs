@@ -6,6 +6,8 @@ using UnityEngine;
 public class Misil : Prop
 {
     public Vector3 direccion = new Vector3(0, 0, 0);
+    public Rigidbody rb;
+    private int i = 0;
     private void Start()
     {
         StartCoroutine(MuerteProp());
@@ -13,7 +15,11 @@ public class Misil : Prop
 
     private void FixedUpdate()
     {
-        transform.Translate(direccion * Time.deltaTime);
+        if (i == 0)
+        {
+            rb.AddForce(direccion, ForceMode.Impulse);
+            i++;
+        }   
     }
 
     public void SetVector(Vector3 v)
