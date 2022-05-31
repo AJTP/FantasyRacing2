@@ -13,6 +13,7 @@ public class FormulaOne : Coche
     }
     void Start()
     {
+        IniciarTemporizador();
         CargarDatos();
         CargarCooldowns(30, 20, 20, 30);
         esfera.transform.parent = null;
@@ -24,7 +25,7 @@ public class FormulaOne : Coche
     {
         if (vista.IsMine)
         {
-            //
+            ActualizarTemporizador();
             RecogerInputMovimientoBasico();
             RecogerInputDerrape();
             int habilidad = RecogerInputHabilidades();

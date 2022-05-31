@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using System.Collections.Generic;
+using PlayFab;
+using PlayFab.ClientModels;
+using UnityEngine.SceneManagement;
 
 public class Coche : MonoBehaviour
 {
@@ -26,6 +29,7 @@ public class Coche : MonoBehaviour
     public bool boosted = false;
     public float cantidadBoost;
 
+    public float tiempoCircuito;
 
     #endregion
 
@@ -297,6 +301,7 @@ public class Coche : MonoBehaviour
                 }
                 PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
                 //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+                GuardarTiempo();
             }
         }
     }
@@ -614,7 +619,108 @@ public class Coche : MonoBehaviour
         ActualizarRanking();
     }
 
-    
+    public void IniciarTemporizador() {
+        tiempoCircuito = Time.deltaTime;
+    }
+
+    public void ActualizarTemporizador() {
+        tiempoCircuito += Time.deltaTime;
+    }
+
+    public void GuardarTiempo() {
+        //CARGAR TIEMPOS ACTUALES
+        string nombre = "";
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Ovalo":
+                nombre = "Leaderboard Ovalo";
+                break;
+            case "Karting":
+                nombre = "Leaderboard Karting";
+                break;
+            case "Castillo":
+                nombre = "Leaderboard Castillo";
+                break;
+        }
+        var request = new UpdatePlayerStatisticsRequest
+        {
+            Statistics = new List<StatisticUpdate> {
+                new StatisticUpdate {
+                    StatisticName = nombre,
+                    Value = (int)tiempoCircuito-5
+                }
+            }
+        };
+        PlayFabClientAPI.UpdatePlayerStatistics(request, null, null);
+        //PlayFabClientAPI.GetUserData(new GetUserDataRequest(),TiemposRecibidos,null);        
+    }
+
+    //public void TiemposRecibidos(GetUserDataResult result) {
+    //    if (result.Data != null && result.Data.ContainsKey("Ovalo") && result.Data.ContainsKey("Karting") && result.Data.ContainsKey("Castillo"))
+    //    {
+    //        string tiempoO = result.Data["Ovalo"].Value;
+    //        string tiempoK = result.Data["Karting"].Value;
+    //        string tiempoC = result.Data["Castillo"].Value;
+    //        switch (SceneManager.GetActiveScene().name) {
+    //            case "Ovalo":
+    //                if (float.Parse(tiempoO) > tiempoCircuito || float.Parse(tiempoO) == 0) {
+    //                    tiempoO = (tiempoCircuito-5).ToString();
+    //                }
+    //                break;
+    //            case "Karting":
+    //                if (float.Parse(tiempoK) > tiempoCircuito || float.Parse(tiempoK) == 0)
+    //                {
+    //                    tiempoK = (tiempoCircuito - 5).ToString();
+    //                }
+    //                break;
+    //            case "Castillo":
+    //                if (float.Parse(tiempoC) > tiempoCircuito || float.Parse(tiempoC) == 0)
+    //                {
+    //                    tiempoC = (tiempoCircuito - 5).ToString();
+    //                }
+    //                break;
+    //        }
+    //        var request = new UpdateUserDataRequest
+    //        {
+    //            Data = new Dictionary<string, string> {
+    //            {"Ovalo",tiempoO},
+    //            {"Karting",tiempoK},
+    //            {"Castillo",tiempoC},
+    //        }
+    //        };
+    //        PlayFabClientAPI.UpdateUserData(request, null, TiemposErroneos);
+    //    }
+    //    else {
+    //        string tiempoO = "0";
+    //        string tiempoK = "0";
+    //        string tiempoC = "0";
+    //        switch (SceneManager.GetActiveScene().name)
+    //        {
+    //            case "Ovalo":
+    //                    tiempoO = (tiempoCircuito - 5).ToString();
+    //                break;
+    //            case "Karting":
+    //                    tiempoK = (tiempoCircuito - 5).ToString();
+    //                break;
+    //            case "Castillo":
+    //                    tiempoC = (tiempoCircuito - 5).ToString();
+    //                break;
+    //        }
+    //        var request = new UpdateUserDataRequest
+    //        {
+    //            Data = new Dictionary<string, string> {
+    //            {"Ovalo",tiempoO},
+    //            {"Karting",tiempoK},
+    //            {"Castillo",tiempoC},
+    //        }
+    //        };
+    //        PlayFabClientAPI.UpdateUserData(request, null, TiemposErroneos);
+    //    }
+    //}
+
+    public void TiemposErroneos(PlayFabError error) {
+        Debug.Log("ERROR: " + error.ToString());
+    }
     #endregion
 
     #region INFORMACION JUGADOR

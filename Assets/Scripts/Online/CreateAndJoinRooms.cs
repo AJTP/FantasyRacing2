@@ -59,13 +59,10 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     private void UpdateRoomList(List<RoomInfo> listaSalas)
     {
         foreach (SalaItem salaItem in salaItemLista) {
-            Debug.Log("ELIMINO DE LA LISTA " + salaItem.nombreSala.text);
-            
             Destroy(salaItem.gameObject);
             Destroy(salaItem);
         }
         salaItemLista.Clear();
-        Debug.Log("quedan: " + salaItemLista.Count);
 
         foreach (RoomInfo salaInfo in listaSalas)
         {

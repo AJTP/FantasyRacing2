@@ -13,6 +13,7 @@ public class CamionBomberos : Coche
     }
     void Start()
     {
+        IniciarTemporizador();
         CargarDatos();
         CargarCooldowns(8, 15, 20, 50);
         esfera.transform.parent = null;
@@ -24,7 +25,7 @@ public class CamionBomberos : Coche
     {
         if (vista.IsMine)
         {
-            //
+            ActualizarTemporizador();
             RecogerInputMovimientoBasico();
             RecogerInputDerrape();
             int habilidad = RecogerInputHabilidades();

@@ -12,6 +12,7 @@ public class Ambulancia : Coche
     }
     void Start()
     {
+        IniciarTemporizador();
         CargarDatos();
         CargarCooldowns(8,20,25,60);
         esfera.transform.parent = null;
@@ -22,7 +23,7 @@ public class Ambulancia : Coche
     void Update()
     {
         if (vista.IsMine) {
-            //
+            ActualizarTemporizador();
             RecogerInputMovimientoBasico();
             RecogerInputDerrape();
             int habilidad = RecogerInputHabilidades();

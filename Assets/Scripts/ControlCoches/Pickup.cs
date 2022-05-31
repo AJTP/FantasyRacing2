@@ -14,6 +14,7 @@ public class Pickup : Coche
     }
     void Start()
     {
+        IniciarTemporizador();
         CargarDatos();
         CargarCooldowns(10, 15, 25, 60);
         esfera.transform.parent = null;
@@ -25,7 +26,7 @@ public class Pickup : Coche
     {
         if (vista.IsMine)
         {
-            //
+            ActualizarTemporizador();
             
             RecogerInputMovimientoBasico();
             RecogerInputDerrape();

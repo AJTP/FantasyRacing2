@@ -240,6 +240,7 @@ MonoBehaviour:
   posicion: 0
   boosted: 0
   cantidadBoost: 0
+  tiempoCircuito: 0
   suelo:
     serializedVersion: 2
     m_Bits: 128

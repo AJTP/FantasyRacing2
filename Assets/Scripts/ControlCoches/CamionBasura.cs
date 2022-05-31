@@ -15,6 +15,7 @@ public class CamionBasura : Coche
     }
     void Start()
     {
+        IniciarTemporizador();
         CargarDatos();
         CargarCooldowns(15, 25, 30, 40);
         esfera.transform.parent = null;
@@ -26,6 +27,7 @@ public class CamionBasura : Coche
     {
         if (vista.IsMine)
         {
+            ActualizarTemporizador();
             RecogerInputMovimientoBasico();
             RecogerInputDerrape();
             int habilidad = RecogerInputHabilidades();

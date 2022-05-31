@@ -13,6 +13,7 @@ public class Policia : Coche
     }
     void Start()
     {
+        IniciarTemporizador();
         CargarDatos();
         CargarCooldowns(8, 5, 20, 40);
         esfera.transform.parent = null;
@@ -24,7 +25,7 @@ public class Policia : Coche
     {
         if (vista.IsMine)
         {
-            //
+            ActualizarTemporizador();
             RecogerInputMovimientoBasico();
             RecogerInputDerrape();
             int habilidad = RecogerInputHabilidades();

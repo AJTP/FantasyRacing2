@@ -16,7 +16,9 @@ public class ControlMenus : MonoBehaviourPunCallbacks
     public Button botonRegistrar;
     //public Text userName,userEmail,userPassword,userRepeatPassword;
     public InputField userName, userEmail, userPassword, userRepeatPassword;
-
+    public InputField nombreJugador;
+    public GameObject panelNuevoNombre;
+    public GameObject panelLeaderBoard;
     //=======================ESCENA CREAR USUARIO=======================
     public void ToInicioSesion()
     {
@@ -142,19 +144,31 @@ public class ControlMenus : MonoBehaviourPunCallbacks
 
 
     public void IniciarSesion() {
-        var requestRegistro = new LoginWithEmailAddressRequest { Email = userEmail.text, Password = Encryptar(userPassword.text) };
+        var requestRegistro = new LoginWithEmailAddressRequest { Email = userEmail.text, Password = Encryptar(userPassword.text), InfoRequestParameters = new GetPlayerCombinedInfoRequestParams {
+            GetPlayerProfile = true
+        } };
         PlayFabClientAPI.LoginWithEmailAddress(requestRegistro, LoginSuccess, RegisterError);
     }
     public void LoginSuccess(LoginResult result)
     {
-        OnClickConnect();
+        string nombre = null;
+        if (result.InfoResultPayload.PlayerProfile.DisplayName != null)
+        {
+            nombre = result.InfoResultPayload.PlayerProfile.DisplayName;
+            Debug.Log(nombre);
+            OnClickConnect(nombre);
+        }
+        else {
+            panelNuevoNombre.SetActive(true);
+        }
+        
     }
 
-    public void OnClickConnect()
+    public void OnClickConnect(string nombre)
     {
         if (userEmail.text.Length > 0)
         {
-            PhotonNetwork.NickName = userEmail.text;
+            PhotonNetwork.NickName = nombre;
             textoBoton.text = "Conectando...";
             PhotonNetwork.AutomaticallySyncScene = true;
             PhotonNetwork.ConnectUsingSettings();
@@ -164,5 +178,22 @@ public class ControlMenus : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         SceneManager.LoadScene("Rooms(3)");
+    }
+
+    public void NombreEstablecido() {
+        var request = new UpdateUserTitleDisplayNameRequest()
+        {
+            DisplayName = nombreJugador.text
+        };
+        PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, RegisterError);
+       
+    }
+
+    void OnDisplayNameUpdate(UpdateUserTitleDisplayNameResult result) {
+        OnClickConnect(result.DisplayName);
+    }
+
+    public void AbrirLeaderBoard() {
+        panelLeaderBoard.SetActive(true);
     }
 }
