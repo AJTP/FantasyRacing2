@@ -277,8 +277,8 @@ public class Coche : MonoBehaviour
             vuelta++;
             //propiedadesJugador["jugadorVuelta"] = vuelta;
             propiedadesJugador["jugadorVuelta"] = 4;
-            PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
-            //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+            //PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
+            PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
             ActualizarRanking();
             if (vuelta <= 3)
             {
@@ -299,8 +299,8 @@ public class Coche : MonoBehaviour
                 else {
                     propiedadesJugador["jugadorPunFinal"] = (PhotonNetwork.CurrentRoom.PlayerCount+1 - puestoFinal) * 5;
                 }
-                PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
-                //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+                //PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
+                PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
                 GuardarTiempo();
             }
         }
@@ -311,8 +311,8 @@ public class Coche : MonoBehaviour
         propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
         numPuntoControl =n;
         propiedadesJugador["jugadorPuntoControl"] = numPuntoControl;
-        PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
-        //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+        //PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
+        PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
         ActualizarRanking();
 
     }
@@ -613,8 +613,8 @@ public class Coche : MonoBehaviour
         colores[0] = Color.yellow;
         colores[1] = Color.cyan;
         colores[2] = Color.magenta;
-        PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
-        //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+        //PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
+        PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
         ActualizarHP(maxHP);
         ActualizarRanking();
     }
@@ -743,8 +743,8 @@ public class Coche : MonoBehaviour
             propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
             distanciaSiguientePunto = Vector3.Distance(transform.position, puntosControl.transform.GetChild(numPuntoControl).transform.position);
             propiedadesJugador["jugadorDistancia"] = distanciaSiguientePunto;
-            PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
-            //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+            //PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
+            PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
             yield return new WaitForSeconds(2);
             ActualizarRanking();
         }

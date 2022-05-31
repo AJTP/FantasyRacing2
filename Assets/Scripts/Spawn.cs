@@ -14,7 +14,6 @@ public class Spawn : MonoBehaviour
 
     private GameObject miJugador;
     GameObject puntosControl;
-    GameObject meta;
     List<GameObject> puntos = new List<GameObject>();
     ExitGames.Client.Photon.Hashtable propiedadesJugador = new ExitGames.Client.Photon.Hashtable();
     void Start()
@@ -25,8 +24,8 @@ public class Spawn : MonoBehaviour
         int spawn = DameUnSpawn();
         Transform puntoSpawn = puntosSpawn[spawn];
         propiedadesJugador["jugadorSpawn"] = spawn;
-        PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
-        //PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+        //PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
+        PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
         miJugador = PhotonNetwork.Instantiate(jugadorAlSpawn.name, puntoSpawn.position, puntoSpawn.rotation);
         miJugador.GetComponent<Coche>().SetNickJugador(PhotonNetwork.LocalPlayer.NickName);
 
