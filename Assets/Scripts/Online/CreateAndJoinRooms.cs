@@ -134,6 +134,20 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     }
 
     public void OnClickBotonJugar() {
+        ReparteSpawns();
         PhotonNetwork.LoadLevel("Ovalo");
+    }
+
+    private void ReparteSpawns()
+    {
+        ExitGames.Client.Photon.Hashtable propiedadesAUX = new ExitGames.Client.Photon.Hashtable();
+        int i = 0;
+        foreach (KeyValuePair<int, Player> player in PhotonNetwork.CurrentRoom.Players)
+        {
+            propiedadesAUX = player.Value.CustomProperties;
+            propiedadesAUX["jugadorSpawn"] = i;
+            player.Value.SetCustomProperties(propiedadesAUX);
+            i++;
+        }
     }
 }

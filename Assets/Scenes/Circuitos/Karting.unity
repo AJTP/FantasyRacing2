@@ -15578,6 +15578,9 @@ MonoBehaviour:
   userEmail: {fileID: 0}
   userPassword: {fileID: 0}
   userRepeatPassword: {fileID: 0}
+  nombreJugador: {fileID: 0}
+  panelNuevoNombre: {fileID: 0}
+  panelLeaderBoard: {fileID: 0}
 --- !u!114 &1708069475
 MonoBehaviour:
   m_ObjectHideFlags: 0

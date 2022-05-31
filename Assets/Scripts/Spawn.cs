@@ -6,7 +6,6 @@ using Photon.Pun;
 using Photon.Realtime;
 public class Spawn : MonoBehaviour
 {
-
     public GameObject[] prefabsJugadores;
     public Transform[] puntosSpawn;
     public Text cuentaAtras;
@@ -16,16 +15,17 @@ public class Spawn : MonoBehaviour
     GameObject puntosControl;
     List<GameObject> puntos = new List<GameObject>();
     ExitGames.Client.Photon.Hashtable propiedadesJugador = new ExitGames.Client.Photon.Hashtable();
+    ExitGames.Client.Photon.Hashtable propiedadesAUX = new ExitGames.Client.Photon.Hashtable();
     void Start()
     {
+        
+
         StartCoroutine(CuentaAtras());
+
         propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
         GameObject jugadorAlSpawn = prefabsJugadores[(int)PhotonNetwork.LocalPlayer.CustomProperties["avatarJugador"]];
-        int spawn = DameUnSpawn();
-        Transform puntoSpawn = puntosSpawn[spawn];
-        propiedadesJugador["jugadorSpawn"] = spawn;
-        //PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
-        PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
+        Transform puntoSpawn = puntosSpawn[(int)propiedadesJugador["jugadorSpawn"]];
+
         miJugador = PhotonNetwork.Instantiate(jugadorAlSpawn.name, puntoSpawn.position, puntoSpawn.rotation);
         miJugador.GetComponent<Coche>().SetNickJugador(PhotonNetwork.LocalPlayer.NickName);
 
@@ -52,30 +52,6 @@ public class Spawn : MonoBehaviour
             puntos.Add(puntosControl.transform.GetChild(i).gameObject);
         }
     }
-
-    private int DameUnSpawn() {
-        bool ok;
-        int numeroRandom = -1;
-        while (true) {
-            ok = true;
-            numeroRandom = Random.Range(0, puntosSpawn.Length);
-            foreach (KeyValuePair<int, Player> player in PhotonNetwork.CurrentRoom.Players)
-            {
-                if (player.Value.CustomProperties.ContainsKey("jugadorSpawn"))
-                {
-                    if ((int)player.Value.CustomProperties["jugadorSpawn"] == numeroRandom)
-                    {
-                        ok = false;
-                        break;
-                    }
-                }
-            }
-            if (ok)
-                break;
-        }
-        return numeroRandom;
-    }
-
     private IEnumerator CuentaAtras() {
         i = 5;
         while (i > 0) {
