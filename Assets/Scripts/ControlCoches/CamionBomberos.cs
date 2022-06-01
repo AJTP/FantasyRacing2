@@ -6,6 +6,7 @@ public class CamionBomberos : Coche
 {
     public GameObject prefab,prefab2,prefab3;
     public AudioClip[] sonidos = new AudioClip[3];
+    GameObject ob = null;
     #region PARTE COMUN
     private void Awake()
     {
@@ -15,7 +16,7 @@ public class CamionBomberos : Coche
     {
         IniciarTemporizador();
         CargarDatos();
-        CargarCooldowns(8, 15, 20, 50);
+        CargarCooldowns(8, 15, 20, 60);
         esfera.transform.parent = null;
         StartCoroutine(ActualizarDistanciaPuntoControl());
         //CargarCamaras();
@@ -39,6 +40,9 @@ public class CamionBomberos : Coche
                 {
                     ReducirCoolDown(i);
                 }
+            }
+            if (ob != null) {
+                ob.transform.position = this.puntoRayoSuelo.position + new Vector3(0,2,0);
             }
         }
     }
@@ -112,8 +116,8 @@ public class CamionBomberos : Coche
     public void Habilidad3()
     {
         GameObject ob = SoltarPrefab(prefab2);
+        ob.GetComponent<FuegoRotatorio>().SetParent(puntoRayoSuelo.transform);
         protegido = true;
-        ob.GetComponent<FuegoRotatorio>().SetParent(this.puntoRayoSuelo.transform);
     }
 
     public IEnumerator RastroAgua() {

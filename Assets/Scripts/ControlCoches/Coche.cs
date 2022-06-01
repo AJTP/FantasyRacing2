@@ -79,7 +79,7 @@ public class Coche : MonoBehaviour
 
     #region INFORMACION JUGADOR
     private string nombreJugador;
-    private int vuelta = 3;
+    private int vuelta = 0;
     private int numPuntoControl;
     private float distanciaSiguientePunto;
     private GameObject puntosControl;
@@ -275,11 +275,12 @@ public class Coche : MonoBehaviour
         if (vista.IsMine) {
             propiedadesJugador = PhotonNetwork.LocalPlayer.CustomProperties;
             vuelta++;
-            //propiedadesJugador["jugadorVuelta"] = vuelta;
-            propiedadesJugador["jugadorVuelta"] = 4;
+            propiedadesJugador["jugadorVuelta"] = vuelta;
+            //propiedadesJugador["jugadorVuelta"] = 0;
             //PhotonNetwork.LocalPlayer.CustomProperties = propiedadesJugador;
             PhotonNetwork.SetPlayerCustomProperties(propiedadesJugador);
             ActualizarRanking();
+            Debug.Log("Vuelta: "+vuelta);
             if (vuelta <= 3)
             {
                 contadorVueltas.text = vuelta + "/3";
@@ -466,6 +467,7 @@ public class Coche : MonoBehaviour
         GameObject go = PhotonNetwork.Instantiate(prefab.name, puntoPrefabs.position+offset, transform.rotation);
         return go;
     }
+
     protected void ReducirCoolDown(int i)
     {
         if (vista.IsMine)
@@ -493,19 +495,19 @@ public class Coche : MonoBehaviour
     {
         if (acabado || spawn.i > 0 || stuneado)
             return 5;
-        if (Input.GetKeyDown(KeyCode.U) || Input.GetButtonDown("JoystickButton0"))
+        if (Input.GetKeyDown(KeyCode.U))
         {
             return 0;
         }
-        else if (Input.GetKeyDown(KeyCode.I) || Input.GetButtonDown("JoystickButton1"))
+        else if (Input.GetKeyDown(KeyCode.I))
         {
             return 1;
         }
-        else if (Input.GetKeyDown(KeyCode.O) || Input.GetButtonDown("JoystickButton2"))
+        else if (Input.GetKeyDown(KeyCode.O))
         {
             return 2;
         }
-        else if (Input.GetKeyDown(KeyCode.P) || Input.GetButtonDown("JoystickButton3"))
+        else if (Input.GetKeyDown(KeyCode.P))
         {
             return 3;
         }
