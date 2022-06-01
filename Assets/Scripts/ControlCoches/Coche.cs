@@ -493,19 +493,19 @@ public class Coche : MonoBehaviour
     {
         if (acabado || spawn.i > 0 || stuneado)
             return 5;
-        if (Input.GetKeyDown("u"))
+        if (Input.GetKeyDown(KeyCode.U) || Input.GetButtonDown("JoystickButton0"))
         {
             return 0;
         }
-        else if (Input.GetKeyDown("i"))
+        else if (Input.GetKeyDown(KeyCode.I) || Input.GetButtonDown("JoystickButton1"))
         {
             return 1;
         }
-        else if (Input.GetKeyDown("o"))
+        else if (Input.GetKeyDown(KeyCode.O) || Input.GetButtonDown("JoystickButton2"))
         {
             return 2;
         }
-        else if (Input.GetKeyDown("p"))
+        else if (Input.GetKeyDown(KeyCode.P) || Input.GetButtonDown("JoystickButton3"))
         {
             return 3;
         }
