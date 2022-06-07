@@ -110,7 +110,7 @@ public class ControlMenus : MonoBehaviourPunCallbacks
     public void SalirJuego() {
         Application.Quit();
     }
-
+/*
     string Encryptar(string pass) {
         System.Security.Cryptography.MD5CryptoServiceProvider x = new System.Security.Cryptography.MD5CryptoServiceProvider();
         byte[] bs = System.Text.Encoding.UTF8.GetBytes(pass);
@@ -120,13 +120,13 @@ public class ControlMenus : MonoBehaviourPunCallbacks
             s.Append(b.ToString("x2").ToLower());
         }
         return s.ToString();
-    }
+    }*/
 
     public void CrearUsuario()
     {
         if (!userPassword.text.Equals("") && !userRepeatPassword.text.Equals("") && !userName.text.Equals("") && !userEmail.text.Equals(""))
         {
-            var requestRegistro = new RegisterPlayFabUserRequest { Email = userEmail.text, Password = Encryptar(userPassword.text), Username = userName.text };
+            var requestRegistro = new RegisterPlayFabUserRequest { Email = userEmail.text, Password = userPassword.text, Username = userName.text };
             PlayFabClientAPI.RegisterPlayFabUser(requestRegistro, RegisterSuccess, RegisterError);
         }
         else {
@@ -144,7 +144,7 @@ public class ControlMenus : MonoBehaviourPunCallbacks
 
 
     public void IniciarSesion() {
-        var requestRegistro = new LoginWithEmailAddressRequest { Email = userEmail.text, Password = Encryptar(userPassword.text), InfoRequestParameters = new GetPlayerCombinedInfoRequestParams {
+        var requestRegistro = new LoginWithEmailAddressRequest { Email = userEmail.text, Password = userPassword.text, InfoRequestParameters = new GetPlayerCombinedInfoRequestParams {
             GetPlayerProfile = true
         } };
         PlayFabClientAPI.LoginWithEmailAddress(requestRegistro, LoginSuccess, RegisterError);
@@ -195,5 +195,23 @@ public class ControlMenus : MonoBehaviourPunCallbacks
 
     public void AbrirLeaderBoard() {
         panelLeaderBoard.SetActive(true);
+    }
+
+    public void ReiniciarPassword() {
+        var request = new SendAccountRecoveryEmailRequest
+        {
+            Email = userEmail.text,
+            TitleId = "DB976"
+        };
+
+        PlayFabClientAPI.SendAccountRecoveryEmail(request, OnPasswordReset, OnResetError);
+    }
+
+    void OnPasswordReset(SendAccountRecoveryEmailResult result) {
+        MostrarFeedback("Revisa tu correo electrónico");
+    }
+
+    void OnResetError(PlayFabError error) {
+        MostrarFeedback(error.GenerateErrorReport());
     }
 }
