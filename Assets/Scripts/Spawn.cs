@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
+
 public class Spawn : MonoBehaviour
 {
     public GameObject[] prefabsJugadores;
